@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For SEO reasons we want books#show to be as short as possible, thus skipping /books prefix
+  get ":id" => "books#show"
 end
