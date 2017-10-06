@@ -29,5 +29,6 @@ module UaBooks
     config.generators.system_tests = nil
 
     config.active_record.schema_format = :sql
+    config.i18n.default_locale = :uk
   end
 end
