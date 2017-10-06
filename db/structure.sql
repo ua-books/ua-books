@@ -23,6 +23,16 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: gender; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE gender AS ENUM (
+    'female',
+    'male'
+);
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -71,6 +81,72 @@ ALTER SEQUENCE books_id_seq OWNED BY books.id;
 
 
 --
+-- Name: people; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE people (
+    id bigint NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    gender gender NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE people_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE people_id_seq OWNED BY people.id;
+
+
+--
+-- Name: person_aliases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE person_aliases (
+    id bigint NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    person_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: person_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE person_aliases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: person_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE person_aliases_id_seq OWNED BY person_aliases.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -80,10 +156,101 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: work_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE work_types (
+    id bigint NOT NULL,
+    name_feminine character varying NOT NULL,
+    name_masculine character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: work_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE work_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: work_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE work_types_id_seq OWNED BY work_types.id;
+
+
+--
+-- Name: works; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE works (
+    id bigint NOT NULL,
+    book_id bigint NOT NULL,
+    person_alias_id bigint NOT NULL,
+    work_type_id bigint NOT NULL
+);
+
+
+--
+-- Name: works_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE works_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: works_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE works_id_seq OWNED BY works.id;
+
+
+--
 -- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY books ALTER COLUMN id SET DEFAULT nextval('books_id_seq'::regclass);
+
+
+--
+-- Name: people id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people ALTER COLUMN id SET DEFAULT nextval('people_id_seq'::regclass);
+
+
+--
+-- Name: person_aliases id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY person_aliases ALTER COLUMN id SET DEFAULT nextval('person_aliases_id_seq'::regclass);
+
+
+--
+-- Name: work_types id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY work_types ALTER COLUMN id SET DEFAULT nextval('work_types_id_seq'::regclass);
+
+
+--
+-- Name: works id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY works ALTER COLUMN id SET DEFAULT nextval('works_id_seq'::regclass);
 
 
 --
@@ -103,11 +270,103 @@ ALTER TABLE ONLY books
 
 
 --
+-- Name: people people_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: person_aliases person_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY person_aliases
+    ADD CONSTRAINT person_aliases_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: work_types work_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY work_types
+    ADD CONSTRAINT work_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: works works_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY works
+    ADD CONSTRAINT works_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_person_aliases_on_person_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_person_aliases_on_person_id ON person_aliases USING btree (person_id);
+
+
+--
+-- Name: index_works_on_book_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_works_on_book_id ON works USING btree (book_id);
+
+
+--
+-- Name: index_works_on_person_alias_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_works_on_person_alias_id ON works USING btree (person_alias_id);
+
+
+--
+-- Name: index_works_on_work_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_works_on_work_type_id ON works USING btree (work_type_id);
+
+
+--
+-- Name: works fk_rails_2a8b3c3c4c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY works
+    ADD CONSTRAINT fk_rails_2a8b3c3c4c FOREIGN KEY (book_id) REFERENCES books(id);
+
+
+--
+-- Name: works fk_rails_86dd05cfb5; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY works
+    ADD CONSTRAINT fk_rails_86dd05cfb5 FOREIGN KEY (person_alias_id) REFERENCES person_aliases(id);
+
+
+--
+-- Name: works fk_rails_9ade36165d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY works
+    ADD CONSTRAINT fk_rails_9ade36165d FOREIGN KEY (work_type_id) REFERENCES work_types(id);
+
+
+--
+-- Name: person_aliases fk_rails_a4cf4f8aaa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY person_aliases
+    ADD CONSTRAINT fk_rails_a4cf4f8aaa FOREIGN KEY (person_id) REFERENCES people(id);
 
 
 --
@@ -117,6 +376,7 @@ ALTER TABLE ONLY schema_migrations
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20171005125359');
+('20171005125359'),
+('20171006125238');
 
 

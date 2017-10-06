@@ -1,2 +1,7 @@
 - title book_head_title(book)
 = book.title
+ul
+  - book.works.preload(:type, person_alias: :person).each do |work|
+    li
+      span => work_type_name(work)
+      span = person_alias(work.person_alias)
