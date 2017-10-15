@@ -1,7 +1,10 @@
 module ApplicationHelper
-  # Goes to /html/head/title
-  def book_head_title(book)
-    "«#{book.title}» на Українських книжках"
+  def book_title(book)
+    author_aliases = book.works.to_a.uniq(&:person_alias_id).map do |work|
+      person_alias(work.person_alias)
+    end
+
+    "#{author_aliases.join ", "} «#{book.title}»"
   end
 
   # Gender-aware work type name

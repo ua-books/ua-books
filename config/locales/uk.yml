@@ -2,3 +2,4 @@ uk:
   layouts:
     application:
       title: Українські книжки
+      title_template: "%{title} на Українських книжках"

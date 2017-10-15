@@ -10,9 +10,9 @@ RSpec.describe "Books" do
     Work.create!(person_alias: oksana.main_alias, type: create(:illustrator_type), book: book)
 
     visit "/#{book.id}"
-    expect(page).to have_css :h1, text: "Зубр шукає гніздо"
+    expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/
     expect(page).to have_content "Авторка тексту Оксана Була"
     expect(page).to have_content "Ілюстраторка Оксана Була"
-    expect(page.title).to eq "«Зубр шукає гніздо» на Українських книжках"
+    expect(page.title).to eq "Оксана Була «Зубр шукає гніздо» на Українських книжках"
   end
 end
