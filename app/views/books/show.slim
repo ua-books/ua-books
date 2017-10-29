@@ -6,7 +6,7 @@
 
 h1 = book_title
 ul
-  - book.works.preload(:type, person_alias: :person).each do |work|
+  - book.works.for_list.each do |work|
     li
       span => work_type_name(work)
       span = person_alias(work.person_alias)

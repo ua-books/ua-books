@@ -9,4 +9,8 @@ class Work < ApplicationRecord
   belongs_to :person_alias
 
   delegate :person, to: :person_alias
+
+  def self.for_list
+    preload(:type, person_alias: :person)
+  end
 end
