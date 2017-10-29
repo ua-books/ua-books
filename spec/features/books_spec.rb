@@ -13,6 +13,8 @@ RSpec.describe "Books" do
     expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/
     expect(page).to have_content "Авторка тексту Оксана Була"
     expect(page).to have_content "Ілюстраторка Оксана Була"
+
     expect(page.title).to eq "Оксана Була «Зубр шукає гніздо» на Українських книжках"
+    expect(page).to have_css "link[rel='canonical'][href='http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}']", visible: false
   end
 end

@@ -1,4 +1,11 @@
 module ApplicationHelper
+  # `ActiveSupport::Inflector.parameterize` supports ASCII symbols only (non-ASCII should
+  # be transliterated first). We don't want to transliterate for SEO reasons, thus we
+  # duplicate the logic here with Unicode support.
+  def parameterize(string)
+    string.gsub(/[^\p{L}]+/, "-").chomp("-").downcase
+  end
+
   def book_title(book)
     author_aliases = book.works.to_a.uniq(&:person_alias_id).map do |work|
       person_alias(work.person_alias)

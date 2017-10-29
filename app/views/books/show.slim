@@ -1,4 +1,8 @@
 - title book_title(book)
+
+- content_for :head do
+  link rel="canonical" href=book_url(id: book.id, slug: parameterize(book_title(book)))
+
 h1 = book_title(book)
 ul
   - book.works.preload(:type, person_alias: :person).each do |work|
