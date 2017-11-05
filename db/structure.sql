@@ -195,7 +195,8 @@ CREATE TABLE works (
     id bigint NOT NULL,
     book_id bigint NOT NULL,
     person_alias_id bigint NOT NULL,
-    work_type_id bigint NOT NULL
+    work_type_id bigint NOT NULL,
+    title boolean DEFAULT false NOT NULL
 );
 
 
@@ -377,6 +378,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20171005125359'),
-('20171006125238');
+('20171006125238'),
+('20171029122110');
 
 

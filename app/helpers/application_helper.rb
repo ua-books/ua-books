@@ -6,8 +6,10 @@ module ApplicationHelper
     string.gsub(/[^\p{L}]+/, "-").chomp("-").downcase
   end
 
-  def book_title(book)
-    author_aliases = book.works.to_a.uniq(&:person_alias_id).map do |work|
+  # With `:works` option you can make additional filtering/preloading of `book.works`
+  # without passing the logic into the helper.
+  def book_title(book, works: book.works)
+    author_aliases = works.find_all(&:title?).uniq(&:person_alias_id).map do |work|
       person_alias(work.person_alias)
     end
 

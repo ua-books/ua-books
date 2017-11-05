@@ -9,5 +9,10 @@ FactoryGirl.define do
       name_feminine "Ілюстраторка"
       name_masculine "Ілюстратор"
     end
+
+    factory :chief_editor_type do
+      name_feminine "Головна редакторка"
+      name_masculine "Головний редактор"
+    end
   end
 end
