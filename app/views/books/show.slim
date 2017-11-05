@@ -10,3 +10,6 @@ ul
     li
       span => work_type_name(work)
       span = person_alias(work.person_alias)
+  li
+    span => t "published_on"
+    span = l(book.published_on, format: "%Y")

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Books" do
   specify "visiting" do
-    book = create(:book, title: "Зубр шукає гніздо")
+    book = create(:book, title: "Зубр шукає гніздо", published_on: "2016-09-16")
 
     oksana = create(:person, :with_alias, first_name: "Оксана", last_name: "Була", gender: "female")
     maryana = create(:person, :with_alias, first_name: "Мар'яна", last_name: "Савка", gender: "female")
@@ -16,6 +16,8 @@ RSpec.describe "Books" do
     expect(page).to have_content "Авторка тексту Оксана Була"
     expect(page).to have_content "Ілюстраторка Оксана Була"
     expect(page).to have_content "Головна редакторка Мар'яна Савка"
+
+    expect(page).to have_content "Рік видання 2016"
 
     expect(page.title).to eq "Оксана Була «Зубр шукає гніздо» на Українських книжках"
     expect(page).to have_css "link[rel='canonical'][href='http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}']", visible: false

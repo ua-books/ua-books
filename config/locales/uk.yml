@@ -3,3 +3,4 @@ uk:
     application:
       title: Українські книжки
       title_template: "%{title} на Українських книжках"
+  published_on: Рік видання

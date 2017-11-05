@@ -57,7 +57,8 @@ CREATE TABLE books (
     id bigint NOT NULL,
     title character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    published_on date DEFAULT ('now'::text)::date NOT NULL
 );
 
 
@@ -379,6 +380,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20171005125359'),
 ('20171006125238'),
-('20171029122110');
+('20171029122110'),
+('20171105155810');
 
 
