@@ -13,3 +13,6 @@ ul
   li
     span => t "published_on"
     span = l(book.published_on, format: "%Y")
+  li
+    span => t "number_of_pages"
+    span = book.number_of_pages
