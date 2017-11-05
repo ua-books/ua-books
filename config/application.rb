@@ -32,5 +32,7 @@ module UaBooks
 
     config.i18n.default_locale = :uk
     config.i18n.fallbacks = [:en]
+
+    config.time_zone = "Europe/Kiev"
   end
 end
