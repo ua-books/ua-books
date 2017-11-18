@@ -11,6 +11,7 @@ gem 'decent_exposure', '~> 3.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
+gem 'foundation-rails', '~> 6.4'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
