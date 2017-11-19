@@ -8,6 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'slim-rails', '~> 3.1'
 gem 'smart_titles', '~> 0.4'
 gem 'decent_exposure', '~> 3.0'
+gem 'dragonfly', '1.1.3'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
