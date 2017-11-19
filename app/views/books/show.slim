@@ -5,6 +5,11 @@
   link rel="canonical" href=book_url(id: book.id, slug: parameterize(book_title))
 
 h1 = book_title
+
+figure
+  picture
+    img src=book.cover.url alt=book_title
+
 ul
   - book.works.for_list.each do |work|
     li
