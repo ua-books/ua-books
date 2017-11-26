@@ -15,4 +15,4 @@ production:
   <<: *default
   database: ua-books
   username: ua-books
-  password: <%= ENV['UA-BOOKS_DATABASE_PASSWORD'] %>
+  password: <%= ENV['UA_BOOKS_DATABASE_PASSWORD'] %>
