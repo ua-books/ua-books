@@ -84,4 +84,9 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  config.define_derived_metadata do |meta|
+    # https://relishapp.com/rspec/rspec-core/docs/expectation-framework-integration/aggregating-failures
+    meta[:aggregate_failures] = true
+  end
 end
