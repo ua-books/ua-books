@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "Books" do
-  specify "visiting" do
+RSpec.describe "BooksController" do
+  specify "#show" do
     book = create(:book,
                   title: "Зубр шукає гніздо",
                   number_of_pages: 32,

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Books" do
+RSpec.describe "Admin::BooksController" do
   specify "#index" do
     create(:book, title: "Зубр шукає гніздо")
 
