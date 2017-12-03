@@ -3,15 +3,24 @@ module Admin
     protect_from_forgery with: :exception
     layout "admin"
 
+    def create
+      resource.attributes = params_for_resource
+      if resource.save
+        redirect_to redirect_to_after(:create)
+      else
+        render "new"
+      end
+    end
+
     def update
-      if resource.update_attributes(resource_params)
+      if resource.update_attributes(params_for_resource)
         redirect_to redirect_to_after(:update)
       else
         render "edit"
       end
     end
 
-    def resource_params
+    def params_for_resource
       param_key = resource.model_name.param_key
       params[param_key].try(:permit!)
     end

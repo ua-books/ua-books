@@ -11,6 +11,20 @@ RSpec.describe "Books" do
     expect(page.title).to eq "Books | Admin"
   end
 
+  specify "#create" do
+    visit "/admin/books/new"
+
+    expect(page).to have_css :h1, text: %r{^Books / New$}
+    expect(page.title).to eq "Books / New | Admin"
+
+    fill_in "Title", with: "Ведмідь не хоче спати"
+    fill_in "Number of pages", with: "30"
+    click_on "Create Book"
+
+    expect(page).to have_css :h1, text: /^Books$/
+    expect(page).to have_content "Ведмідь не хоче спати"
+  end
+
   specify "#update" do
     book = create(:book, title: "Зубр шукає гніздо")
 
