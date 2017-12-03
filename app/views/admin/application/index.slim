@@ -1,0 +1,10 @@
+= title controller_name.humanize
+table
+  thead
+    - index_columns.each do |column|
+      th = column.humanize
+  tbody
+    - resource_collection.each do |resource|
+      tr
+        - index_columns.each do |column|
+          td = resource.public_send(column)

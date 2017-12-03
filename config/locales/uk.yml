@@ -1,5 +1,8 @@
 uk:
   layouts:
+    admin:
+      title: Admin
+      title_template: "%{title} | Admin"
     application:
       title: Українські книжки
       title_template: "%{title} на Українських книжках"
