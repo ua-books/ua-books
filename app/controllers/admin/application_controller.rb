@@ -3,6 +3,16 @@ module Admin
     protect_from_forgery with: :exception
     layout "admin"
 
+    helper do
+      def index_action_columns
+        %w[edit]
+      end
+
+      def edit_column(resource)
+        link_to "edit", polymorphic_path([:admin, resource], action: :edit), class: "button"
+      end
+    end
+
     def new
       resource.attributes = params_for_resource
     end
