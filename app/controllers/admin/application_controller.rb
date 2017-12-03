@@ -3,6 +3,10 @@ module Admin
     protect_from_forgery with: :exception
     layout "admin"
 
+    def new
+      resource.attributes = params_for_resource
+    end
+
     def create
       resource.attributes = params_for_resource
       if resource.save
@@ -22,7 +26,7 @@ module Admin
 
     def params_for_resource
       param_key = resource.model_name.param_key
-      params[param_key].try(:permit!)
+      params[param_key].try(:permit!) || {}
     end
 
     def redirect_to_after(action)

@@ -25,6 +25,16 @@ RSpec.describe "Books" do
     expect(page).to have_content "Ведмідь не хоче спати"
   end
 
+  specify "#create with a prefilled form" do
+    visit "/admin/books/new?book[title]=#{CGI.escape "Ведмідь"}"
+
+    fill_in "Number of pages", with: "30"
+    click_on "Create Book"
+
+    expect(page).to have_css :h1, text: /^Books$/
+    expect(page).to have_content "Ведмідь"
+  end
+
   specify "#update" do
     book = create(:book, title: "Зубр шукає гніздо")
 
