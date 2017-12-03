@@ -4,6 +4,7 @@
 @import 'foundation';
 
 @include foundation-global-styles;
+@include foundation-typography;
 @include foundation-table;
 @include foundation-forms;
 @include foundation-button;
