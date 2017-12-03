@@ -3,6 +3,13 @@ module Admin
     protect_from_forgery with: :exception
     layout "admin"
 
+    if Rails.env.production?
+      http_basic_authenticate_with(
+        name: ENV.fetch("RAILS_ADMIN_NAME"),
+        password: ENV.fetch("RAILS_ADMIN_PASSWORD"),
+      )
+    end
+
     helper do
       def index_action_columns
         %w[edit]
