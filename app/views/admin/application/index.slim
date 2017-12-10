@@ -12,6 +12,10 @@ table
     - resource_collection.each do |resource|
       tr
         - index_columns.each do |column|
-          td = resource.public_send(column)
+          td
+            - if respond_to?("#{column}_column")
+              = public_send("#{column}_column", resource)
+            - else
+              = resource.public_send(column)
         - index_action_columns.each do |column|
           td = public_send("#{column}_column", resource)
