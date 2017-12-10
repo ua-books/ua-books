@@ -1,7 +1,7 @@
 module Admin
   class BooksController < Admin::ApplicationController
     expose(:index_columns) { %w[id title] }
-    expose(:resource_collection) { Book.all }
+    expose(:resource_collection) { Book.order("id desc") }
     expose(:resource, model: "Book")
 
     helper do
