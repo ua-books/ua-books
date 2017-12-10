@@ -5,18 +5,18 @@ module Admin
     expose(:resource, model: "Book")
 
     helper do
-      def resource_name(resource)
-        resource.title
+      def resource_name(book)
+        book.title
       end
 
-      def cover_column(resource)
-        if resource.cover
-          link_to image_tag(resource.cover.thumb("x100").url), resource.cover.url
+      def cover_column(book)
+        if book.cover
+          link_to image_tag(book.cover.thumb("x100").url), book.cover.url
         end
       end
 
-      def published_on_column(resource)
-        l(resource.published_on, format: "%b %Y")
+      def published_on_column(book)
+        l(book.published_on, format: "%b %Y")
       end
     end
   end
