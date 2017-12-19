@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :books
     resources :work_types
     resources :people
+    resources :works
   end
 end

@@ -1,0 +1,5 @@
+= simple_form_for [:admin, resource] do |f|
+  = f.association :book
+  = f.association :type, label_method: :name_masculine
+  = f.association :person_alias, label_method: method(:person_alias)
+  = f.submit class: "button"
