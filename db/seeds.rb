@@ -3,7 +3,7 @@ require "factory_girl_rails"
 text_author_type = FactoryGirl.create(:text_author_type)
 illustrator_type = FactoryGirl.create(:illustrator_type)
 
-oksana_bula = FactoryGirl.create(:person, :with_alias, first_name: "Оксана", last_name: "Була", gender: "female")
+oksana_bula = FactoryGirl.create(:person, first_name: "Оксана", last_name: "Була", gender: "female")
 
 zubr = FactoryGirl.create(:book, title: "Зубр шукає гніздо", cover_uid: "oksana-bula-zubr.jpg")
 vedmid = FactoryGirl.create(:book, title: "Ведмідь не хоче спати", cover_uid: "oksana-bula-vedmid.jpg")

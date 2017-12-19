@@ -7,8 +7,8 @@ RSpec.describe "BooksController" do
                   number_of_pages: 32,
                   published_on: "2016-09-16")
 
-    oksana = create(:person, :with_alias, first_name: "Оксана", last_name: "Була", gender: "female")
-    maryana = create(:person, :with_alias, first_name: "Мар'яна", last_name: "Савка", gender: "female")
+    oksana = create(:person, first_name: "Оксана", last_name: "Була", gender: "female")
+    maryana = create(:person, first_name: "Мар'яна", last_name: "Савка", gender: "female")
 
     create(:work, person_alias: oksana.main_alias, type: create(:text_author_type), book: book)
     create(:work, person_alias: oksana.main_alias, type: create(:illustrator_type), book: book)

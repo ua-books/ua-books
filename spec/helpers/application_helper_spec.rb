@@ -6,8 +6,8 @@ RSpec.describe ApplicationHelper do
   end
 
   describe "#book_title" do
-    let(:oksana) { create(:person, :with_alias, first_name: "Оксана", last_name: "Була") }
-    let(:maryana) { create(:person, :with_alias, first_name: "Мар'яна", last_name: "Савка") }
+    let(:oksana) { create(:person, first_name: "Оксана", last_name: "Була") }
+    let(:maryana) { create(:person, first_name: "Мар'яна", last_name: "Савка") }
     let(:book) { create(:book, title: "Зубр шукає гніздо") }
 
     specify "single author, single work" do

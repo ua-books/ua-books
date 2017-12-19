@@ -8,6 +8,10 @@ class Person < ApplicationRecord
 
   has_many :aliases, class_name: "PersonAlias", inverse_of: :person
 
+  after_create do
+    aliases.create!(first_name: first_name, last_name: last_name)
+  end
+
   def main_alias
     aliases.first
   end
