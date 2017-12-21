@@ -11,6 +11,7 @@ RSpec.describe "Admin::WorkController" do
     expect(page).to have_css :h1, text: %r{^Works / New$}
     expect(page.title).to eq "Works / New | Admin"
 
+    check "Title"
     select "Зубр шукає гніздо", from: "Book"
     select "Автор тексту", from: "Type"
     select "Оксана Була", from: "Person alias"
