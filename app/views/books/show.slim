@@ -8,7 +8,7 @@ h1 = book_title
 
 figure
   picture
-    img src=book.cover.url alt=book_title
+    img src=book.cover.thumb("640x").url alt=book_title
 
 ul
   - book.works.for_list.each do |work|
