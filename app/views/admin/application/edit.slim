@@ -1,2 +1,7 @@
-= title "#{controller_name.humanize} / #{resource_name resource} / Edit"
+- title "#{controller_name.humanize} / #{resource_name resource} / Edit"
+
+h1
+  a> href=polymorphic_path([:admin, resource.class]) = controller_name.humanize
+  | / #{resource_name resource} / Edit
+
 = render "form"

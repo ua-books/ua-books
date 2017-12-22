@@ -1,6 +1,16 @@
 = simple_form_for [:admin, resource] do |f|
   = f.input :title
-  = f.association :book
-  = f.association :type, label_method: :name_masculine
-  = f.association :person_alias, label_method: method(:person_alias)
+  .grid-x.grid-margin-x
+    .cell.medium-6
+      = f.association :book
+  .grid-x.grid-margin-x.align-middle
+    .cell.medium-6
+      = f.association :type, label_method: :name_masculine
+    .cell.medium-6
+      a href=new_admin_work_type_path target="_blank" Add new type
+  .grid-x.grid-margin-x.align-middle
+    .cell.medium-6
+      = f.association :person_alias, label_method: method(:person_alias)
+    .cell.medium-6
+      a href=new_admin_person_path target="_blank" Add new person
   = f.submit class: "button"
