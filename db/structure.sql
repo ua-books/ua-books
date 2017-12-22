@@ -321,10 +321,10 @@ CREATE INDEX index_person_aliases_on_person_id ON person_aliases USING btree (pe
 
 
 --
--- Name: index_works_on_book_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_works_on_book_id_and_person_alias_id_and_work_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_works_on_book_id ON works USING btree (book_id);
+CREATE UNIQUE INDEX index_works_on_book_id_and_person_alias_id_and_work_type_id ON works USING btree (book_id, person_alias_id, work_type_id);
 
 
 --
@@ -385,6 +385,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171029122110'),
 ('20171105155810'),
 ('20171105170914'),
-('20171119083656');
+('20171119083656'),
+('20171222185134');
 
 

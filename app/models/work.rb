@@ -13,6 +13,8 @@ class Work < ApplicationRecord
   belongs_to :type, class_name: "WorkType", foreign_key: "work_type_id"
   belongs_to :person_alias
 
+  validates_uniqueness_of :book_id, scope: [:person_alias_id, :work_type_id]
+
   delegate :person, to: :person_alias
 
   def self.for_list
