@@ -15,6 +15,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'foundation-rails', '~> 6.4'
 
+gem 'bootsnap', '~> 1.1', require: false
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.6'
@@ -24,7 +26,6 @@ end
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'bootsnap', '~> 1.1', require: false
 end
 
 group :test do
