@@ -1,1 +1,4 @@
 h1 Українські книжки
+
+- books.each do |book|
+  div: a href=book_path(id: book) = book_title(book, works: book.title_works)
