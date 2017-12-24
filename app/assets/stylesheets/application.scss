@@ -1,1 +1,11 @@
-@import "foundation_and_overrides";
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+
+@include foundation-global-styles;
+@include foundation-xy-grid-classes;
+@include foundation-flex-classes;
+@include foundation-typography;
+@include foundation-forms;
+@include foundation-button;
