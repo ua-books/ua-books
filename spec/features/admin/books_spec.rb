@@ -10,7 +10,7 @@ RSpec.describe "Admin::BooksController" do
     fill_in "Title", with: "Ведмідь не хоче спати"
     fill_in "Number of pages", with: "30"
     select_date Date.new(2016, 10, 10), from: "Published on"
-    attach_file "Cover", "public/dragonfly/development/oksana-bula-vedmid.jpg"
+    attach_file "Cover", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
     click_on "Create Book"
 
     expect(page).to have_css :h1, text: /^Books$/
