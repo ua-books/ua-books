@@ -8,6 +8,20 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
+    - if Rails.env.production?
+      script async=true src="https://www.googletagmanager.com/gtag/js?id=UA-111763181-1"
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
     = yield :head
   body
     = yield
+
+    javascript:
+      var canonicalLink = document.querySelector("[rel='canonical']");
+      var canonicalHref = canonicalLink ? canonicalLink.href : window.location.href;
+      gtag('config', 'UA-111763181-1', {
+        'page_location': canonicalHref
+      });
