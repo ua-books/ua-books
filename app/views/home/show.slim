@@ -1,6 +1,3 @@
-h1 Українські книжки
-
-- books.each do |book|
-  p: a href=book_path(id: book) = book_title(book, works: book.title_works)
-
-p Замислено в Харкові з любов'ю до світу.
+article.home-article
+  - books.each do |book|
+    p: a href=book_path(id: book) = book_title(book, works: book.title_works)

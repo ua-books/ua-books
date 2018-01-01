@@ -1,0 +1,6 @@
+@mixin container {
+  @include breakpoint(medium down) {
+    margin-left: $global-margin;
+    margin-right: $global-margin;
+  }
+}

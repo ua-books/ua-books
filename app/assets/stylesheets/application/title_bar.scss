@@ -1,0 +1,8 @@
+.title-bar-left {
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
+
+  > .logo-link {
+    color: $titlebar-color;
+  }
+}

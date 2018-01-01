@@ -17,7 +17,21 @@ html
 
     = yield :head
   body
-    = yield
+    .grid-container
+      .title-bar
+        .title-bar-left
+          a.logo-link href=root_path Українські книжки
+
+      = yield
+
+      hr
+      footer.footer-container
+        ul.vertical.menu
+          li : a href="/" Про нас
+          li : a href="/" Як можна допомогти
+
+        div © 2017 Українські книжки
+        div Замислено в Харкові з любові до світу.
 
     javascript:
       var canonicalLink = document.querySelector("[rel='canonical']");

@@ -5,7 +5,10 @@
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
-@include foundation-flex-classes;
 @include foundation-typography;
-@include foundation-forms;
 @include foundation-button;
+@include foundation-menu;
+@include foundation-media-object;
+@include foundation-title-bar;
+
+@import 'application/*'

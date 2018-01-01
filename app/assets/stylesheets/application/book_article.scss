@@ -1,0 +1,11 @@
+.book-article {
+  > .title {
+    @include container;
+  }
+
+  > .media-object {
+    > .main-section {
+      @include container;
+    }
+  }
+}

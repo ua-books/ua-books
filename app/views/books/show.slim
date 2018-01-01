@@ -4,20 +4,24 @@
 - content_for :head do
   link rel="canonical" href=book_url(id: book.id, slug: parameterize(book_title))
 
-h1 = book_title
+article.book-article
+  h1.title = book_title
 
-figure
-  picture
-    img src=book.cover.thumb("640x").url alt=book_title
+  .media-object.stack-for-small
+    .media-object-section
+      figure
+        picture
+          img src=book.cover.thumb("640x").url alt=book_title
 
-ul
-  - book.works.for_list.each do |work|
-    li
-      span => work_type_name(work)
-      span = person_alias(work.person_alias)
-  li
-    span => t "published_on"
-    span = l(book.published_on, format: "%Y")
-  li
-    span => t "number_of_pages"
-    span = book.number_of_pages
+    .media-object-section.main-section
+      dl.inline
+        - book.works.for_list.each do |work|
+          dt => work_type_name(work)
+          dd = person_alias(work.person_alias)
+
+      dl.inline
+        dt => t "published_on"
+        dd = l(book.published_on, format: "%Y")
+
+        dt => t "number_of_pages"
+        dd = book.number_of_pages

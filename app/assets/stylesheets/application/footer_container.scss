@@ -1,0 +1,9 @@
+.footer-container {
+  color: $secondary-color;
+  margin-bottom: 0.5rem;
+  @include container;
+
+  > .menu {
+    margin-bottom: $global-margin;
+  }
+}
