@@ -22,13 +22,16 @@ html
         .title-bar-left
           a.logo-link href=root_path Українські книжки
 
-      = yield
+      - if content_for?(:content)
+        = yield(:content)
+      - else
+        = yield
 
       hr
       footer.footer-container
         ul.vertical.menu
-          li : a href="/" Про нас
-          li : a href="/" Як можна допомогти
+          li : a href=static_path("about") Про нас
+          li : a href=static_path("helping-us") Як можна допомогти
 
         div © 2017 Українські книжки
         div Замислено в Харкові з любові до світу.
