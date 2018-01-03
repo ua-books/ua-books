@@ -15,12 +15,14 @@ RSpec.describe "Admin::WorkController" do
     select "Зубр шукає гніздо", from: "Book"
     select "Автор тексту", from: "Type"
     select "Оксана Була", from: "Person alias"
+    fill_in "Notes", with: "2008"
     click_on "Create Work"
 
     expect(page).to have_css :h1, text: /^Works$/
     expect(page).to have_content "Зубр шукає гніздо"
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Оксана Була"
+    expect(page).to have_content "2008"
   end
 
   specify "#update" do

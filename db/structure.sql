@@ -199,7 +199,8 @@ CREATE TABLE works (
     book_id bigint NOT NULL,
     person_alias_id bigint NOT NULL,
     work_type_id bigint NOT NULL,
-    title boolean DEFAULT false NOT NULL
+    title boolean DEFAULT false NOT NULL,
+    notes character varying
 );
 
 
@@ -386,6 +387,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171105155810'),
 ('20171105170914'),
 ('20171119083656'),
-('20171222185134');
+('20171222185134'),
+('20180103203154');
 
 

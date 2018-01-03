@@ -11,13 +11,13 @@ RSpec.describe "BooksController" do
     maryana = create(:person, first_name: "Мар'яна", last_name: "Савка", gender: "female")
 
     create(:work, person_alias: oksana.main_alias, type: create(:text_author_type), book: book)
-    create(:work, person_alias: oksana.main_alias, type: create(:illustrator_type), book: book)
+    create(:work, person_alias: oksana.main_alias, type: create(:illustrator_type), book: book, notes: "включно з обкладинкою")
     create(:work, person_alias: maryana.main_alias, type: create(:chief_editor_type), book: book, title: false)
 
     visit "/#{book.id}"
     expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/
     expect(page).to have_content "Авторка тексту Оксана Була"
-    expect(page).to have_content "Ілюстраторка Оксана Була"
+    expect(page).to have_content "Ілюстраторка Оксана Була, включно з обкладинкою"
     expect(page).to have_content "Головна редакторка Мар'яна Савка"
 
     expect(page).to have_content "Рік видання 2016"

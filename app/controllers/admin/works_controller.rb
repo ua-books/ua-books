@@ -1,6 +1,6 @@
 module Admin
   class WorksController < Admin::ApplicationController
-    expose(:index_columns) { %w[id book type person_alias] }
+    expose(:index_columns) { %w[id book type person_alias notes] }
     expose(:resource_collection) { Work.preload(:book, :type, person_alias: :person).order(:book_id, :person_alias_id) }
     expose(:resource, model: "Work")
 
