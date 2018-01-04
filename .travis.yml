@@ -1,0 +1,6 @@
+language: ruby
+cache:
+  directories:
+    - vendor/bundle
+    - tmp/cache
+bundler_args: --without development --path vendor/bundle
