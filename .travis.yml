@@ -4,3 +4,9 @@ cache:
     - vendor/bundle
     - tmp/cache
 bundler_args: --without development --path vendor/bundle
+addons:
+  postgresql: "9.6"
+services:
+  - postgresql
+before_script:
+  - cp config/database.travis.yml config/database.yml
