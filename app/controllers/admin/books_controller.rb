@@ -15,6 +15,10 @@ module Admin
         end
       end
 
+      def title_column(book)
+        link_to_if book.publisher_page_url.present?, book.title, book.publisher_page_url
+      end
+
       def published_on_column(book)
         l(book.published_on, format: "%b %Y")
       end

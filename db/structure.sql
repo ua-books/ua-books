@@ -60,7 +60,8 @@ CREATE TABLE books (
     updated_at timestamp without time zone NOT NULL,
     published_on date DEFAULT ('now'::text)::date NOT NULL,
     number_of_pages integer NOT NULL,
-    cover_uid character varying
+    cover_uid character varying,
+    publisher_page_url character varying
 );
 
 
@@ -388,6 +389,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171105170914'),
 ('20171119083656'),
 ('20171222185134'),
-('20180103203154');
+('20180103203154'),
+('20180105201202');
 
 
