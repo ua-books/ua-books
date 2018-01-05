@@ -10,11 +10,12 @@ RSpec.describe "Admin::BooksController" do
     fill_in "Title", with: "Ведмідь не хоче спати"
     fill_in "Number of pages", with: "30"
     select_date Date.new(2016, 10, 10), from: "Published on"
+    fill_in "Publisher page url", with: "https://starylev.com.ua/"
     attach_file "Cover", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
     click_on "Create Book"
 
     expect(page).to have_css :h1, text: /^Books$/
-    expect(page).to have_content "Ведмідь не хоче спати"
+    expect(page).to have_link "Ведмідь не хоче спати", href: "https://starylev.com.ua/"
     expect(page).to have_content "Oct 2016"
   end
 

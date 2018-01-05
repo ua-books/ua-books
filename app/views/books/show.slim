@@ -29,3 +29,6 @@ article.book-article
 
         dt => t "number_of_pages"
         dd = book.number_of_pages
+
+      - if book.publisher_page_url.present?
+        a.button.large.expanded href=book.publisher_page_url target="_blank" rel="nofollow noopener" Перейти на сайт видавництва
