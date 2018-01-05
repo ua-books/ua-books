@@ -14,7 +14,7 @@ class Book < ApplicationRecord
   private
 
   def publisher_page_url_should_be_valid
-    # Traling spaces are too common when copy-pasting, be forgiving
+    # Trailing spaces are too common when copy-pasting, be forgiving
     self.publisher_page_url = publisher_page_url.strip
 
     uri = URI.parse(publisher_page_url)
