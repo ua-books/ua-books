@@ -3,7 +3,7 @@ module ApplicationHelper
   # be transliterated first). We don't want to transliterate for SEO reasons, thus we
   # duplicate the logic here with Unicode support.
   def parameterize(string)
-    string.gsub(/[^\p{L}]+/, "-").chomp("-").downcase
+    string.gsub(/[^\p{Alnum}]+/, "-").sub(/^-/, "").sub(/-$/, "").downcase
   end
 
   # With `:works` option you can make additional filtering/preloading of `book.works`
