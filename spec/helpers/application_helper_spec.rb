@@ -1,8 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper do
-  specify "#parameterize" do
-    expect(helper.parameterize("Оксана Була «Зубр шукає гніздо»")).to eq "оксана-була-зубр-шукає-гніздо"
+  describe "#parameterize" do
+    specify "with an author" do
+      expect(helper.parameterize("Оксана Була «Зубр шукає гніздо»")).to eq "оксана-була-зубр-шукає-гніздо"
+    end
+
+    specify "without an author" do
+      expect(helper.parameterize("«Зубр шукає гніздо»")).to eq "зубр-шукає-гніздо"
+    end
+
+    specify "with numerals" do
+      expect(helper.parameterize("«Зубр шукає гніздо в 33 раз»")).to eq "зубр-шукає-гніздо-в-33-раз"
+    end
   end
 
   describe "#book_title" do
