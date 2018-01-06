@@ -27,4 +27,10 @@ module ApplicationHelper
   def person_alias(person_alias)
     "#{person_alias.first_name} #{person_alias.last_name}"
   end
+
+  MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true))
+
+  def markdown(text)
+    MARKDOWN.render(text || "").html_safe
+  end
 end

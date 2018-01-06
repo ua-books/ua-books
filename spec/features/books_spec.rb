@@ -4,6 +4,7 @@ RSpec.describe "BooksController" do
   specify "#show" do
     book = create(:book,
                   title: "Зубр шукає гніздо",
+                  description_md: "Це опис книжки про класного зубра",
                   number_of_pages: 32,
                   publisher_page_url: "https://starylev.com.ua/",
                   published_on: "2016-09-16")
@@ -25,6 +26,8 @@ RSpec.describe "BooksController" do
     expect(page).to have_content "Кількість сторінок 32"
 
     expect(page).to have_link "Перейти на сайт видавництва", href: "https://starylev.com.ua/"
+
+    expect(page).to have_content "Це опис книжки про класного зубра"
 
     expect(page.title).to eq "Оксана Була «Зубр шукає гніздо» на Українських книжках"
     expect(page).to have_css "link[rel='canonical'][href='http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}']", visible: false

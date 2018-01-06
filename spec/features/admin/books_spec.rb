@@ -9,6 +9,7 @@ RSpec.describe "Admin::BooksController" do
 
     fill_in "Title", with: "Ведмідь не хоче спати"
     fill_in "Number of pages", with: "30"
+    fill_in "Description md", with: "Опис цієї книги"
     select_date Date.new(2016, 10, 10), from: "Published on"
     fill_in "Publisher page url", with: "https://starylev.com.ua/"
     attach_file "Cover", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
@@ -17,6 +18,9 @@ RSpec.describe "Admin::BooksController" do
     expect(page).to have_css :h1, text: /^Books$/
     expect(page).to have_link "Ведмідь не хоче спати", href: "https://starylev.com.ua/"
     expect(page).to have_content "Oct 2016"
+
+    click_on "edit"
+    expect(page).to have_field "Description md", with: "Опис цієї книги"
   end
 
   specify "#create with a prefilled form" do
