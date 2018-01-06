@@ -4,9 +4,23 @@
   }
 
   > .media-object {
+    @include breakpoint(medium up) {
+      margin-bottom: 2rem;
+    }
+
     > .main-section {
       @include container;
+
+      > .publisher-url {
+        margin-top: 4rem;
+      }
     }
+  }
+
+
+  > .description {
+    @include container;
+    max-width: 75ch;
   }
 }
 

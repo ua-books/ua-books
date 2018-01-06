@@ -1,7 +1,10 @@
 # Fields:
 #   "publisher_page_url" (optional) contains URL to the
-#   book on the publisher's site. Usually it's not the same
-#   URL as for publsher's homepage.
+#     book on the publisher's site. Usually it's not the same
+#     URL as for publisher's homepage;
+#
+#   "description_md" (optional) contains description/annotation
+#     formatted with Markdown.
 class Book < ApplicationRecord
   validates_presence_of :title, :number_of_pages
   validate :publisher_page_url_should_be_valid, if: ->{ publisher_page_url.present? }

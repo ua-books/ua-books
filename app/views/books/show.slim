@@ -31,4 +31,8 @@ article.book-article
         dd = book.number_of_pages
 
       - if book.publisher_page_url.present?
-        a.button.large.expanded href=book.publisher_page_url target="_blank" rel="nofollow noopener" Перейти на сайт видавництва
+        a.publisher-url.button.large.expanded href=book.publisher_page_url target="_blank" rel="nofollow noopener" Перейти на сайт видавництва
+
+  - if book.description_md.present?
+    .description
+      = markdown(book.description_md)
