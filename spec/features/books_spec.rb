@@ -31,5 +31,6 @@ RSpec.describe "BooksController" do
 
     expect(page.title).to eq "Оксана Була «Зубр шукає гніздо» на Українських книжках"
     expect(page).to have_css "link[rel='canonical'][href='http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}']", visible: false
+    expect(page).to have_css "meta[name='description'][content='Це опис книжки про класного зубра']", visible: false
   end
 end

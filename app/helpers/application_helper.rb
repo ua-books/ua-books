@@ -16,6 +16,15 @@ module ApplicationHelper
     "#{author_aliases.join ", "} «#{book.title}»"
   end
 
+  def book_meta_description(book)
+    if book.description_md.present?
+      first_paragraph, _ = book.description_md.split("\n\n", 2)
+      strip_tags(markdown(first_paragraph)).chomp("\n")
+    else
+      "Книга «#{book.title}»"
+    end
+  end
+
   # Gender-aware work type name
   def work_type_name(work)
     case work.person.gender

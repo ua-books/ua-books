@@ -53,4 +53,26 @@ RSpec.describe ApplicationHelper do
       expect(helper.book_title(book, works: [work])).to eq "Оксана Була «Зубр шукає гніздо»"
     end
   end
+
+  describe "#book_meta_description" do
+    specify "no description" do
+      book = Book.new(title: "Зубр шукає гніздо")
+      expect(helper.book_meta_description(book)).to eq "Книга «Зубр шукає гніздо»"
+    end
+
+    specify "one paragraph" do
+      book = Book.new(description_md: "Перший параграф")
+      expect(helper.book_meta_description(book)).to eq "Перший параграф"
+    end
+
+    specify "more than one paragraph" do
+      book = Book.new(description_md: "Перший параграф.\n\nДругий параграф\n\nТретій параграф.")
+      expect(helper.book_meta_description(book)).to eq "Перший параграф."
+    end
+
+    specify "strip markdown formatting" do
+      book = Book.new(description_md: "Перший *параграф*")
+      expect(helper.book_meta_description(book)).to eq "Перший параграф"
+    end
+  end
 end
