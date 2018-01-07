@@ -1,7 +1,10 @@
 doctype xml
-urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
   - Book.all.each do |book|
     url
       loc = book_url(id: book.id)
       changefreq always
       lastmod = book.updated_at.to_formatted_s(:iso8601)
+      image:image
+        image:loc = asset_url(book.cover.thumb("640x").url)
+        image:title Обкладинка до книги «#{book.title}»
