@@ -3,6 +3,7 @@
 
 - content_for :head do
   link rel="canonical" href=book_url(id: book.id, slug: parameterize(book_title))
+  meta name="description" content=book_meta_description(book)
 
 article.book-article
   h1.title = book_title
