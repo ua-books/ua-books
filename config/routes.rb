@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "(:slug)/:id" => "books#show", as: :book, constraints: {id: /\d+/}
   get "/" => "home#show", as: :root
   get "/:path", to: "static#show", as: :static, constraints: {path: /about|helping-us/}
+  get "/sitemap.xml", to: "sitemap#show"
 
   namespace :admin do
     resources :books
