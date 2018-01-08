@@ -1,0 +1,14 @@
+uk:
+  helpers:
+    submit:
+      book:
+        create: Додати книгу
+  simple_form:
+    labels:
+      book:
+        title: Назва
+        number_of_pages: Кількість сторінок
+        description_md: Опис
+        published_on: Дата подання до друку
+        publisher_page_url: Посилання на книгу на сайті видавця
+        cover: Обкладинка
