@@ -4,8 +4,8 @@ RSpec.describe "Admin::BooksController" do
   specify "#create" do
     visit "/admin/books/new"
 
-    expect(page).to have_css :h1, text: %r{^Books / New$}
-    expect(page.title).to eq "Books / New | Admin"
+    expect(page).to have_css :h1, text: %r{^Книги / Додати$}
+    expect(page.title).to eq "Книги / Додати | Admin"
 
     fill_in "Назва", with: "Ведмідь не хоче спати"
     fill_in "Кількість сторінок", with: "30"
@@ -15,7 +15,7 @@ RSpec.describe "Admin::BooksController" do
     attach_file "Обкладинка", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
     click_on "Додати книгу"
 
-    expect(page).to have_css :h1, text: /^Books$/
+    expect(page).to have_css :h1, text: /^Книги$/
     expect(page).to have_link "Ведмідь не хоче спати", href: "https://starylev.com.ua/"
     expect(page).to have_content "Oct 2016"
 
@@ -29,7 +29,7 @@ RSpec.describe "Admin::BooksController" do
     fill_in "Кількість сторінок", with: "30"
     click_on "Додати книгу"
 
-    expect(page).to have_css :h1, text: /^Books$/
+    expect(page).to have_css :h1, text: /^Книги$/
     expect(page).to have_content "Ведмідь"
   end
 
@@ -38,13 +38,13 @@ RSpec.describe "Admin::BooksController" do
 
     visit "/admin/books/#{book.id}/edit"
 
-    expect(page).to have_css :h1, text: %r{^Books / Зубр шукає гніздо / Edit$}
-    expect(page.title).to eq "Books / Зубр шукає гніздо / Edit | Admin"
+    expect(page).to have_css :h1, text: %r{^Книги / Зубр шукає гніздо / Правити$}
+    expect(page.title).to eq "Книги / Зубр шукає гніздо / Правити | Admin"
 
     fill_in "Назва", with: "Ведмідь не хоче спати"
     click_on "Update Book"
 
-    expect(page).to have_css :h1, text: /^Books$/
+    expect(page).to have_css :h1, text: /^Книги$/
     expect(page).to have_content "Ведмідь не хоче спати"
   end
 end

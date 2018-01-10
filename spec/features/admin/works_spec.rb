@@ -8,8 +8,8 @@ RSpec.describe "Admin::WorkController" do
 
     visit "/admin/works/new"
 
-    expect(page).to have_css :h1, text: %r{^Works / New$}
-    expect(page.title).to eq "Works / New | Admin"
+    expect(page).to have_css :h1, text: %r{^Роботи / Додати$}
+    expect(page.title).to eq "Роботи / Додати | Admin"
 
     check "Title"
     select "Зубр шукає гніздо", from: "Book"
@@ -18,7 +18,7 @@ RSpec.describe "Admin::WorkController" do
     fill_in "Notes", with: "2008"
     click_on "Create Work"
 
-    expect(page).to have_css :h1, text: /^Works$/
+    expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Зубр шукає гніздо"
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Оксана Була"
@@ -34,13 +34,13 @@ RSpec.describe "Admin::WorkController" do
 
     visit "/admin/works/#{work.id}/edit"
 
-    expect(page).to have_css :h1, text: %r{^Works / Зубр шукає гніздо - Авторка тексту - Оксана Була / Edit$}
-    expect(page.title).to eq "Works / Зубр шукає гніздо - Авторка тексту - Оксана Була / Edit | Admin"
+    expect(page).to have_css :h1, text: %r{^Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити$}
+    expect(page.title).to eq "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити | Admin"
 
     select "Ілюстратор", from: "Type"
     click_on "Update Work"
 
-    expect(page).to have_css :h1, text: /^Works$/
+    expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Ілюстраторка"
   end
 end
