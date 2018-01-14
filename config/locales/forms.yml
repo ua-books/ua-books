@@ -1,0 +1,39 @@
+uk:
+  helpers:
+    submit:
+      update: Зберегти правки
+      book:
+        create: Додати книгу
+      person:
+        create: Додати персону
+      work_type:
+        create: Додати тип робіт
+      work:
+        create: Додати роботу
+  simple_form:
+    options:
+      person:
+        gender:
+          male: чоловіча
+          female: жіноча
+    labels:
+      book:
+        title: Назва
+        number_of_pages: Кількість сторінок
+        description_md: Опис
+        published_on: Дата подання до друку
+        publisher_page_url: Посилання на книгу на сайті видавця
+        cover: Обкладинка
+      person:
+        first_name: Ім'я
+        last_name: Прізвище
+        gender: Стать
+      work_type:
+        name_feminine: Назва (жіночий рід)
+        name_masculine: Назва (чоловічий рід)
+      work:
+        title: У заголовку
+        book: Книга
+        type: Тип робіт
+        person_alias: Ім'я / Псевдонім
+        notes: Примітки

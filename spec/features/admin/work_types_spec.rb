@@ -4,14 +4,14 @@ RSpec.describe "Admin::WorkTypesController" do
   specify "#create" do
     visit "/admin/work_types/new"
 
-    expect(page).to have_css :h1, text: %r{^Work types / New$}
-    expect(page.title).to eq "Work types / New | Admin"
+    expect(page).to have_css :h1, text: %r{^Типи робіт / Додати$}
+    expect(page.title).to eq "Типи робіт / Додати | Admin"
 
-    fill_in "Name feminine", with: "Авторка тексту"
-    fill_in "Name masculine", with: "Автор тексту"
-    click_on "Create Work type"
+    fill_in "Назва (жіночий рід)", with: "Авторка тексту"
+    fill_in "Назва (чоловічий рід)", with: "Автор тексту"
+    click_on "Додати тип робіт"
 
-    expect(page).to have_css :h1, text: /^Work types$/
+    expect(page).to have_css :h1, text: /^Типи робіт$/
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Автор тексту"
   end
@@ -21,13 +21,13 @@ RSpec.describe "Admin::WorkTypesController" do
 
     visit "/admin/work_types/#{illustrator_type.id}/edit"
 
-    expect(page).to have_css :h1, text: %r{^Work types / Ілюстратор / Edit$}
-    expect(page.title).to eq "Work types / Ілюстратор / Edit | Admin"
+    expect(page).to have_css :h1, text: %r{^Типи робіт / Ілюстратор / Правити$}
+    expect(page.title).to eq "Типи робіт / Ілюстратор / Правити | Admin"
 
-    fill_in "Name masculine", with: "Художник"
-    click_on "Update Work type"
+    fill_in "Назва (жіночий рід)", with: "Художник"
+    click_on "Зберегти правки"
 
-    expect(page).to have_css :h1, text: /^Work types$/
+    expect(page).to have_css :h1, text: /^Типи робіт$/
     expect(page).to have_content "Художник"
   end
 end

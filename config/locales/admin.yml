@@ -1,0 +1,14 @@
+uk:
+  admin:
+    books:
+      index:
+        title: Книги
+    people:
+      index:
+        title: Персони
+    work_types:
+      index:
+        title: Типи робіт
+    works:
+      index:
+        title: Роботи

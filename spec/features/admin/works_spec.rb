@@ -8,17 +8,17 @@ RSpec.describe "Admin::WorkController" do
 
     visit "/admin/works/new"
 
-    expect(page).to have_css :h1, text: %r{^Works / New$}
-    expect(page.title).to eq "Works / New | Admin"
+    expect(page).to have_css :h1, text: %r{^Роботи / Додати$}
+    expect(page.title).to eq "Роботи / Додати | Admin"
 
-    check "Title"
-    select "Зубр шукає гніздо", from: "Book"
-    select "Автор тексту", from: "Type"
-    select "Оксана Була", from: "Person alias"
-    fill_in "Notes", with: "2008"
-    click_on "Create Work"
+    check "У заголовку"
+    select "Зубр шукає гніздо", from: "Книга"
+    select "Автор тексту", from: "Тип робіт"
+    select "Оксана Була", from: "Псевдонім"
+    fill_in "Примітки", with: "2008"
+    click_on "Додати роботу"
 
-    expect(page).to have_css :h1, text: /^Works$/
+    expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Зубр шукає гніздо"
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Оксана Була"
@@ -34,13 +34,13 @@ RSpec.describe "Admin::WorkController" do
 
     visit "/admin/works/#{work.id}/edit"
 
-    expect(page).to have_css :h1, text: %r{^Works / Зубр шукає гніздо - Авторка тексту - Оксана Була / Edit$}
-    expect(page.title).to eq "Works / Зубр шукає гніздо - Авторка тексту - Оксана Була / Edit | Admin"
+    expect(page).to have_css :h1, text: %r{^Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити$}
+    expect(page.title).to eq "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити | Admin"
 
-    select "Ілюстратор", from: "Type"
-    click_on "Update Work"
+    select "Ілюстратор", from: "Тип робіт"
+    click_on "Зберегти правки"
 
-    expect(page).to have_css :h1, text: /^Works$/
+    expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Ілюстраторка"
   end
 end

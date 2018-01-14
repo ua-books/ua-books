@@ -16,7 +16,7 @@ module Admin
       end
 
       def edit_column(resource)
-        link_to "edit", polymorphic_path([:admin, resource], action: :edit), class: "button"
+        link_to "правити", polymorphic_path([:admin, resource], action: :edit), class: "button"
       end
     end
 

@@ -1,5 +1,5 @@
 = simple_form_for [:admin, resource] do |f|
   = f.input :first_name
   = f.input :last_name
-  = f.input :gender, collection: %w[female male]
+  = f.input :gender, collection: %i[female male]
   = f.submit class: "button"
