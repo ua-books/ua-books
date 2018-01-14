@@ -5,7 +5,7 @@
 table.index
   thead
     - index_columns.each do |column|
-      th = column.humanize
+      th = column_name(column)
     - index_action_columns.each do
       th
   tbody
