@@ -19,7 +19,7 @@ RSpec.describe "Admin::BooksController" do
     expect(page).to have_link "Ведмідь не хоче спати", href: "https://starylev.com.ua/"
     expect(page).to have_content "Oct 2016"
 
-    click_on "edit"
+    click_on "правити"
     expect(page).to have_field "Опис", with: "Опис цієї книги"
   end
 
@@ -42,7 +42,7 @@ RSpec.describe "Admin::BooksController" do
     expect(page.title).to eq "Книги / Зубр шукає гніздо / Правити | Admin"
 
     fill_in "Назва", with: "Ведмідь не хоче спати"
-    click_on "Update Book"
+    click_on "Зберегти правки"
 
     expect(page).to have_css :h1, text: /^Книги$/
     expect(page).to have_content "Ведмідь не хоче спати"

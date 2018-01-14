@@ -1,6 +1,7 @@
 uk:
   helpers:
     submit:
+      update: Зберегти правки
       book:
         create: Додати книгу
   simple_form:

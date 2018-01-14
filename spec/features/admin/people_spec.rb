@@ -26,7 +26,7 @@ RSpec.describe "Admin::PeopleController" do
     expect(page.title).to eq "Персони / Оксана Була / Правити | Admin"
 
     fill_in "First name", with: "Галина"
-    click_on "Update Person"
+    click_on "Зберегти правки"
 
     expect(page).to have_css :h1, text: /^Персони$/
     expect(page).to have_content "Галина"

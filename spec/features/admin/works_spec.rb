@@ -38,7 +38,7 @@ RSpec.describe "Admin::WorkController" do
     expect(page.title).to eq "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити | Admin"
 
     select "Ілюстратор", from: "Type"
-    click_on "Update Work"
+    click_on "Зберегти правки"
 
     expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Ілюстраторка"

@@ -25,7 +25,7 @@ RSpec.describe "Admin::WorkTypesController" do
     expect(page.title).to eq "Типи робіт / Ілюстратор / Правити | Admin"
 
     fill_in "Name masculine", with: "Художник"
-    click_on "Update Work type"
+    click_on "Зберегти правки"
 
     expect(page).to have_css :h1, text: /^Типи робіт$/
     expect(page).to have_content "Художник"
