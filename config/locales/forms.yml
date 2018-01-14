@@ -8,6 +8,8 @@ uk:
         create: Додати персону
       work_type:
         create: Додати тип робіт
+      work:
+        create: Додати роботу
   simple_form:
     options:
       person:
@@ -29,3 +31,9 @@ uk:
       work_type:
         name_feminine: Назва (жіночий рід)
         name_masculine: Назва (чоловічий рід)
+      work:
+        title: У заголовку
+        book: Книга
+        type: Тип робіт
+        person_alias: Ім'я / Псевдонім
+        notes: Примітки

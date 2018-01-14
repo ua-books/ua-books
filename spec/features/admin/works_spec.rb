@@ -11,12 +11,12 @@ RSpec.describe "Admin::WorkController" do
     expect(page).to have_css :h1, text: %r{^Роботи / Додати$}
     expect(page.title).to eq "Роботи / Додати | Admin"
 
-    check "Title"
-    select "Зубр шукає гніздо", from: "Book"
-    select "Автор тексту", from: "Type"
-    select "Оксана Була", from: "Person alias"
-    fill_in "Notes", with: "2008"
-    click_on "Create Work"
+    check "У заголовку"
+    select "Зубр шукає гніздо", from: "Книга"
+    select "Автор тексту", from: "Тип робіт"
+    select "Оксана Була", from: "Псевдонім"
+    fill_in "Примітки", with: "2008"
+    click_on "Додати роботу"
 
     expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Зубр шукає гніздо"
@@ -37,7 +37,7 @@ RSpec.describe "Admin::WorkController" do
     expect(page).to have_css :h1, text: %r{^Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити$}
     expect(page.title).to eq "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити | Admin"
 
-    select "Ілюстратор", from: "Type"
+    select "Ілюстратор", from: "Тип робіт"
     click_on "Зберегти правки"
 
     expect(page).to have_css :h1, text: /^Роботи$/
