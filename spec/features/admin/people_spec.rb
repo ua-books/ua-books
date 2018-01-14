@@ -7,10 +7,10 @@ RSpec.describe "Admin::PeopleController" do
     expect(page).to have_css :h1, text: %r{^Персони / Додати$}
     expect(page.title).to eq "Персони / Додати | Admin"
 
-    fill_in "First name", with: "Дмитро"
-    fill_in "Last name", with: "Яворницький"
-    select "male", from: "Gender"
-    click_on "Create Person"
+    fill_in "Ім'я", with: "Дмитро"
+    fill_in "Прізвище", with: "Яворницький"
+    select "чоловіча", from: "Стать"
+    click_on "Додати персону"
 
     expect(page).to have_css :h1, text: /^Персони$/
     expect(page).to have_content "Дмитро"
@@ -25,7 +25,7 @@ RSpec.describe "Admin::PeopleController" do
     expect(page).to have_css :h1, text: %r{^Персони / Оксана Була / Правити$}
     expect(page.title).to eq "Персони / Оксана Була / Правити | Admin"
 
-    fill_in "First name", with: "Галина"
+    fill_in "Ім'я", with: "Галина"
     click_on "Зберегти правки"
 
     expect(page).to have_css :h1, text: /^Персони$/

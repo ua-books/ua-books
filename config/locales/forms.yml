@@ -4,7 +4,14 @@ uk:
       update: Зберегти правки
       book:
         create: Додати книгу
+      person:
+        create: Додати персону
   simple_form:
+    options:
+      person:
+        gender:
+          male: чоловіча
+          female: жіноча
     labels:
       book:
         title: Назва
@@ -13,3 +20,7 @@ uk:
         published_on: Дата подання до друку
         publisher_page_url: Посилання на книгу на сайті видавця
         cover: Обкладинка
+      person:
+        first_name: Ім'я
+        last_name: Прізвище
+        gender: Стать
