@@ -5,6 +5,8 @@ class DragonflyInput < SimpleForm::Inputs::Base
     model = @builder.object
     tags = []
 
+    # http://markevans.github.io/dragonfly/models#reflection-methods
+    # http://markevans.github.io/dragonfly/models#retaining-across-form-redisplays
     if model.public_send("#{attribute_name}_stored?")
       attachment = model.public_send(attribute_name)
     else
