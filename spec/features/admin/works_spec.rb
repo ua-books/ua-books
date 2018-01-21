@@ -24,6 +24,13 @@ RSpec.describe "Admin::WorkController" do
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Оксана Була"
     expect(page).to have_content "2008"
+
+    click_on "правити"
+    expect(page).to have_checked_field "У заголовку"
+    expect(page).to have_select "Книга", selected: "Зубр шукає гніздо"
+    expect(page).to have_select "Тип робіт", selected: "Автор тексту"
+    expect(page).to have_select "Псевдонім", selected: "Оксана Була"
+    expect(page).to have_field "Примітки", with: "2008"
   end
 
   specify "#update" do
@@ -42,5 +49,8 @@ RSpec.describe "Admin::WorkController" do
     click_on "Зберегти правки"
 
     expect(page).to have_content "Запис було успішно оновлено"
+
+    click_on "правити"
+    expect(page).to have_select "Тип робіт", selected: "Ілюстратор"
   end
 end
