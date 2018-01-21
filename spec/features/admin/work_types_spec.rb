@@ -15,6 +15,10 @@ RSpec.describe "Admin::WorkTypesController" do
     expect(page).to have_css :h1, text: /^Типи робіт$/
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Автор тексту"
+
+    click_on "правити"
+    expect(page).to have_field "Назва (жіночий рід)", with: "Авторка тексту"
+    expect(page).to have_field "Назва (чоловічий рід)", with: "Автор тексту"
   end
 
   specify "#update" do
@@ -29,5 +33,8 @@ RSpec.describe "Admin::WorkTypesController" do
     click_on "Зберегти правки"
 
     expect(page).to have_content "Запис було успішно оновлено"
+
+    click_on "правити"
+    expect(page).to have_field "Назва (жіночий рід)", with: "Художник"
   end
 end

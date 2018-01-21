@@ -21,7 +21,11 @@ RSpec.describe "Admin::BooksController" do
     expect(page).to have_content "Oct 2016"
 
     click_on "правити"
+    expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
+    expect(page).to have_field "Кількість сторінок", with: "30"
     expect(page).to have_field "Опис", with: "Опис цієї книги"
+    expect(page).to have_field "Дата подання до друку", with: "2016-10-10"
+    expect(page).to have_field "Посилання на книгу на сайті видавця", with: "https://starylev.com.ua/"
   end
 
   specify "#create with a prefilled form" do
@@ -31,6 +35,9 @@ RSpec.describe "Admin::BooksController" do
     click_on "Додати книгу"
 
     expect(page).to have_content "Запис було успішно створено"
+
+    click_on "правити"
+    expect(page).to have_field "Назва", with: "Ведмідь"
   end
 
   specify "#update" do
@@ -45,5 +52,8 @@ RSpec.describe "Admin::BooksController" do
     click_on "Зберегти правки"
 
     expect(page).to have_content "Запис було успішно оновлено"
+
+    click_on "правити"
+    expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
   end
 end
