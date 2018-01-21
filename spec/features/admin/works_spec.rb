@@ -18,6 +18,7 @@ RSpec.describe "Admin::WorkController" do
     fill_in "Примітки", with: "2008"
     click_on "Додати роботу"
 
+    expect(page).to have_content "Запис було успішно створено"
     expect(page).to have_css :h1, text: /^Роботи$/
     expect(page).to have_content "Зубр шукає гніздо"
     expect(page).to have_content "Авторка тексту"
@@ -40,7 +41,6 @@ RSpec.describe "Admin::WorkController" do
     select "Ілюстратор", from: "Тип робіт"
     click_on "Зберегти правки"
 
-    expect(page).to have_css :h1, text: /^Роботи$/
-    expect(page).to have_content "Ілюстраторка"
+    expect(page).to have_content "Запис було успішно оновлено"
   end
 end

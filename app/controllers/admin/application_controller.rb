@@ -27,7 +27,7 @@ module Admin
     def create
       resource.attributes = params_for_resource
       if resource.save
-        redirect_to redirect_to_after(:create)
+        redirect_to_after(:create)
       else
         render "new"
       end
@@ -35,7 +35,7 @@ module Admin
 
     def update
       if resource.update_attributes(params_for_resource)
-        redirect_to redirect_to_after(:update)
+        redirect_to_after(:update)
       else
         render "edit"
       end
@@ -47,7 +47,11 @@ module Admin
     end
 
     def redirect_to_after(action)
-      polymorphic_path([:admin, resource.class])
+      redirect_to polymorphic_path([:admin, resource.class]), notice: redirect_to_after_notice(action)
+    end
+
+    def redirect_to_after_notice(action)
+      I18n.t "admin.#{controller_name}.#{action}.notice", default: :"admin.application.#{action}.notice"
     end
   end
 end
