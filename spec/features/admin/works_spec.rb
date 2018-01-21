@@ -1,11 +1,28 @@
 require "rails_helper"
 
 RSpec.describe "Admin::WorkController" do
-  specify "#create" do
-    create(:text_author_type)
-    create(:book, title: "Зубр шукає гніздо")
-    create(:person, first_name: "Оксана", last_name: "Була")
+  let!(:text_author_type) { create(:text_author_type) }
+  let!(:zubr_book) { create(:book, title: "Зубр шукає гніздо") }
+  let!(:oksana_bula) { create(:person, first_name: "Оксана", last_name: "Була") }
 
+  specify "#index" do
+    create(:work, book: zubr_book, type: text_author_type, person_alias: oksana_bula.main_alias, notes: "2008")
+
+    visit "/admin/works"
+
+    expect(page).to have_css :h1, text: /^Роботи$/
+    expect(page.title).to eq "Роботи | Admin"
+
+    expect(page).to have_content "Зубр шукає гніздо"
+    expect(page).to have_content "Авторка тексту"
+    expect(page).to have_content "Оксана Була"
+    expect(page).to have_content "2008"
+
+    click_on "правити"
+    expect(page).to have_content "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити"
+  end
+
+  specify "#create" do
     visit "/admin/works/new"
 
     expect(page).to have_css :h1, text: %r{^Роботи / Додати$}
@@ -14,18 +31,15 @@ RSpec.describe "Admin::WorkController" do
     check "У заголовку"
     select "Зубр шукає гніздо", from: "Книга"
     select "Автор тексту", from: "Тип робіт"
-    select "Оксана Була", from: "Псевдонім"
+    select "Оксана Була", from: "Ім'я / Псевдонім"
     fill_in "Примітки", with: "2008"
     click_on "Додати роботу"
 
     expect(page).to have_content "Запис було успішно створено"
-    expect(page).to have_css :h1, text: /^Роботи$/
-    expect(page).to have_content "Зубр шукає гніздо"
-    expect(page).to have_content "Авторка тексту"
-    expect(page).to have_content "Оксана Була"
-    expect(page).to have_content "2008"
+    expect(page).to have_content "Роботи до книги «Зубр шукає гніздо»"
 
-    click_on "правити"
+    visit "/admin/works/#{Work.last.id}/edit"
+
     expect(page).to have_checked_field "У заголовку"
     expect(page).to have_select "Книга", selected: "Зубр шукає гніздо"
     expect(page).to have_select "Тип робіт", selected: "Автор тексту"
@@ -35,10 +49,7 @@ RSpec.describe "Admin::WorkController" do
 
   specify "#update" do
     create(:illustrator_type)
-    text_author_type = create(:text_author_type)
-    book = create(:book, title: "Зубр шукає гніздо")
-    oksana_bula = create(:person, first_name: "Оксана", last_name: "Була")
-    work = Work.create!(book: book, type: text_author_type, person_alias: oksana_bula.main_alias)
+    work = create(:work, book: zubr_book, type: text_author_type, person_alias: oksana_bula.main_alias)
 
     visit "/admin/works/#{work.id}/edit"
 
@@ -50,7 +61,7 @@ RSpec.describe "Admin::WorkController" do
 
     expect(page).to have_content "Запис було успішно оновлено"
 
-    click_on "правити"
+    visit "/admin/works/#{work.id}/edit"
     expect(page).to have_select "Тип робіт", selected: "Ілюстратор"
   end
 end

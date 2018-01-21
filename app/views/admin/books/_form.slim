@@ -1,7 +1,3 @@
-- if resource.persisted?
-  .button-group
-    a.button href=new_admin_work_path(work: {book_id: resource.id}) target="_blank" Add work
-
 = simple_form_for [:admin, resource] do |f|
   = f.input :title
   = f.input :number_of_pages
