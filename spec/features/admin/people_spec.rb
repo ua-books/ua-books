@@ -12,6 +12,7 @@ RSpec.describe "Admin::PeopleController" do
     select "чоловіча", from: "Стать"
     click_on "Додати персону"
 
+    expect(page).to have_content "Запис було успішно створено"
     expect(page).to have_css :h1, text: /^Персони$/
     expect(page).to have_content "Дмитро"
     expect(page).to have_content "Яворницький"
@@ -28,7 +29,6 @@ RSpec.describe "Admin::PeopleController" do
     fill_in "Ім'я", with: "Галина"
     click_on "Зберегти правки"
 
-    expect(page).to have_css :h1, text: /^Персони$/
-    expect(page).to have_content "Галина"
+    expect(page).to have_content "Запис було успішно оновлено"
   end
 end

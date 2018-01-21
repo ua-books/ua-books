@@ -11,6 +11,7 @@ RSpec.describe "Admin::WorkTypesController" do
     fill_in "Назва (чоловічий рід)", with: "Автор тексту"
     click_on "Додати тип робіт"
 
+    expect(page).to have_content "Запис було успішно створено"
     expect(page).to have_css :h1, text: /^Типи робіт$/
     expect(page).to have_content "Авторка тексту"
     expect(page).to have_content "Автор тексту"
@@ -27,7 +28,6 @@ RSpec.describe "Admin::WorkTypesController" do
     fill_in "Назва (жіночий рід)", with: "Художник"
     click_on "Зберегти правки"
 
-    expect(page).to have_css :h1, text: /^Типи робіт$/
-    expect(page).to have_content "Художник"
+    expect(page).to have_content "Запис було успішно оновлено"
   end
 end

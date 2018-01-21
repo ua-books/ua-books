@@ -15,6 +15,7 @@ RSpec.describe "Admin::BooksController" do
     attach_file "Обкладинка", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
     click_on "Додати книгу"
 
+    expect(page).to have_content "Запис було успішно створено"
     expect(page).to have_css :h1, text: /^Книги$/
     expect(page).to have_link "Ведмідь не хоче спати", href: "https://starylev.com.ua/"
     expect(page).to have_content "Oct 2016"
@@ -29,8 +30,7 @@ RSpec.describe "Admin::BooksController" do
     fill_in "Кількість сторінок", with: "30"
     click_on "Додати книгу"
 
-    expect(page).to have_css :h1, text: /^Книги$/
-    expect(page).to have_content "Ведмідь"
+    expect(page).to have_content "Запис було успішно створено"
   end
 
   specify "#update" do
@@ -44,7 +44,6 @@ RSpec.describe "Admin::BooksController" do
     fill_in "Назва", with: "Ведмідь не хоче спати"
     click_on "Зберегти правки"
 
-    expect(page).to have_css :h1, text: /^Книги$/
-    expect(page).to have_content "Ведмідь не хоче спати"
+    expect(page).to have_content "Запис було успішно оновлено"
   end
 end

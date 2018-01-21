@@ -11,4 +11,8 @@ html
     = yield :head
   body
     .grid-container class=controller_name class=action_name
+      - if flash[:notice]
+        .callout.success = flash[:notice]
+      - if flash[:alert]
+        .callout.alert = flash[:alert]
       = yield

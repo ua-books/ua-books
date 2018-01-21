@@ -47,7 +47,11 @@ module Admin
     end
 
     def redirect_to_after(action)
-      redirect_to polymorphic_path([:admin, resource.class])
+      redirect_to polymorphic_path([:admin, resource.class]), notice: redirect_to_after_notice(action)
+    end
+
+    def redirect_to_after_notice(action)
+      I18n.t "admin.#{controller_name}.#{action}.notice", default: :"admin.application.#{action}.notice"
     end
   end
 end

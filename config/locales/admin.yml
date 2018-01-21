@@ -1,5 +1,10 @@
 uk:
   admin:
+    application:
+      create:
+        notice: Запис було успішно створено.
+      update:
+        notice: Запис було успішно оновлено.
     books:
       index:
         title: Книги
