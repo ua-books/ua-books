@@ -1,7 +1,14 @@
 module Admin
   class WorksController < Admin::ApplicationController
     expose(:index_columns) { %w[id book type person_alias notes] }
-    expose(:resource_collection) { Work.preload(:book, :type, person_alias: :person).order(:book_id, :person_alias_id) }
+    expose(:book) { params[:book_id].presence && Book.find(params[:book_id]) }
+    expose(:resource_collection) do
+      scope = Work.preload(:book, :type, person_alias: :person).order(:book_id, :person_alias_id)
+      if book
+        scope = scope.where(book_id: book.id)
+      end
+      scope
+    end
     expose(:resource, model: "Work")
 
     helper do
@@ -20,6 +27,18 @@ module Admin
       def person_alias_column(work)
         person_alias(work.person_alias)
       end
+
+      def index_title
+        if book
+          t "admin.works.index.title_for_book", title: book.title
+        else
+          super
+        end
+      end
+    end
+
+    def redirect_to_after(action)
+      redirect_to admin_works_path(book_id: resource.book_id), notice: redirect_to_after_notice(action)
     end
   end
 end

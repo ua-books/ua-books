@@ -1,6 +1,27 @@
 require "rails_helper"
 
 RSpec.describe "Admin::BooksController" do
+  specify "#index" do
+    book = create(:book,
+                  title: "Зубр шукає гніздо",
+                  publisher_page_url: "https://starylev.com.ua/",
+                  published_on: "2016-09-16")
+
+    visit "/admin/books"
+
+    expect(page).to have_css :h1, text: /^Книги$/
+    expect(page.title).to eq "Книги | Admin"
+    expect(page).to have_link "Зубр шукає гніздо", href: "https://starylev.com.ua/"
+    expect(page).to have_content "Sep 2016"
+
+    click_on "правити"
+    expect(page).to have_content "Книги / Зубр шукає гніздо / Правити"
+
+    visit "/admin/books"
+    click_on "роботи"
+    expect(page).to have_content "Роботи до книги «Зубр шукає гніздо»"
+  end
+
   specify "#create" do
     visit "/admin/books/new"
 
@@ -15,12 +36,11 @@ RSpec.describe "Admin::BooksController" do
     attach_file "Обкладинка", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
     click_on "Додати книгу"
 
-    expect(page).to have_content "Запис було успішно створено"
-    expect(page).to have_css :h1, text: /^Книги$/
-    expect(page).to have_link "Ведмідь не хоче спати", href: "https://starylev.com.ua/"
-    expect(page).to have_content "Oct 2016"
+    expect(page).to have_content "Книгу було успішно додано. Будь ласка, вкажіть тих, хто над нею працював."
+    expect(page).to have_content "Роботи до книги «Ведмідь не хоче спати»"
 
-    click_on "правити"
+    visit "/admin/books/#{Book.last.id}/edit"
+
     expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
     expect(page).to have_field "Кількість сторінок", with: "30"
     expect(page).to have_field "Опис", with: "Опис цієї книги"
@@ -34,9 +54,9 @@ RSpec.describe "Admin::BooksController" do
     fill_in "Кількість сторінок", with: "30"
     click_on "Додати книгу"
 
-    expect(page).to have_content "Запис було успішно створено"
+    expect(page).to have_content "Книгу було успішно додано"
 
-    click_on "правити"
+    visit "/admin/books/#{Book.last.id}/edit"
     expect(page).to have_field "Назва", with: "Ведмідь"
   end
 
@@ -53,7 +73,7 @@ RSpec.describe "Admin::BooksController" do
 
     expect(page).to have_content "Запис було успішно оновлено"
 
-    click_on "правити"
+    visit "/admin/books/#{book.id}/edit"
     expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
   end
 end

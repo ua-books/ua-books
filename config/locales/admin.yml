@@ -8,6 +8,9 @@ uk:
     books:
       index:
         title: Книги
+      create:
+        notice:
+          Книгу було успішно додано. Будь ласка, вкажіть тих, хто над нею працював.
     people:
       index:
         title: Персони
@@ -17,3 +20,4 @@ uk:
     works:
       index:
         title: Роботи
+        title_for_book: Роботи до книги «%{title}»

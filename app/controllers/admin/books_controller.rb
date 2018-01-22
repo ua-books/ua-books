@@ -9,6 +9,10 @@ module Admin
         book.title
       end
 
+      def index_action_columns
+        %w[edit works]
+      end
+
       def cover_column(book)
         if book.cover
           link_to image_tag(book.cover.thumb("x100").url), book.cover.url
@@ -21,6 +25,18 @@ module Admin
 
       def published_on_column(book)
         l(book.published_on, format: "%b %Y")
+      end
+
+      def works_column(book)
+        link_to "роботи", admin_works_path(book_id: book.id), class: "button"
+      end
+    end
+
+    def redirect_to_after(action)
+      if action == :create
+        redirect_to admin_works_path(book_id: resource.id), notice: redirect_to_after_notice(:create)
+      else
+        super
       end
     end
   end
