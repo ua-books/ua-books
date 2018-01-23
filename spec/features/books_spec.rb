@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "BooksController" do
-  specify "#show" do
+  specify "#show when published" do
     book = create(:book,
+                  :published,
                   title: "Зубр шукає гніздо",
                   description_md: "Це опис книжки про класного зубра",
                   number_of_pages: 32,
@@ -32,5 +33,12 @@ RSpec.describe "BooksController" do
     expect(page.title).to eq "Оксана Була «Зубр шукає гніздо» на Українських книжках"
     expect(page).to have_css "link[rel='canonical'][href='http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}']", visible: false
     expect(page).to have_css "meta[name='description'][content='Це опис книжки про класного зубра']", visible: false
+  end
+
+  specify "#show when draft", realistic_error_responses: true do
+    book = create(:book)
+
+    visit "/#{book.id}"
+    expect(page).to have_content "The page you were looking for doesn't exist."
   end
 end
