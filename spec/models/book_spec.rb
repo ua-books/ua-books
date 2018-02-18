@@ -1,6 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Book do
+  specify "missing cover" do
+    book = create(:book, cover: nil)
+    expect(book.cover).to be
+  end
+
   describe "validations" do
     describe "#publisher_page_url" do
       specify "nil" do
