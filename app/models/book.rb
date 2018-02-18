@@ -20,7 +20,9 @@ class Book < ApplicationRecord
   has_many :works, inverse_of: :book
   has_many :title_works, ->{ where(title: true) }, class_name: "Work"
 
-  dragonfly_accessor :cover
+  dragonfly_accessor :cover do
+    default "public/system/dragonfly/no_image.png"
+  end
 
   private
 
