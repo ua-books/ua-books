@@ -62,7 +62,8 @@ CREATE TABLE books (
     number_of_pages integer NOT NULL,
     cover_uid character varying,
     publisher_page_url character varying,
-    description_md text
+    description_md text,
+    state character varying DEFAULT 'draft'::character varying NOT NULL
 );
 
 
@@ -317,6 +318,13 @@ ALTER TABLE ONLY works
 
 
 --
+-- Name: index_books_on_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_state ON books USING btree (state);
+
+
+--
 -- Name: index_person_aliases_on_person_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -392,6 +400,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20171222185134'),
 ('20180103203154'),
 ('20180105201202'),
-('20180106133300');
+('20180106133300'),
+('20180123191209');
 
 

@@ -1,6 +1,6 @@
 module Admin
   class BooksController < Admin::ApplicationController
-    expose(:index_columns) { %w[id cover title published_on] }
+    expose(:index_columns) { %w[id state cover title published_on] }
     expose(:resource_collection) { Book.order("id desc") }
     expose(:resource, model: "Book")
 
@@ -11,6 +11,10 @@ module Admin
 
       def index_action_columns
         %w[edit works]
+      end
+
+      def state_column(book)
+        link_to_if book.published?, t("simple_form.options.book.state.#{book.state}"), book_path(id: book), target: "_blank"
       end
 
       def cover_column(book)

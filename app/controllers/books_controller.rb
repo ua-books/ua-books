@@ -1,3 +1,3 @@
 class BooksController < ApplicationController
-  expose(:book)
+  expose(:book, scope: ->{ Book.published })
 end

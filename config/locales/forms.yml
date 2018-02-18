@@ -16,8 +16,13 @@ uk:
         gender:
           male: чоловіча
           female: жіноча
+      book:
+        state:
+          draft: чорновик
+          published: опубліковано
     labels:
       book:
+        state: Стан
         title: Назва
         number_of_pages: Кількість сторінок
         description_md: Опис

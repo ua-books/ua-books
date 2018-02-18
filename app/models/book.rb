@@ -1,4 +1,7 @@
 # Fields:
+#   "state" can be "draft" or "published".
+#     It defines record visibility;
+#
 #   "publisher_page_url" (optional) contains URL to the
 #     book on the publisher's site. Usually it's not the same
 #     URL as for publisher's homepage;
@@ -6,6 +9,11 @@
 #   "description_md" (optional) contains description/annotation
 #     formatted with Markdown.
 class Book < ApplicationRecord
+  enum state: {
+    draft: "draft",
+    published: "published",
+  }
+
   validates_presence_of :title, :number_of_pages
   validate :publisher_page_url_should_be_valid, if: ->{ publisher_page_url.present? }
 

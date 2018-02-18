@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "Admin::BooksController" do
   specify "#index" do
     book = create(:book,
+                  :published,
                   title: "Зубр шукає гніздо",
                   publisher_page_url: "https://starylev.com.ua/",
                   published_on: "2016-09-16")
@@ -11,6 +12,7 @@ RSpec.describe "Admin::BooksController" do
 
     expect(page).to have_css :h1, text: /^Книги$/
     expect(page.title).to eq "Книги | Admin"
+    expect(page).to have_link "опубліковано", href: book_path(id: book)
     expect(page).to have_link "Зубр шукає гніздо", href: "https://starylev.com.ua/"
     expect(page).to have_content "Sep 2016"
 
@@ -28,6 +30,7 @@ RSpec.describe "Admin::BooksController" do
     expect(page).to have_css :h1, text: %r{^Книги / Додати$}
     expect(page.title).to eq "Книги / Додати | Admin"
 
+    expect(page).not_to have_field "Стан"
     fill_in "Назва", with: "Ведмідь не хоче спати"
     fill_in "Кількість сторінок", with: "30"
     fill_in "Опис", with: "Опис цієї книги"
@@ -41,6 +44,7 @@ RSpec.describe "Admin::BooksController" do
 
     visit "/admin/books/#{Book.last.id}/edit"
 
+    expect(page).to have_select "Стан", selected: "чорновик"
     expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
     expect(page).to have_field "Кількість сторінок", with: "30"
     expect(page).to have_field "Опис", with: "Опис цієї книги"
