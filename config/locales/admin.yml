@@ -21,3 +21,6 @@ uk:
       index:
         title: Роботи
         title_for_book: Роботи до книги «%{title}»
+    publishers:
+      index:
+        title: Видавництва

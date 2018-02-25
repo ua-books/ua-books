@@ -15,6 +15,10 @@ article.book-article
           img src=book.cover.thumb("640x").url alt=book_title
 
     .media-object-section.main-section
+      dl.inline
+        dt => t "publisher"
+        dd = book.publisher.name
+
       dl.inline.book-works
         - book.works.for_list.each do |work|
           dt => work_type_name(work)

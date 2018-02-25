@@ -14,6 +14,7 @@ FactoryGirl.define do
     txt
     number_of_pages 32
     cover_uid "oksana-bula-zubr.jpg"
+    publisher
 
     trait :published do
       state "published"

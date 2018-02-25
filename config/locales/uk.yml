@@ -6,5 +6,6 @@ uk:
     application:
       title: Українські книжки
       title_template: "%{title} на Українських книжках"
+  publisher: Видавництво
   published_on: Рік видання
   number_of_pages: Кількість сторінок

@@ -1,6 +1,7 @@
 = simple_form_for [:admin, resource] do |f|
   - if resource.persisted?
     = f.input :state, collection: Book.states.values.map(&:to_sym), include_blank: false
+  = f.association :publisher
   = f.input :title
   = f.input :number_of_pages
   = f.input :description_md

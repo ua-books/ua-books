@@ -5,8 +5,10 @@ illustrator_type = FactoryGirl.create(:illustrator_type)
 
 oksana_bula = FactoryGirl.create(:person, first_name: "Оксана", last_name: "Була", gender: "female")
 
-zubr = FactoryGirl.create(:book, title: "Зубр шукає гніздо", cover_uid: "oksana-bula-zubr.jpg")
-vedmid = FactoryGirl.create(:book, title: "Ведмідь не хоче спати", cover_uid: "oksana-bula-vedmid.jpg")
+leva_publishing = FactoryGirl.create(:publisher, name: "Видавництво Старого Лева")
+
+zubr = FactoryGirl.create(:book, title: "Зубр шукає гніздо", cover_uid: "oksana-bula-zubr.jpg", publisher: leva_publishing)
+vedmid = FactoryGirl.create(:book, title: "Ведмідь не хоче спати", cover_uid: "oksana-bula-vedmid.jpg", publisher: leva_publishing)
 
 Work.create!(title: true, book: zubr, person_alias: oksana_bula.main_alias, type: text_author_type)
 Work.create!(book: zubr, person_alias: oksana_bula.main_alias, type: illustrator_type)
