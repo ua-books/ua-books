@@ -2,9 +2,10 @@ require "rails_helper"
 
 RSpec.describe "BooksController" do
   specify "#show when published" do
-    leva_publishing = create(:publisher, name: "Видавництво Старого Лева")
+    leva_publishing = create(:publisher, name: "Старий Лев")
     book = create(:book,
                   :published,
+                  publisher: leva_publishing,
                   title: "Зубр шукає гніздо",
                   description_md: "Це опис книжки про класного зубра",
                   number_of_pages: 32,
@@ -20,7 +21,7 @@ RSpec.describe "BooksController" do
 
     visit "/#{book.id}"
     expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/
-    expect(page).to have_content "Видавництво Видавництво Старого Лева"
+    expect(page).to have_content "Видавництво Старий Лев"
 
     expect(page).to have_content "Авторка тексту Оксана Була"
     expect(page).to have_content "Ілюстраторка Оксана Була, включно з обкладинкою"
