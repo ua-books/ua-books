@@ -25,12 +25,14 @@ RSpec.describe "Admin::BooksController" do
   end
 
   specify "#create" do
+    create(:publisher, name: "Старий Лев")
     visit "/admin/books/new"
 
     expect(page).to have_css :h1, text: %r{^Книги / Додати$}
     expect(page.title).to eq "Книги / Додати | Admin"
 
     expect(page).not_to have_field "Стан"
+    select "Старий Лев", from: "Видавництво"
     fill_in "Назва", with: "Ведмідь не хоче спати"
     fill_in "Кількість сторінок", with: "30"
     fill_in "Опис", with: "Опис цієї книги"
@@ -45,6 +47,7 @@ RSpec.describe "Admin::BooksController" do
     visit "/admin/books/#{Book.last.id}/edit"
 
     expect(page).to have_select "Стан", selected: "чорновик"
+    expect(page).to have_select "Видавництво", selected: "Старий Лев"
     expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
     expect(page).to have_field "Кількість сторінок", with: "30"
     expect(page).to have_field "Опис", with: "Опис цієї книги"
@@ -54,13 +57,6 @@ RSpec.describe "Admin::BooksController" do
 
   specify "#create with a prefilled form" do
     visit "/admin/books/new?book[title]=#{CGI.escape "Ведмідь"}"
-
-    fill_in "Кількість сторінок", with: "30"
-    click_on "Додати книгу"
-
-    expect(page).to have_content "Книгу було успішно додано"
-
-    visit "/admin/books/#{Book.last.id}/edit"
     expect(page).to have_field "Назва", with: "Ведмідь"
   end
 

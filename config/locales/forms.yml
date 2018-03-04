@@ -10,6 +10,8 @@ uk:
         create: Додати тип робіт
       work:
         create: Додати роботу
+      publisher:
+        create: Додати видавництво
   simple_form:
     options:
       person:
@@ -23,6 +25,7 @@ uk:
     labels:
       book:
         state: Стан
+        publisher: Видавництво
         title: Назва
         number_of_pages: Кількість сторінок
         description_md: Опис
@@ -42,3 +45,5 @@ uk:
         type: Тип робіт
         person_alias: Ім'я / Псевдонім
         notes: Примітки
+      publisher:
+        name: Назва

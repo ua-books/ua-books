@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :work_types
     resources :people
     resources :works
+    resources :publishers
   end
 end

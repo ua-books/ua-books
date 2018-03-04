@@ -63,7 +63,8 @@ CREATE TABLE books (
     cover_uid character varying,
     publisher_page_url character varying,
     description_md text,
-    state character varying DEFAULT 'draft'::character varying NOT NULL
+    state character varying DEFAULT 'draft'::character varying NOT NULL,
+    publisher_id integer NOT NULL
 );
 
 
@@ -150,6 +151,37 @@ CREATE SEQUENCE person_aliases_id_seq
 --
 
 ALTER SEQUENCE person_aliases_id_seq OWNED BY person_aliases.id;
+
+
+--
+-- Name: publishers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE publishers (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: publishers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE publishers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: publishers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE publishers_id_seq OWNED BY publishers.id;
 
 
 --
@@ -248,6 +280,13 @@ ALTER TABLE ONLY person_aliases ALTER COLUMN id SET DEFAULT nextval('person_alia
 
 
 --
+-- Name: publishers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY publishers ALTER COLUMN id SET DEFAULT nextval('publishers_id_seq'::regclass);
+
+
+--
 -- Name: work_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -294,6 +333,14 @@ ALTER TABLE ONLY person_aliases
 
 
 --
+-- Name: publishers publishers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY publishers
+    ADD CONSTRAINT publishers_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -315,6 +362,13 @@ ALTER TABLE ONLY work_types
 
 ALTER TABLE ONLY works
     ADD CONSTRAINT works_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_publisher_id ON books USING btree (publisher_id);
 
 
 --
@@ -385,6 +439,14 @@ ALTER TABLE ONLY person_aliases
 
 
 --
+-- Name: books fk_rails_d7ae2b039e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY books
+    ADD CONSTRAINT fk_rails_d7ae2b039e FOREIGN KEY (publisher_id) REFERENCES publishers(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -401,6 +463,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180103203154'),
 ('20180105201202'),
 ('20180106133300'),
-('20180123191209');
+('20180123191209'),
+('20180225184939');
 
 
