@@ -19,6 +19,8 @@ gem 'foundation-rails', '~> 6.4'
 gem 'bootsnap', '~> 1.1', require: false
 gem 'rack-cache'
 
+gem 'omniauth-google-oauth2', '~> 0.5'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.6'

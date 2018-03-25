@@ -1,11 +1,18 @@
 require "rails_helper"
 
 RSpec.describe "Admin::PublishersController" do
+  let(:admin) { create(:admin) }
+
+  include_examples "authentication" do
+    let(:page_url) { "/admin/publishers" }
+  end
+
   specify "#index" do
     book = create(:publisher,
                   name: "Старий Лев")
 
     visit "/admin/publishers"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: /^Видавництва$/
     expect(page.title).to eq "Видавництва | Admin"
@@ -17,6 +24,7 @@ RSpec.describe "Admin::PublishersController" do
 
   specify "#create" do
     visit "/admin/publishers/new"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Видавництва / Додати$}
     expect(page.title).to eq "Видавництва / Додати | Admin"
@@ -35,6 +43,7 @@ RSpec.describe "Admin::PublishersController" do
     publisher = create(:publisher, name: "Видавництво Старого Лева")
 
     visit "/admin/publishers/#{publisher.id}/edit"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Видавництва / Видавництво Старого Лева / Правити$}
     expect(page.title).to eq "Видавництва / Видавництво Старого Лева / Правити | Admin"

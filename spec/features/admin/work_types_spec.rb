@@ -1,8 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "Admin::WorkTypesController" do
+  let(:admin) { create(:admin) }
+
+  include_examples "authentication" do
+    let(:page_url) { "/admin/work_types" }
+  end
+
   specify "#create" do
     visit "/admin/work_types/new"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Типи робіт / Додати$}
     expect(page.title).to eq "Типи робіт / Додати | Admin"
@@ -25,6 +32,7 @@ RSpec.describe "Admin::WorkTypesController" do
     illustrator_type = create(:illustrator_type, name_masculine: "Ілюстратор")
 
     visit "/admin/work_types/#{illustrator_type.id}/edit"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Типи робіт / Ілюстратор / Правити$}
     expect(page.title).to eq "Типи робіт / Ілюстратор / Правити | Admin"

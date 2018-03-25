@@ -10,6 +10,34 @@ module Admin
       )
     end
 
+    # See also app/controllers/omniauth_sessions_controller
+    module Authentication
+      extend ActiveSupport::Concern
+
+      included do
+        expose(:current_user) do
+          User.find_by(id: cookies.encrypted[:user_id])
+        end
+
+        before_action :authenticate
+      end
+
+      private
+
+      def authenticate
+        unless current_user
+          flash[:alert] = I18n.t "admin.sessions.index.alert"
+
+          # Survive double redirect: current page -> /admin/auth -> provider.
+          # `request.env["omniauth.origin"]` can handle only single redirect.
+          session[:return_to] = request.original_fullpath
+
+          redirect_to admin_sessions_path
+        end
+      end
+    end
+    include Authentication
+
     helper do
       def index_action_columns
         %w[edit]

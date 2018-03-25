@@ -88,6 +88,38 @@ ALTER SEQUENCE books_id_seq OWNED BY books.id;
 
 
 --
+-- Name: oauth_providers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE oauth_providers (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    uid character varying NOT NULL,
+    user_id bigint NOT NULL,
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: oauth_providers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE oauth_providers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: oauth_providers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE oauth_providers_id_seq OWNED BY oauth_providers.id;
+
+
+--
 -- Name: people; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -194,6 +226,40 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE users (
+    id bigint NOT NULL,
+    email character varying NOT NULL,
+    email_verified boolean DEFAULT false NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
 -- Name: work_types; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -266,6 +332,13 @@ ALTER TABLE ONLY books ALTER COLUMN id SET DEFAULT nextval('books_id_seq'::regcl
 
 
 --
+-- Name: oauth_providers id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY oauth_providers ALTER COLUMN id SET DEFAULT nextval('oauth_providers_id_seq'::regclass);
+
+
+--
 -- Name: people id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -284,6 +357,13 @@ ALTER TABLE ONLY person_aliases ALTER COLUMN id SET DEFAULT nextval('person_alia
 --
 
 ALTER TABLE ONLY publishers ALTER COLUMN id SET DEFAULT nextval('publishers_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -314,6 +394,14 @@ ALTER TABLE ONLY ar_internal_metadata
 
 ALTER TABLE ONLY books
     ADD CONSTRAINT books_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth_providers oauth_providers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY oauth_providers
+    ADD CONSTRAINT oauth_providers_pkey PRIMARY KEY (id);
 
 
 --
@@ -349,6 +437,14 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: work_types work_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -379,10 +475,24 @@ CREATE INDEX index_books_on_state ON books USING btree (state);
 
 
 --
+-- Name: index_oauth_providers_on_name_and_uid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_oauth_providers_on_name_and_uid ON oauth_providers USING btree (name, uid);
+
+
+--
 -- Name: index_person_aliases_on_person_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_person_aliases_on_person_id ON person_aliases USING btree (person_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
@@ -412,6 +522,14 @@ CREATE INDEX index_works_on_work_type_id ON works USING btree (work_type_id);
 
 ALTER TABLE ONLY works
     ADD CONSTRAINT fk_rails_2a8b3c3c4c FOREIGN KEY (book_id) REFERENCES books(id);
+
+
+--
+-- Name: oauth_providers fk_rails_5bebf45322; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY oauth_providers
+    ADD CONSTRAINT fk_rails_5bebf45322 FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -464,6 +582,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180105201202'),
 ('20180106133300'),
 ('20180123191209'),
-('20180225184939');
+('20180225184939'),
+('20180325074547');
 
 
