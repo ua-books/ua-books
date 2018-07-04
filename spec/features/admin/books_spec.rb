@@ -1,6 +1,12 @@
 require "rails_helper"
 
 RSpec.describe "Admin::BooksController" do
+  let(:admin) { create(:admin) }
+
+  include_examples "authentication" do
+    let(:page_url) { "/admin/books" }
+  end
+
   specify "#index" do
     book = create(:book,
                   :published,
@@ -9,6 +15,7 @@ RSpec.describe "Admin::BooksController" do
                   published_on: "2016-09-16")
 
     visit "/admin/books"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: /^Книги$/
     expect(page.title).to eq "Книги | Admin"
@@ -27,6 +34,7 @@ RSpec.describe "Admin::BooksController" do
   specify "#create" do
     create(:publisher, name: "Старий Лев")
     visit "/admin/books/new"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Книги / Додати$}
     expect(page.title).to eq "Книги / Додати | Admin"
@@ -57,6 +65,7 @@ RSpec.describe "Admin::BooksController" do
 
   specify "#create with a prefilled form" do
     visit "/admin/books/new?book[title]=#{CGI.escape "Ведмідь"}"
+    sign_in_as admin
     expect(page).to have_field "Назва", with: "Ведмідь"
   end
 
@@ -64,6 +73,7 @@ RSpec.describe "Admin::BooksController" do
     book = create(:book, title: "Зубр шукає гніздо")
 
     visit "/admin/books/#{book.id}/edit"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Книги / Зубр шукає гніздо / Правити$}
     expect(page.title).to eq "Книги / Зубр шукає гніздо / Правити | Admin"

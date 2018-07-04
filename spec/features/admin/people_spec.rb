@@ -1,8 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "Admin::PeopleController" do
+  let(:admin) { create(:admin) }
+
+  include_examples "authentication" do
+    let(:page_url) { "/admin/people" }
+  end
+
   specify "#create" do
     visit "/admin/people/new"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Персони / Додати$}
     expect(page.title).to eq "Персони / Додати | Admin"
@@ -27,6 +34,7 @@ RSpec.describe "Admin::PeopleController" do
     oksana = create(:person, first_name: "Оксана", last_name: "Була")
 
     visit "/admin/people/#{oksana.id}/edit"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Персони / Оксана Була / Правити$}
     expect(page.title).to eq "Персони / Оксана Була / Правити | Admin"

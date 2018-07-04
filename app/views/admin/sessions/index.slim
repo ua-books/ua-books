@@ -1,0 +1,7 @@
+= title index_title
+
+p = t ".sign_in"
+p
+  ul
+    - OauthProvider.names.values.each do |provider|
+      li : a href="/auth/#{provider}" = provider.humanize

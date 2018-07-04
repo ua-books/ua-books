@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   get "/:path", to: "static#show", as: :static, constraints: {path: /about|helping-us/}
   get "/sitemap.xml", to: "sitemap#show"
 
+  match "/auth/:provider/callback", to: "omniauth_sessions#create",
+    via: [:get, :post],
+    constraints: {provider: Regexp.union(OauthProvider.names.values)}
+
   namespace :admin do
+    get "/auth", to: "sessions#index", as: :sessions
     resources :books
     resources :work_types
     resources :people

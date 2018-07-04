@@ -5,10 +5,17 @@ RSpec.describe "Admin::WorkController" do
   let!(:zubr_book) { create(:book, title: "Зубр шукає гніздо") }
   let!(:oksana_bula) { create(:person, first_name: "Оксана", last_name: "Була") }
 
+  let(:admin) { create(:admin) }
+
+  include_examples "authentication" do
+    let(:page_url) { "/admin/works" }
+  end
+
   specify "#index" do
     create(:work, book: zubr_book, type: text_author_type, person_alias: oksana_bula.main_alias, notes: "2008")
 
     visit "/admin/works"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: /^Роботи$/
     expect(page.title).to eq "Роботи | Admin"
@@ -24,6 +31,7 @@ RSpec.describe "Admin::WorkController" do
 
   specify "#create" do
     visit "/admin/works/new"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Роботи / Додати$}
     expect(page.title).to eq "Роботи / Додати | Admin"
@@ -52,6 +60,7 @@ RSpec.describe "Admin::WorkController" do
     work = create(:work, book: zubr_book, type: text_author_type, person_alias: oksana_bula.main_alias)
 
     visit "/admin/works/#{work.id}/edit"
+    sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити$}
     expect(page.title).to eq "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити | Admin"
