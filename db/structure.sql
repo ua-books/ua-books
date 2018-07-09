@@ -236,7 +236,8 @@ CREATE TABLE users (
     first_name character varying NOT NULL,
     last_name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    admin boolean DEFAULT false NOT NULL
 );
 
 
@@ -583,6 +584,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180106133300'),
 ('20180123191209'),
 ('20180225184939'),
-('20180325074547');
+('20180325074547'),
+('20180709114819');
 
 

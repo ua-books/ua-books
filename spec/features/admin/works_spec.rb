@@ -7,7 +7,7 @@ RSpec.describe "Admin::WorkController" do
 
   let(:admin) { create(:admin) }
 
-  include_examples "authentication" do
+  include_examples "features" do
     let(:page_url) { "/admin/works" }
   end
 

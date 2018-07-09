@@ -1,4 +1,6 @@
 uk:
+  permission_denied:
+    default: У вас немає доступу до цієї сторінки.
   admin:
     sessions:
       index:

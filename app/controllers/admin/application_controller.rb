@@ -38,6 +38,26 @@ module Admin
     end
     include Authentication
 
+    module Authorization
+      extend ActiveSupport::Concern
+
+      included do
+        include Pundit
+        before_action :check_permissions
+      end
+
+      private
+
+      def check_permissions
+        authorize [:admin, resource]
+      rescue Pundit::NotAuthorizedError => exception
+        policy_key = exception.policy.model_name.i18n_key
+        flash[:alert] = t "#{policy_key}.#{exception.query}", scope: "permission_denied", default: :default
+        redirect_to admin_sessions_path
+      end
+    end
+    include Authorization
+
     helper do
       def index_action_columns
         %w[edit]
