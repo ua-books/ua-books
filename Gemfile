@@ -11,6 +11,7 @@ gem 'decent_exposure', '~> 3.0'
 gem 'dragonfly', '1.1.3'
 gem 'simple_form', '~> 3.5'
 gem 'redcarpet', '~> 3.4'
+gem 'pundit', '~> 1.1'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'

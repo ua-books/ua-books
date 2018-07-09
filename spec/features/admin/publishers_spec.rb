@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Admin::PublishersController" do
   let(:admin) { create(:admin) }
 
-  include_examples "authentication" do
+  include_examples "features" do
     let(:page_url) { "/admin/publishers" }
   end
 
