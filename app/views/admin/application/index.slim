@@ -9,7 +9,7 @@ table.index
     - index_action_columns.each do
       th
   tbody
-    - resource_collection.each do |resource|
+    - policy_scope([:admin, resource_collection]).each do |resource|
       tr
         - index_columns.each do |column|
           td
