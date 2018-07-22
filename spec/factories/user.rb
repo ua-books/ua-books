@@ -8,5 +8,9 @@ FactoryGirl.define do
     factory :admin do
       admin true
     end
+
+    factory :publisher_user do
+      publisher
+    end
   end
 end

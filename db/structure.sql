@@ -237,7 +237,8 @@ CREATE TABLE users (
     last_name character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    admin boolean DEFAULT false NOT NULL
+    admin boolean DEFAULT false NOT NULL,
+    publisher_id bigint
 );
 
 
@@ -550,6 +551,14 @@ ALTER TABLE ONLY works
 
 
 --
+-- Name: users fk_rails_9ef4d305d6; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_9ef4d305d6 FOREIGN KEY (publisher_id) REFERENCES publishers(id);
+
+
+--
 -- Name: person_aliases fk_rails_a4cf4f8aaa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -585,6 +594,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180123191209'),
 ('20180225184939'),
 ('20180325074547'),
-('20180709114819');
+('20180709114819'),
+('20180715175444');
 
 

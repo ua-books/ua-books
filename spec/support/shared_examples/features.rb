@@ -8,7 +8,7 @@ RSpec.shared_examples "features" do
   it "handles denied permission" do
     visit page_url
     sign_in_as create(:user)
-    expect(page.title).to eq "У вас недостатньо прав | Admin"
-    expect(page).to have_content "У вас немає доступу до цієї сторінки."
+    expect(current_url).to eq new_admin_publisher_url
+    expect(page).to have_content "Ви ідентифіковані, але наразі не керуєте жодним видавництвом"
   end
 end
