@@ -12,4 +12,28 @@ RSpec.describe Admin::WorkPolicy do
       expect(policy).to permit(build(:admin), Work.new)
     end
   end
+
+  describe "scope" do
+    def policy_scope(user)
+      Pundit.policy_scope!(user, [:admin, Work])
+    end
+
+    let(:publisher) { create(:publisher) }
+    let(:author) { create(:person) }
+    let(:work_type) { create(:text_author_type) }
+
+    let!(:book1) { create(:book, publisher: publisher) }
+    let!(:work1) { Work.create!(book: book1, person_alias: author.main_alias, type: work_type) }
+
+    let!(:book2) { create(:book) }
+    let!(:work2) { Work.create!(book: book2, person_alias: author.main_alias, type: work_type) }
+
+    it "returns nothing for just registered user" do
+      expect(policy_scope(build(:user))).to be_empty
+    end
+
+    it "returns everything for admin" do
+      expect(policy_scope(build(:admin))).to match [work1, work2]
+    end
+  end
 end

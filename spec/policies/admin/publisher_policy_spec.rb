@@ -12,4 +12,21 @@ RSpec.describe Admin::PublisherPolicy do
       expect(policy).to permit(build(:admin), Publisher.new)
     end
   end
+
+  describe "scope" do
+    def policy_scope(user)
+      Pundit.policy_scope!(user, [:admin, Publisher])
+    end
+
+    let!(:publisher1) { create(:publisher) }
+    let!(:publisher2) { create(:publisher) }
+
+    it "returns nothing for just registered user" do
+      expect(policy_scope(build(:user))).to be_empty
+    end
+
+    it "returns everything for admin" do
+      expect(policy_scope(build(:admin))).to match [publisher1, publisher2]
+    end
+  end
 end
