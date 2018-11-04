@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/auth", to: "sessions#index", as: :sessions
+    get "/denied", to: "permission_denied#index", as: :permission_denied
     resources :books
     resources :work_types
     resources :people

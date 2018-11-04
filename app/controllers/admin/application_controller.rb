@@ -53,7 +53,7 @@ module Admin
       rescue Pundit::NotAuthorizedError => exception
         policy_key = exception.policy.model_name.i18n_key
         flash[:alert] = t "#{policy_key}.#{exception.query}", scope: "permission_denied", default: :default
-        redirect_to admin_sessions_path
+        redirect_to admin_permission_denied_path
       end
     end
     include Authorization
