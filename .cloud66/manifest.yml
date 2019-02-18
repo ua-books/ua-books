@@ -1,0 +1,4 @@
+production:
+  rails:
+    configuration:
+      ruby_version: 2.6.1
