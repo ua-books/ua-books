@@ -38,6 +38,28 @@ module Admin
     end
     include Authentication
 
+    module Attributes
+      extend ActiveSupport::Concern
+
+      included do
+        before_action :assign_attributes, only: %i[new create edit update]
+      end
+
+      private
+
+      # Some policies check not only current user attributes, but also a resource attributes.
+      # That requires them to be assigned *before* `check_permissions` is executed.
+      def assign_attributes
+        resource.attributes = params_for_resource
+      end
+
+      def params_for_resource
+        param_key = resource.model_name.param_key
+        params[param_key].try(:permit!) || {}
+      end
+    end
+    include Attributes
+
     module Authorization
       extend ActiveSupport::Concern
 
@@ -68,12 +90,7 @@ module Admin
       end
     end
 
-    def new
-      resource.attributes = params_for_resource
-    end
-
     def create
-      resource.attributes = params_for_resource
       if resource.save
         redirect_to_after(:create)
       else
@@ -82,16 +99,11 @@ module Admin
     end
 
     def update
-      if resource.update_attributes(params_for_resource)
+      if resource.save
         redirect_to_after(:update)
       else
         render "edit"
       end
-    end
-
-    def params_for_resource
-      param_key = resource.model_name.param_key
-      params[param_key].try(:permit!) || {}
     end
 
     def redirect_to_after(action)
