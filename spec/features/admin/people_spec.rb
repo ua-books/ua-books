@@ -2,32 +2,37 @@ require "rails_helper"
 
 RSpec.describe "Admin::PeopleController" do
   let(:admin) { create(:admin) }
+  let(:publisher_user) { create(:publisher_user) }
 
   include_examples "features" do
     let(:page_url) { "/admin/people" }
   end
 
-  specify "#create" do
-    visit "/admin/people/new"
-    sign_in_as admin
+  %i[admin publisher_user].each do |user|
+    specify "#create #{user}" do
+      visit "/admin/people/new"
+      sign_in_as public_send(user)
 
-    expect(page).to have_css :h1, text: %r{^Персони / Додати$}
-    expect(page.title).to eq "Персони / Додати | Admin"
+      expect(page).to have_css :h1, text: %r{^Персони / Додати$}
+      expect(page.title).to eq "Персони / Додати | Admin"
 
-    fill_in "Ім'я", with: "Дмитро"
-    fill_in "Прізвище", with: "Яворницький"
-    select "чоловіча", from: "Стать"
-    click_on "Додати персону"
+      fill_in "Ім'я", with: "Дмитро"
+      fill_in "Прізвище", with: "Яворницький"
+      select "чоловіча", from: "Стать"
+      click_on "Додати персону"
 
-    expect(page).to have_content "Запис було успішно створено"
-    expect(page).to have_css :h1, text: /^Персони$/
-    expect(page).to have_content "Дмитро"
-    expect(page).to have_content "Яворницький"
+      expect(page).to have_content "Запис було успішно створено"
+      expect(page).to have_css :h1, text: /^Персони$/
+      expect(page).to have_content "Дмитро"
+      expect(page).to have_content "Яворницький"
 
-    click_on "правити"
-    expect(page).to have_field "Ім'я", with: "Дмитро"
-    expect(page).to have_field "Прізвище", with: "Яворницький"
-    expect(page).to have_select "Стать", selected: "чоловіча"
+      if user == :admin
+        click_on "правити"
+        expect(page).to have_field "Ім'я", with: "Дмитро"
+        expect(page).to have_field "Прізвище", with: "Яворницький"
+        expect(page).to have_select "Стать", selected: "чоловіча"
+      end
+    end
   end
 
   specify "#update" do
