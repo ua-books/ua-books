@@ -1,7 +1,7 @@
-- title "#{index_title} / #{resource_name resource} / Правити"
+- title "#{page_title(action: :index)} / #{resource_name resource} / Правити"
 
 h1
-  a> href=polymorphic_path([:admin, resource.class]) = index_title
+  a> href=polymorphic_path([:admin, resource.class]) = page_title(action: :index)
   | / #{resource_name resource} / Правити
 
 = render "form"
