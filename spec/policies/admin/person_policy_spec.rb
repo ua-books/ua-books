@@ -3,7 +3,35 @@ require "rails_helper"
 RSpec.describe Admin::PersonPolicy do
   let(:policy) { described_class }
 
-  permissions :index?, :new?, :create?, :update?, :edit? do
+  permissions :index? do
+    it "denies access to just registered user" do
+      expect(policy).not_to permit(build(:user), Person.new)
+    end
+
+    it "grants access to publisher" do
+      expect(policy).to permit(build(:publisher_user), Person.new)
+    end
+
+    it "grants access to admin" do
+      expect(policy).to permit(build(:admin), Person.new)
+    end
+  end
+
+  permissions :new?, :create? do
+    it "denies access to just registered user" do
+      expect(policy).not_to permit(build(:user), Person.new)
+    end
+
+    it "grants access to publisher" do
+      expect(policy).to permit(build(:publisher_user), Person.new)
+    end
+
+    it "grants access to admin" do
+      expect(policy).to permit(build(:admin), Person.new)
+    end
+  end
+
+  permissions :edit?, :update? do
     it "denies access to just registered user" do
       expect(policy).not_to permit(build(:user), Person.new)
     end
@@ -29,8 +57,8 @@ RSpec.describe Admin::PersonPolicy do
       expect(policy_scope(build(:user))).to be_empty
     end
 
-    it "returns nothing for publisher" do
-      expect(policy_scope(build(:publisher_user))).to be_empty
+    it "returns everything for publisher" do
+      expect(policy_scope(build(:publisher_user))).to match [person1, person2]
     end
 
     it "returns everything for admin" do
