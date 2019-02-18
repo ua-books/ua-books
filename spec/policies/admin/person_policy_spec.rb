@@ -8,6 +8,10 @@ RSpec.describe Admin::PersonPolicy do
       expect(policy).not_to permit(build(:user), Person.new)
     end
 
+    it "denies access to publisher" do
+      expect(policy).not_to permit(build(:publisher_user), Person.new)
+    end
+
     it "grants access to admin" do
       expect(policy).to permit(build(:admin), Person.new)
     end
@@ -23,6 +27,10 @@ RSpec.describe Admin::PersonPolicy do
 
     it "returns nothing for just registered user" do
       expect(policy_scope(build(:user))).to be_empty
+    end
+
+    it "returns nothing for publisher" do
+      expect(policy_scope(build(:publisher_user))).to be_empty
     end
 
     it "returns everything for admin" do

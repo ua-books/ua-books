@@ -16,3 +16,4 @@ Work.create!(title: true, book: vedmid, person_alias: oksana_bula.main_alias, ty
 Work.create!(book: vedmid, person_alias: oksana_bula.main_alias, type: illustrator_type)
 
 FactoryGirl.create(:admin, email: "admin@ua-books.test")
+FactoryGirl.create(:user, email: "lev@ua-books.test", publisher: leva_publishing)
