@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     constraints: {provider: Regexp.union(OauthProvider.names.values)}
 
   namespace :admin do
-    get "/auth", to: "sessions#index", as: :sessions
     get "/denied", to: "permission_denied#index", as: :permission_denied
+    resource :sessions, path: "auth", only: %i[show destroy]
     resources :books
     resources :work_types
     resources :people

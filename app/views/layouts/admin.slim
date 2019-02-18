@@ -15,4 +15,9 @@ html
         .callout.success = flash[:notice]
       - if flash[:alert]
         .callout.alert = flash[:alert]
+
+      - if current_user
+          = current_user.email
+          =< button_to t(:sign_out), admin_sessions_path, form_class: "float-right", class: "button small hollow secondary", method: :delete
+
       = yield

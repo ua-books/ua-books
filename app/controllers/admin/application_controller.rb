@@ -26,7 +26,7 @@ module Admin
 
       def authenticate
         unless current_user
-          flash[:alert] = I18n.t "admin.sessions.index.alert"
+          flash[:alert] = I18n.t "admin.sessions.show.alert"
 
           # Survive double redirect: current page -> /admin/auth -> provider.
           # `request.env["omniauth.origin"]` can handle only single redirect.
