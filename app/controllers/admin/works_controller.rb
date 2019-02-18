@@ -28,9 +28,9 @@ module Admin
         person_alias(work.person_alias)
       end
 
-      def index_title
+      def page_title(action: self.action_name)
         if book
-          t "admin.works.index.title_for_book", title: book.title
+          t "admin.works.#{action}.title_for_book", title: book.title
         else
           super
         end
