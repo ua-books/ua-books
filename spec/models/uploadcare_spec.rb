@@ -14,7 +14,7 @@ RSpec.describe Uploadcare do
   end
 
   specify ".signature" do
-    valid_to = Time.new(2019, 3, 8, 17, 43, 30)
-    expect(Uploadcare.signature(valid_to)).to eq "268d154e610c96541a35b6f3c1386279"
+    valid_to = Time.utc(2019, 3, 8, 17, 43, 30)
+    expect(Uploadcare.signature(valid_to)).to eq "23aae6e66d5ff76899725747cc9f4712"
   end
 end
