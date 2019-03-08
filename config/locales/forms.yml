@@ -31,7 +31,7 @@ uk:
         description_md: Опис
         published_on: Дата подання до друку
         publisher_page_url: Посилання на книгу на сайті видавця
-        cover: Обкладинка
+        cover_url: Обкладинка
       person:
         first_name: Ім'я
         last_name: Прізвище

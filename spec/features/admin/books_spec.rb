@@ -50,7 +50,6 @@ RSpec.describe "Admin::BooksController" do
       fill_in "Опис", with: "Опис цієї книги"
       select_date Date.new(2016, 10, 10), from: "Дата подання до друку"
       fill_in "Посилання на книгу на сайті видавця", with: "https://starylev.com.ua/"
-      attach_file "Обкладинка", "public/system/dragonfly/development/oksana-bula-vedmid.jpg"
       click_on "Додати книгу"
 
       expect(page).to have_content "Книгу було успішно додано. Будь ласка, вкажіть тих, хто над нею працював."
