@@ -13,7 +13,7 @@ FactoryGirl.define do
       серії оповідок про мешканців лісу.
     txt
     number_of_pages 32
-    cover_uid "oksana-bula-zubr.jpg"
+    cover_url "https://ucarecdn.com/25245d09-0e4a-494c-8666-bba90a442090/"
     publisher
 
     trait :published do

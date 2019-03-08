@@ -1,6 +1,6 @@
 module Admin
   class BooksController < Admin::ApplicationController
-    expose(:index_columns) { %w[id state cover title published_on] }
+    expose(:index_columns) { %w[id state cover_url title published_on] }
     expose(:resource_collection) { Book.order("id desc") }
     expose(:resource, model: "Book")
 
@@ -17,9 +17,9 @@ module Admin
         link_to_if book.published?, t("simple_form.options.book.state.#{book.state}"), book_path(id: book), target: "_blank"
       end
 
-      def cover_column(book)
-        if book.cover
-          link_to image_tag(book.cover.thumb("x100").url), book.cover.url
+      def cover_url_column(book)
+        if book.cover_url?
+          link_to image_tag(Uploadcare.url(book.cover_url, resize: "x100")), book.cover_url
         end
       end
 

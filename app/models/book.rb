@@ -26,6 +26,16 @@ class Book < ApplicationRecord
     default "public/system/dragonfly/no_image.png"
   end
 
+  # Fix method being overridden by dragonfly
+  # https://github.com/markevans/dragonfly/blob/3ad0c6dded8f69773e042714be1f877b3c05797a/lib/dragonfly/model/class_methods.rb#L61-L71
+  def cover_url=(url)
+    self[:cover_url] = url
+  end
+
+  def cover_url
+    self[:cover_url]
+  end
+
   private
 
   def publisher_page_url_should_be_valid
