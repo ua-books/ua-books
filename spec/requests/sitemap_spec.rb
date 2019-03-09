@@ -15,7 +15,7 @@ RSpec.describe "/sitemap.xml" do
     expect(url).to have_selector("lastmod", text: "2017-12-11T00:00:00")
     expect(url).to have_selector("image")
     image = url.find("image")
-    expect(image).to have_selector("loc", text: "http://www.example.com/media/")
+    expect(image).to have_selector("loc", text: book.cover_url)
     expect(image).to have_selector("title", text: "Обкладинка до книги «Зубр шукає гніздо»")
   end
 
