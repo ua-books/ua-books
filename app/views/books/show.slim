@@ -12,7 +12,7 @@ article.book-article
     .media-object-section
       figure
         picture
-          img src=book.cover.thumb("640x").url alt=book_title
+          img src=Uploadcare.url(book.cover_url, resize: "640x") alt=book_title
 
     .media-object-section.main-section
       dl.inline

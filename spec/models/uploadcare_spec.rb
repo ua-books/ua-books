@@ -2,6 +2,16 @@ require "rails_helper"
 
 RSpec.describe Uploadcare do
   describe ".url" do
+    specify "no image is substituted with a transparent pixel" do
+      url = Uploadcare.url(nil)
+      expect(url).to eq "https://ucarecdn.com/cddfded1-2508-4248-87ab-3aea6c3d71d0/"
+    end
+
+    specify "no operations" do
+      url = Uploadcare.url("https://ucarecdn.com/:uuid/")
+      expect(url).to eq "https://ucarecdn.com/:uuid/"
+    end
+
     specify "one operation" do
       url = Uploadcare.url("https://ucarecdn.com/:uuid/", resize: "x100")
       expect(url).to eq "https://ucarecdn.com/:uuid/-/resize/x100/"
