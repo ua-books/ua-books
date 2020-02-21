@@ -10,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'slim-rails', '~> 3.1'
 gem 'smart_titles', '~> 0.4'
 gem 'decent_exposure', '~> 3.0'
-gem 'simple_form', '~> 3.5'
+gem 'simple_form', '~> 5.0'
 gem 'redcarpet', '~> 3.4'
 gem 'pundit', '~> 2.0'
 
