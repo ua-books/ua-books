@@ -19,7 +19,6 @@ gem 'turbolinks', '~> 5'
 gem 'foundation-rails', '~> 6.4'
 
 gem 'bootsnap', '~> 1.1', require: false
-gem 'rack-cache'
 
 gem 'omniauth-google-oauth2', '~> 0.5'
 

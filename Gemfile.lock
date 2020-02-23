@@ -133,8 +133,6 @@ GEM
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     rack (2.0.8)
-    rack-cache (1.7.1)
-      rack (>= 0.4)
     rack-test (0.7.0)
       rack (>= 1.0, < 3)
     rails (5.1.6.2)
@@ -253,7 +251,6 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.12)
   pundit (~> 2.0)
-  rack-cache
   rails (= 5.1.6.2)
   redcarpet (~> 3.4)
   rspec-rails (~> 3.6)
