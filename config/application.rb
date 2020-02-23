@@ -34,7 +34,5 @@ module UaBooks
     config.i18n.fallbacks = [:en]
 
     config.time_zone = "Europe/Kiev"
-
-    config.action_dispatch.rack_cache = true
   end
 end
