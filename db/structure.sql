@@ -64,7 +64,8 @@ CREATE TABLE books (
     description_md text,
     state character varying DEFAULT 'draft'::character varying NOT NULL,
     publisher_id integer NOT NULL,
-    cover_url character varying
+    cover_url character varying,
+    cover_uid character varying
 );
 
 
@@ -597,6 +598,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180709114819'),
 ('20180715175444'),
 ('20190303154345'),
-('20190526161252');
+('20190526161252'),
+('20200223083804');
 
 
