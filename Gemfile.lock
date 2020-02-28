@@ -155,7 +155,7 @@ GEM
       omniauth (~> 1.9)
     pg (0.21.0)
     public_suffix (3.0.0)
-    puma (3.12.2)
+    puma (3.12.3)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     rack (2.2.2)
