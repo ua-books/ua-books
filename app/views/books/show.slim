@@ -9,10 +9,11 @@ article.book-article
   h1.title = book_title
 
   .media-object.stack-for-small
-    .media-object-section
-      figure
-        picture
-          img src=Uploadcare.url(book.cover_url, resize: "640x") alt=book_title
+    - if book.cover_uid?
+      .media-object-section
+        figure
+          picture
+            = imagekit_hd_image_tag(book.cover_uid, alt: book_title, tr: {w: 640})
 
     .media-object-section.main-section
       dl.inline

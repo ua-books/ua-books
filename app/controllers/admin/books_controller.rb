@@ -18,8 +18,8 @@ module Admin
       end
 
       def cover_url_column(book)
-        if book.cover_url?
-          link_to image_tag(Uploadcare.url(book.cover_url, resize: "x100")), book.cover_url
+        if book.cover_uid?
+          link_to imagekit_hd_image_tag(book.cover_uid, tr: {w: 100}), imagekit_url(book.cover_uid)
         end
       end
 
