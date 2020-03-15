@@ -5,4 +5,5 @@
 # are equal.
 class WorkType < ApplicationRecord
   validates_presence_of :name_feminine, :name_masculine
+  validates_uniqueness_of :name_feminine, :name_masculine
 end
