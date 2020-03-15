@@ -35,6 +35,16 @@ RSpec.describe "Admin::BooksController" do
       expect(page).to have_content "Роботи до книги «Зубр шукає гніздо»"
     end
 
+    specify "#index #{user} with a draft book" do
+      book = create(:book, title: "Ця книга ще не опублікована на сайті", publisher: publisher)
+
+      visit "/admin/books"
+      sign_in_as public_send(user)
+
+      expect(page).to have_content "Ця книга ще не опублікована на сайті"
+      expect(page).to have_link "чорновик", href: book_path(id: book)
+    end
+
     specify "#create #{user}" do
       publisher
       visit "/admin/books/new"
