@@ -14,7 +14,7 @@ module Admin
       end
 
       def state_column(book)
-        link_to_if book.published?, t("simple_form.options.book.state.#{book.state}"), book_path(id: book), target: "_blank"
+        link_to t("simple_form.options.book.state.#{book.state}"), book_path(id: book), target: "_blank"
       end
 
       def cover_url_column(book)

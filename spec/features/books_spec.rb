@@ -39,10 +39,39 @@ RSpec.describe "BooksController" do
     expect(page).to have_css "meta[name='description'][content='Це опис книжки про класного зубра']", visible: false
   end
 
-  specify "#show when draft", realistic_error_responses: true do
-    book = create(:book)
+  context "#show when draft", realistic_error_responses: true do
+    let(:leva_publishing) { create(:publisher, name: "Старий Лев") }
+    let(:book) { create(:book, title: "Зубр шукає гніздо", publisher: leva_publishing) }
 
-    visit "/#{book.id}"
-    expect(page).to have_content "The page you were looking for doesn't exist."
+    specify "is not allowed when visited as anonymous" do
+      visit "/#{book.id}"
+      expect(page).to have_content "The page you were looking for doesn't exist."
+    end
+
+    specify "is allowed when visited as admin" do
+      admin = create(:admin)
+      sign_in_as admin
+
+      visit "/#{book.id}"
+      expect(page).to have_content "Зубр шукає гніздо"
+      expect(page).to have_content "Старий Лев"
+    end
+
+    specify "is allowed when visited as same publisher" do
+      leva_publishing_user = create(:publisher_user, publisher: leva_publishing)
+      sign_in_as leva_publishing_user
+
+      visit "/#{book.id}"
+      expect(page).to have_content "Зубр шукає гніздо"
+      expect(page).to have_content "Старий Лев"
+    end
+
+    specify "is not allowed when visited as another publisher" do
+      shady_publishing_user = create(:publisher_user)
+      sign_in_as shady_publishing_user
+
+      visit "/#{book.id}"
+      expect(page).to have_content "The page you were looking for doesn't exist."
+    end
   end
 end
