@@ -22,6 +22,7 @@ RSpec.describe "BooksController" do
     visit "/#{book.id}"
     expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/
     expect(page).to have_content "Видавництво Старий Лев"
+    expect(page).to have_link "Старий Лев", href: publisher_path(id: leva_publishing, slug: "видавництво-старий-лев")
 
     expect(page).to have_content "Авторка тексту Оксана Була"
     expect(page).to have_content "Ілюстраторка Оксана Була, включно з обкладинкою"

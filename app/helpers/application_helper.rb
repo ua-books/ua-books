@@ -42,4 +42,14 @@ module ApplicationHelper
   def markdown(text)
     MARKDOWN.render(text || "").html_safe
   end
+
+  def publisher_title(publisher)
+    publisher_name = publisher.name
+
+    if publisher_name.starts_with? "Видав"
+      publisher_name
+    else
+      "Видавництво «#{publisher_name}»"
+    end
+  end
 end

@@ -75,4 +75,22 @@ RSpec.describe ApplicationHelper do
       expect(helper.book_meta_description(book)).to eq "Перший параграф"
     end
   end
+
+  describe "#publisher_title" do
+    specify "when name starts with Видав" do
+      publisher1 = create(:publisher, name: "Видавництво Ранок")
+      publisher2 = create(:publisher, name: "Видавець Савчук")
+      publisher3 = create(:publisher, name: "Видавничий дім «Комора»")
+      expect(publisher_title(publisher1)).to eq "Видавництво Ранок"
+      expect(publisher_title(publisher2)).to eq "Видавець Савчук"
+      expect(publisher_title(publisher3)).to eq "Видавничий дім «Комора»"
+    end
+
+    specify "when name does not start with Видав" do
+      publisher1 = create(:publisher, name: "Темпора")
+      publisher2 = create(:publisher, name: "# книголав")
+      expect(publisher_title(publisher1)).to eq "Видавництво «Темпора»"
+      expect(publisher_title(publisher2)).to eq "Видавництво «# книголав»"
+    end
+  end
 end
