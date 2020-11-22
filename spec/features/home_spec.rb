@@ -9,7 +9,7 @@ RSpec.describe "Home page" do
     visit "/"
     expect(page).to have_content "Українські книжки"
     expect(page.title).to eq "Українські книжки"
-    expect(page).to have_link("Оксана Була «Зубр шукає гніздо»", href: "/#{book.id}")
+    expect(page).to have_link("Оксана Була «Зубр шукає гніздо»", href: "/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}")
   end
 
   specify "draft book" do

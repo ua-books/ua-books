@@ -1,3 +1,4 @@
 article.home-article
   - books.each do |book|
-    p: a href=book_path(id: book) = book_title(book, works: book.title_works)
+    - book_title = book_title(book, works: book.title_works)
+    p: a href=book_path(id: book, slug: parameterize(book_title)) = book_title

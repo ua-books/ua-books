@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe "/sitemap.xml" do
   specify "published book" do
     book = create(:book, :published, title: "Зубр шукає гніздо", updated_at: "2017-12-11", cover_uid: "dev/test.jpg")
+    oksana = create(:person, first_name: "Оксана", last_name: "Була")
+    create(:work, person_alias: oksana.main_alias, book: book)
 
     get "/sitemap.xml"
 
@@ -10,7 +12,7 @@ RSpec.describe "/sitemap.xml" do
     xml.native.remove_namespaces!
     expect(xml).to have_selector(:xpath, "//urlset/url")
     url = xml.find(:xpath, "//urlset/url")
-    expect(url).to have_selector("loc", text: "http://www.example.com/#{book.id}")
+    expect(url).to have_selector("loc", text: "http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}")
     expect(url).to have_selector("changefreq", text: "always")
     expect(url).to have_selector("lastmod", text: "2017-12-11T00:00:00")
     expect(url).to have_selector("image")
