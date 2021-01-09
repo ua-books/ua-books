@@ -1,0 +1,12 @@
+- publisher_title = publisher_title(publisher)
+- title publisher_title
+
+- content_for :head do
+  link rel="canonical" href=publisher_url(id: publisher.id, slug: parameterize(publisher_title))
+
+article
+  h1.title = publisher_title
+
+  - books.each do |book|
+    - book_title = book_title(book, works: book.title_works)
+    p: a href=book_path(id: book, slug: parameterize(book_title)) = book_title

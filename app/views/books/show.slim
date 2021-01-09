@@ -18,7 +18,7 @@ article.book-article
     .media-object-section.main-section
       dl.inline
         dt => t "publisher"
-        dd = book.publisher.name
+        dd = link_to book.publisher.name, publisher_path(id: book.publisher, slug: parameterize(publisher_title(book.publisher)))
 
       dl.inline.book-works
         - book.works.for_list.each do |work|
