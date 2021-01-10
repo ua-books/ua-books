@@ -57,7 +57,7 @@ CREATE TABLE author_aliases (
     id bigint NOT NULL,
     first_name character varying NOT NULL,
     last_name character varying NOT NULL,
-    person_id bigint NOT NULL,
+    author_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -463,10 +463,10 @@ ALTER TABLE ONLY works
 
 
 --
--- Name: index_author_aliases_on_person_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_author_aliases_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_author_aliases_on_person_id ON author_aliases USING btree (person_id);
+CREATE INDEX index_author_aliases_on_author_id ON author_aliases USING btree (author_id);
 
 
 --
@@ -563,7 +563,7 @@ ALTER TABLE ONLY users
 --
 
 ALTER TABLE ONLY author_aliases
-    ADD CONSTRAINT fk_rails_a4cf4f8aaa FOREIGN KEY (person_id) REFERENCES authors(id);
+    ADD CONSTRAINT fk_rails_a4cf4f8aaa FOREIGN KEY (author_id) REFERENCES authors(id);
 
 
 --
@@ -601,6 +601,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200223083804'),
 ('20200301092726'),
 ('20210110144352'),
-('20210110154703');
+('20210110154703'),
+('20210110161606');
 
 

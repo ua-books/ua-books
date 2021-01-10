@@ -6,5 +6,5 @@
 class AuthorAlias < ApplicationRecord
   validates_presence_of :first_name, :last_name
 
-  belongs_to :author, foreign_key: "person_id", inverse_of: :aliases
+  belongs_to :author, inverse_of: :aliases
 end
