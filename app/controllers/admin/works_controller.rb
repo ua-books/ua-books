@@ -3,7 +3,7 @@ module Admin
     expose(:index_columns) { %w[id book type author_alias notes] }
     expose(:book) { params[:book_id].presence && Book.find(params[:book_id]) }
     expose(:resource_collection) do
-      scope = Work.preload(:book, :type, author_alias: :author).order(:book_id, :person_alias_id)
+      scope = Work.preload(:book, :type, author_alias: :author).order(:book_id, :author_alias_id)
       if book
         scope = scope.where(book_id: book.id)
       end
