@@ -1,6 +1,6 @@
 doctype xml
 urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-  - Book.published.preload(title_works: :person_alias).each do |book|
+  - Book.published.preload(title_works: :author_alias).each do |book|
     url
       loc = book_url(id: book.id, slug: parameterize(book_title(book, works: book.title_works)))
       changefreq always

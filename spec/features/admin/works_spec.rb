@@ -15,7 +15,7 @@ RSpec.describe "Admin::WorkController" do
 
   %i[admin publisher_user].each do |user|
     specify "#index #{user}" do
-      create(:work, book: zubr_book, type: text_author_type, person_alias: oksana_bula.main_alias, notes: "2008")
+      create(:work, book: zubr_book, type: text_author_type, author_alias: oksana_bula.main_alias, notes: "2008")
 
       visit "/admin/works"
       sign_in_as public_send(user)
@@ -59,7 +59,7 @@ RSpec.describe "Admin::WorkController" do
 
     specify "#update #{user}" do
       create(:illustrator_type)
-      work = create(:work, book: zubr_book, type: text_author_type, person_alias: oksana_bula.main_alias)
+      work = create(:work, book: zubr_book, type: text_author_type, author_alias: oksana_bula.main_alias)
 
       visit "/admin/works/#{work.id}/edit"
       sign_in_as public_send(user)
