@@ -50,6 +50,39 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: authors; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE authors (
+    id bigint NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    gender gender NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE authors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
+
+
+--
 -- Name: books; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -117,39 +150,6 @@ CREATE SEQUENCE oauth_providers_id_seq
 --
 
 ALTER SEQUENCE oauth_providers_id_seq OWNED BY oauth_providers.id;
-
-
---
--- Name: people; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE people (
-    id bigint NOT NULL,
-    first_name character varying NOT NULL,
-    last_name character varying NOT NULL,
-    gender gender NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE people_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: people_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE people_id_seq OWNED BY people.id;
 
 
 --
@@ -327,6 +327,13 @@ ALTER SEQUENCE works_id_seq OWNED BY works.id;
 
 
 --
+-- Name: authors id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
+
+
+--
 -- Name: books id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -338,13 +345,6 @@ ALTER TABLE ONLY books ALTER COLUMN id SET DEFAULT nextval('books_id_seq'::regcl
 --
 
 ALTER TABLE ONLY oauth_providers ALTER COLUMN id SET DEFAULT nextval('oauth_providers_id_seq'::regclass);
-
-
---
--- Name: people id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY people ALTER COLUMN id SET DEFAULT nextval('people_id_seq'::regclass);
 
 
 --
@@ -391,6 +391,14 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
+-- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authors
+    ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -404,14 +412,6 @@ ALTER TABLE ONLY books
 
 ALTER TABLE ONLY oauth_providers
     ADD CONSTRAINT oauth_providers_pkey PRIMARY KEY (id);
-
-
---
--- Name: people people_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY people
-    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
 
 
 --
@@ -563,7 +563,7 @@ ALTER TABLE ONLY users
 --
 
 ALTER TABLE ONLY person_aliases
-    ADD CONSTRAINT fk_rails_a4cf4f8aaa FOREIGN KEY (person_id) REFERENCES people(id);
+    ADD CONSTRAINT fk_rails_a4cf4f8aaa FOREIGN KEY (person_id) REFERENCES authors(id);
 
 
 --
@@ -599,6 +599,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190303154345'),
 ('20190526161252'),
 ('20200223083804'),
-('20200301092726');
+('20200301092726'),
+('20210110144352');
 
 

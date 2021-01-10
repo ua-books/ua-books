@@ -4,8 +4,8 @@ uk:
       update: Зберегти правки
       book:
         create: Додати книгу
-      person:
-        create: Додати персону
+      author:
+        create: Додати автора
       work_type:
         create: Додати тип робіт
       work:
@@ -14,7 +14,7 @@ uk:
         create: Додати видавництво
   simple_form:
     options:
-      person:
+      author:
         gender:
           male: чоловіча
           female: жіноча
@@ -32,7 +32,7 @@ uk:
         published_on: Дата подання до друку
         publisher_page_url: Посилання на книгу на сайті видавця
         cover_url: Обкладинка
-      person:
+      author:
         first_name: Ім'я
         last_name: Прізвище
         gender: Стать

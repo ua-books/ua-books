@@ -1,5 +1,5 @@
 module Admin
-  class PersonPolicy < Admin::ApplicationPolicy
+  class AuthorPolicy < Admin::ApplicationPolicy
     class Scope < Scope
       def resolve
         if user.admin? || user.publisher?

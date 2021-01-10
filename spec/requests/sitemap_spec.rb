@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "/sitemap.xml" do
   specify "published book" do
     book = create(:book, :published, title: "Зубр шукає гніздо", updated_at: "2017-12-11", cover_uid: "dev/test.jpg")
-    oksana = create(:person, first_name: "Оксана", last_name: "Була")
+    oksana = create(:author, first_name: "Оксана", last_name: "Була")
     create(:work, person_alias: oksana.main_alias, book: book)
 
     get "/sitemap.xml"

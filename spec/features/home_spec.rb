@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Home page" do
   specify "visiting" do
     book = create(:book, :published, title: "Зубр шукає гніздо")
-    oksana = create(:person, first_name: "Оксана", last_name: "Була")
+    oksana = create(:author, first_name: "Оксана", last_name: "Була")
     create(:work, person_alias: oksana.main_alias, book: book)
 
     visit "/"
