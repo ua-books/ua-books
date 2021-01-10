@@ -22,9 +22,9 @@ uk:
       create:
         notice:
           Книгу було успішно додано. Будь ласка, вкажіть тих, хто над нею працював.
-    people:
+    authors:
       index:
-        title: Персони
+        title: Автори
     work_types:
       index:
         title: Типи робіт

@@ -1,4 +1,4 @@
-# A type of work a person did for a book.
+# A type of work an author did for a book.
 # Examples: text author, illustrator, editor, corrector.
 #
 # If name is gender neutral, then both #name_feminine and #name_masculine

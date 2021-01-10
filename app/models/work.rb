@@ -1,5 +1,5 @@
-# Links persons (via aliases) with books.
-# A person can easily be a text author for a certain book
+# Links authors (via aliases) with books.
+# An author can easily be a text author for a certain book
 # and at the same time to be a translator for another one. It's not
 # unusual to even mix roles within one book (for example, to be
 # a text author and an illustrator).
@@ -15,9 +15,9 @@ class Work < ApplicationRecord
 
   validates_uniqueness_of :book_id, scope: [:person_alias_id, :work_type_id]
 
-  delegate :person, to: :person_alias
+  delegate :author, to: :person_alias
 
   def self.for_list
-    preload(:type, person_alias: :person)
+    preload(:type, person_alias: :author)
   end
 end

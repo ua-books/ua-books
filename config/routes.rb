@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resource :sessions, path: "auth", only: %i[show destroy]
     resources :books
     resources :work_types
-    resources :people
+    resources :authors
     resources :works
     resources :publishers
   end

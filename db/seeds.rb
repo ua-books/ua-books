@@ -3,7 +3,7 @@ require "factory_girl_rails"
 text_author_type = FactoryGirl.create(:text_author_type)
 illustrator_type = FactoryGirl.create(:illustrator_type)
 
-oksana_bula = FactoryGirl.create(:person, first_name: "Оксана", last_name: "Була", gender: "female")
+oksana_bula = FactoryGirl.create(:author, first_name: "Оксана", last_name: "Була", gender: "female")
 
 leva_publishing = FactoryGirl.create(:publisher, name: "Видавництво Старого Лева")
 

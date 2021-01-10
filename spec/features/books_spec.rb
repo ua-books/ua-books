@@ -12,8 +12,8 @@ RSpec.describe "BooksController" do
                   publisher_page_url: "https://starylev.com.ua/",
                   published_on: "2016-09-16")
 
-    oksana = create(:person, first_name: "Оксана", last_name: "Була", gender: "female")
-    maryana = create(:person, first_name: "Мар'яна", last_name: "Савка", gender: "female")
+    oksana = create(:author, first_name: "Оксана", last_name: "Була", gender: "female")
+    maryana = create(:author, first_name: "Мар'яна", last_name: "Савка", gender: "female")
 
     create(:work, person_alias: oksana.main_alias, type: create(:text_author_type), book: book)
     create(:work, person_alias: oksana.main_alias, type: create(:illustrator_type), book: book, notes: "включно з обкладинкою")

@@ -4,7 +4,7 @@ RSpec.describe "Admin::WorkController" do
   let(:publisher) { create(:publisher) }
   let!(:text_author_type) { create(:text_author_type) }
   let!(:zubr_book) { create(:book, publisher: publisher, title: "Зубр шукає гніздо") }
-  let!(:oksana_bula) { create(:person, first_name: "Оксана", last_name: "Була") }
+  let!(:oksana_bula) { create(:author, first_name: "Оксана", last_name: "Була") }
 
   let(:admin) { create(:admin) }
   let(:publisher_user) { create(:publisher_user, publisher: publisher) }

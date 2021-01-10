@@ -44,7 +44,7 @@ RSpec.describe Admin::WorkPolicy do
   permissions :edit?, :update? do
     let(:publisher) { create(:publisher) }
     let(:book) { create(:book, publisher: publisher) }
-    let(:work) { Work.create!(book: book, person_alias: create(:person).main_alias, type: create(:text_author_type)) }
+    let(:work) { Work.create!(book: book, person_alias: create(:author).main_alias, type: create(:text_author_type)) }
 
     it "denies access to just registered user" do
       expect(policy).not_to permit(build(:user), work)
@@ -71,7 +71,7 @@ RSpec.describe Admin::WorkPolicy do
     end
 
     let(:publisher) { create(:publisher) }
-    let(:author) { create(:person) }
+    let(:author) { create(:author) }
     let(:work_type) { create(:text_author_type) }
 
     let!(:book1) { create(:book, publisher: publisher) }

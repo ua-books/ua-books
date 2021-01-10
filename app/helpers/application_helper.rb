@@ -27,7 +27,7 @@ module ApplicationHelper
 
   # Gender-aware work type name
   def work_type_name(work)
-    case work.person.gender
+    case work.author.gender
     when "female" then work.type.name_feminine
     when "male" then work.type.name_masculine
     end
