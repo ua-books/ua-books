@@ -13,9 +13,10 @@ RSpec.describe "BooksController" do
                   published_on: "2016-09-16")
 
     oksana = create(:author, first_name: "Оксана", last_name: "Була", gender: "female")
+    oksana_alias = AuthorAlias.create!(author: oksana, first_name: "Повелителька", last_name: "Туконів")
     maryana = create(:author, first_name: "Мар'яна", last_name: "Савка", gender: "female")
 
-    create(:work, author_alias: oksana.main_alias, type: create(:text_author_type), book: book)
+    create(:work, title: false, author_alias: oksana_alias, type: create(:text_author_type), book: book)
     create(:work, author_alias: oksana.main_alias, type: create(:illustrator_type), book: book, notes: "включно з обкладинкою")
     create(:work, author_alias: maryana.main_alias, type: create(:chief_editor_type), book: book, title: false)
 
@@ -24,9 +25,13 @@ RSpec.describe "BooksController" do
     expect(page).to have_content "Видавництво Старий Лев"
     expect(page).to have_link "Старий Лев", href: publisher_path(id: leva_publishing, slug: "видавництво-старий-лев")
 
-    expect(page).to have_content "Авторка тексту Оксана Була"
+    expect(page).to have_content "Авторка тексту Повелителька Туконів"
     expect(page).to have_content "Ілюстраторка Оксана Була, включно з обкладинкою"
     expect(page).to have_content "Головна редакторка Мар'яна Савка"
+
+    expect(page).to have_link "Повелителька Туконів", href: author_path(id: oksana.id, slug: "оксана-була")
+    expect(page).to have_link "Оксана Була", href: author_path(id: oksana.id, slug: "оксана-була")
+    expect(page).to have_link "Мар'яна Савка", href: author_path(id: maryana.id, slug: "мар'яна-савка")
 
     expect(page).to have_content "Рік видання 2016"
     expect(page).to have_content "Кількість сторінок 32"

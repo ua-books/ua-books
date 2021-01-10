@@ -7,4 +7,6 @@ class AuthorAlias < ApplicationRecord
   validates_presence_of :first_name, :last_name
 
   belongs_to :author, inverse_of: :aliases
+
+  has_many :works, inverse_of: :aliases
 end
