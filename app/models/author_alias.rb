@@ -3,7 +3,7 @@
 #
 # If an author writes under her/his real name, s/he would have single
 # alias with the same #first_name, #last_name.
-class PersonAlias < ApplicationRecord
+class AuthorAlias < ApplicationRecord
   validates_presence_of :first_name, :last_name
 
   belongs_to :author, foreign_key: "person_id", inverse_of: :aliases

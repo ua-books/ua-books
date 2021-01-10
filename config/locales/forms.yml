@@ -43,7 +43,7 @@ uk:
         title: У заголовку
         book: Книга
         type: Тип робіт
-        person_alias: Ім'я / Псевдонім
+        author_alias: Ім'я / Псевдонім
         notes: Примітки
       publisher:
         name: Назва

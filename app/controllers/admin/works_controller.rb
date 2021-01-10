@@ -1,9 +1,9 @@
 module Admin
   class WorksController < Admin::ApplicationController
-    expose(:index_columns) { %w[id book type person_alias notes] }
+    expose(:index_columns) { %w[id book type author_alias notes] }
     expose(:book) { params[:book_id].presence && Book.find(params[:book_id]) }
     expose(:resource_collection) do
-      scope = Work.preload(:book, :type, person_alias: :author).order(:book_id, :person_alias_id)
+      scope = Work.preload(:book, :type, author_alias: :author).order(:book_id, :person_alias_id)
       if book
         scope = scope.where(book_id: book.id)
       end
@@ -13,7 +13,7 @@ module Admin
 
     helper do
       def resource_name(work)
-        "#{work.book.title} - #{work_type_name(work)} - #{person_alias(work.person_alias)}"
+        "#{work.book.title} - #{work_type_name(work)} - #{author_alias(work.author_alias)}"
       end
 
       def book_column(work)
@@ -24,8 +24,8 @@ module Admin
         work_type_name(work)
       end
 
-      def person_alias_column(work)
-        person_alias(work.person_alias)
+      def author_alias_column(work)
+        author_alias(work.author_alias)
       end
 
       def page_title(action: self.action_name)

@@ -10,7 +10,7 @@ module ApplicationHelper
   # without passing the logic into the helper.
   def book_title(book, works: book.works)
     author_aliases = works.find_all(&:title?).uniq(&:person_alias_id).map do |work|
-      person_alias(work.person_alias)
+      author_alias(work.author_alias)
     end
 
     "#{author_aliases.join ", "} «#{book.title}»"
@@ -33,8 +33,8 @@ module ApplicationHelper
     end
   end
 
-  def person_alias(person_alias)
-    "#{person_alias.first_name} #{person_alias.last_name}"
+  def author_alias(author_alias)
+    "#{author_alias.first_name} #{author_alias.last_name}"
   end
 
   MARKDOWN = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true))

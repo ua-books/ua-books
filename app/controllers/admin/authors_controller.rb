@@ -6,7 +6,7 @@ module Admin
 
     helper do
       def resource_name(author)
-        person_alias(author)
+        author_alias(author)
       end
     end
   end

@@ -50,6 +50,39 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: author_aliases; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE author_aliases (
+    id bigint NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    person_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: author_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE author_aliases_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: author_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE author_aliases_id_seq OWNED BY author_aliases.id;
+
+
+--
 -- Name: authors; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -150,39 +183,6 @@ CREATE SEQUENCE oauth_providers_id_seq
 --
 
 ALTER SEQUENCE oauth_providers_id_seq OWNED BY oauth_providers.id;
-
-
---
--- Name: person_aliases; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE person_aliases (
-    id bigint NOT NULL,
-    first_name character varying NOT NULL,
-    last_name character varying NOT NULL,
-    person_id bigint NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: person_aliases_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE person_aliases_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: person_aliases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE person_aliases_id_seq OWNED BY person_aliases.id;
 
 
 --
@@ -327,6 +327,13 @@ ALTER SEQUENCE works_id_seq OWNED BY works.id;
 
 
 --
+-- Name: author_aliases id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY author_aliases ALTER COLUMN id SET DEFAULT nextval('author_aliases_id_seq'::regclass);
+
+
+--
 -- Name: authors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -345,13 +352,6 @@ ALTER TABLE ONLY books ALTER COLUMN id SET DEFAULT nextval('books_id_seq'::regcl
 --
 
 ALTER TABLE ONLY oauth_providers ALTER COLUMN id SET DEFAULT nextval('oauth_providers_id_seq'::regclass);
-
-
---
--- Name: person_aliases id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY person_aliases ALTER COLUMN id SET DEFAULT nextval('person_aliases_id_seq'::regclass);
 
 
 --
@@ -391,6 +391,14 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
+-- Name: author_aliases author_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY author_aliases
+    ADD CONSTRAINT author_aliases_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -412,14 +420,6 @@ ALTER TABLE ONLY books
 
 ALTER TABLE ONLY oauth_providers
     ADD CONSTRAINT oauth_providers_pkey PRIMARY KEY (id);
-
-
---
--- Name: person_aliases person_aliases_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY person_aliases
-    ADD CONSTRAINT person_aliases_pkey PRIMARY KEY (id);
 
 
 --
@@ -463,6 +463,13 @@ ALTER TABLE ONLY works
 
 
 --
+-- Name: index_author_aliases_on_person_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_author_aliases_on_person_id ON author_aliases USING btree (person_id);
+
+
+--
 -- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -481,13 +488,6 @@ CREATE INDEX index_books_on_state ON books USING btree (state);
 --
 
 CREATE UNIQUE INDEX index_oauth_providers_on_name_and_uid ON oauth_providers USING btree (name, uid);
-
-
---
--- Name: index_person_aliases_on_person_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_person_aliases_on_person_id ON person_aliases USING btree (person_id);
 
 
 --
@@ -539,7 +539,7 @@ ALTER TABLE ONLY oauth_providers
 --
 
 ALTER TABLE ONLY works
-    ADD CONSTRAINT fk_rails_86dd05cfb5 FOREIGN KEY (person_alias_id) REFERENCES person_aliases(id);
+    ADD CONSTRAINT fk_rails_86dd05cfb5 FOREIGN KEY (person_alias_id) REFERENCES author_aliases(id);
 
 
 --
@@ -559,10 +559,10 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: person_aliases fk_rails_a4cf4f8aaa; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: author_aliases fk_rails_a4cf4f8aaa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY person_aliases
+ALTER TABLE ONLY author_aliases
     ADD CONSTRAINT fk_rails_a4cf4f8aaa FOREIGN KEY (person_id) REFERENCES authors(id);
 
 
@@ -600,6 +600,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190526161252'),
 ('20200223083804'),
 ('20200301092726'),
-('20210110144352');
+('20210110144352'),
+('20210110154703');
 
 

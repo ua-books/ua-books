@@ -15,9 +15,9 @@ RSpec.describe "BooksController" do
     oksana = create(:author, first_name: "Оксана", last_name: "Була", gender: "female")
     maryana = create(:author, first_name: "Мар'яна", last_name: "Савка", gender: "female")
 
-    create(:work, person_alias: oksana.main_alias, type: create(:text_author_type), book: book)
-    create(:work, person_alias: oksana.main_alias, type: create(:illustrator_type), book: book, notes: "включно з обкладинкою")
-    create(:work, person_alias: maryana.main_alias, type: create(:chief_editor_type), book: book, title: false)
+    create(:work, author_alias: oksana.main_alias, type: create(:text_author_type), book: book)
+    create(:work, author_alias: oksana.main_alias, type: create(:illustrator_type), book: book, notes: "включно з обкладинкою")
+    create(:work, author_alias: maryana.main_alias, type: create(:chief_editor_type), book: book, title: false)
 
     visit "/#{book.id}"
     expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/

@@ -4,7 +4,7 @@ RSpec.describe "Home page" do
   specify "visiting" do
     book = create(:book, :published, title: "Зубр шукає гніздо")
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
-    create(:work, person_alias: oksana.main_alias, book: book)
+    create(:work, author_alias: oksana.main_alias, book: book)
 
     visit "/"
     expect(page).to have_content "Українські книжки"

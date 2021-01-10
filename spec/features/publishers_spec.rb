@@ -6,7 +6,7 @@ RSpec.describe "PublishersController" do
   specify "#show" do
     book = create(:book, :published, title: "Зубр шукає гніздо", publisher: leva_publishing)
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
-    create(:work, person_alias: oksana.main_alias, book: book)
+    create(:work, author_alias: oksana.main_alias, book: book)
 
     visit "/p/#{leva_publishing.id}"
     expect(page).to have_css :h1, text: /^Видавництво «Старий Лев»$/
