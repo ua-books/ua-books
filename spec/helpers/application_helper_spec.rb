@@ -13,6 +13,10 @@ RSpec.describe ApplicationHelper do
     specify "with numerals" do
       expect(helper.parameterize("«Зубр шукає гніздо в 33 раз»")).to eq "зубр-шукає-гніздо-в-33-раз"
     end
+
+    specify "with apostrophe" do
+      expect(helper.parameterize("Мар'яна Савка")).to eq "мар'яна-савка"
+    end
   end
 
   describe "#book_title" do
