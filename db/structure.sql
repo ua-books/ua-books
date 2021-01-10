@@ -300,7 +300,7 @@ ALTER SEQUENCE work_types_id_seq OWNED BY work_types.id;
 CREATE TABLE works (
     id bigint NOT NULL,
     book_id bigint NOT NULL,
-    person_alias_id bigint NOT NULL,
+    author_alias_id bigint NOT NULL,
     work_type_id bigint NOT NULL,
     title boolean DEFAULT false NOT NULL,
     notes character varying
@@ -498,17 +498,17 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_works_on_book_id_and_person_alias_id_and_work_type_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_works_on_author_alias_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_works_on_book_id_and_person_alias_id_and_work_type_id ON works USING btree (book_id, person_alias_id, work_type_id);
+CREATE INDEX index_works_on_author_alias_id ON works USING btree (author_alias_id);
 
 
 --
--- Name: index_works_on_person_alias_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_works_on_book_id_and_author_alias_id_and_work_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_works_on_person_alias_id ON works USING btree (person_alias_id);
+CREATE UNIQUE INDEX index_works_on_book_id_and_author_alias_id_and_work_type_id ON works USING btree (book_id, author_alias_id, work_type_id);
 
 
 --
@@ -539,7 +539,7 @@ ALTER TABLE ONLY oauth_providers
 --
 
 ALTER TABLE ONLY works
-    ADD CONSTRAINT fk_rails_86dd05cfb5 FOREIGN KEY (person_alias_id) REFERENCES author_aliases(id);
+    ADD CONSTRAINT fk_rails_86dd05cfb5 FOREIGN KEY (author_alias_id) REFERENCES author_aliases(id);
 
 
 --
@@ -602,6 +602,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200301092726'),
 ('20210110144352'),
 ('20210110154703'),
-('20210110161606');
+('20210110161606'),
+('20210110163351');
 
 

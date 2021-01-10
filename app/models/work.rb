@@ -11,9 +11,9 @@
 class Work < ApplicationRecord
   belongs_to :book, inverse_of: :works
   belongs_to :type, class_name: "WorkType", foreign_key: "work_type_id"
-  belongs_to :author_alias, foreign_key: "person_alias_id"
+  belongs_to :author_alias
 
-  validates_uniqueness_of :book_id, scope: [:person_alias_id, :work_type_id]
+  validates_uniqueness_of :book_id, scope: [:author_alias_id, :work_type_id]
 
   delegate :author, to: :author_alias
 

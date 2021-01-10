@@ -9,7 +9,7 @@ module ApplicationHelper
   # With `:works` option you can make additional filtering/preloading of `book.works`
   # without passing the logic into the helper.
   def book_title(book, works: book.works)
-    author_aliases = works.find_all(&:title?).uniq(&:person_alias_id).map do |work|
+    author_aliases = works.find_all(&:title?).uniq(&:author_alias_id).map do |work|
       author_alias(work.author_alias)
     end
 
