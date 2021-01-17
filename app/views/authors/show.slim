@@ -1,0 +1,16 @@
+- author_name = author_alias(author.main_alias)
+- title author_name
+
+- content_for :head do
+  link rel="canonical" href=author_url(id: author.id, slug: parameterize(author_name))
+
+article
+  h1.title = author_name
+
+  - author.published_works.preload(:type, book: {title_works: :author_alias}).group_by(&:type).each do |_, works|
+    section
+      h3 => work_type_name(works.first)
+      - works.each do |work|
+        - book = work.book
+        - book_title = book_title(book, works: book.title_works)
+        p: a href=book_path(id: book, slug: parameterize(book_title)) => book_title

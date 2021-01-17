@@ -24,7 +24,7 @@ article.book-article
         - book.works.for_list.each do |work|
           dt => work_type_name(work)
           dd
-            = author_alias(work.author_alias)
+            = link_to author_alias(work.author_alias), author_path(id: work.author, slug: parameterize(author_alias(work.author.main_alias)))
             - if work.notes.present?
               |,
               span.notes<= work.notes

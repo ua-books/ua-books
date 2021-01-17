@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "(:slug)/p/:id" => "publishers#show", as: :publisher, constraints: {id: /\d+/}
+  get "(:slug)/a/:id" => "authors#show", as: :author, constraints: {id: /\d+/}
   # For SEO reasons we want books#show to be as short as possible, thus skipping /books prefix
   get "(:slug)/:id" => "books#show", as: :book, constraints: {id: /\d+/}
   get "/" => "home#show", as: :root

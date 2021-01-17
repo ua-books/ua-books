@@ -11,13 +11,13 @@
 class Work < ApplicationRecord
   belongs_to :book, inverse_of: :works
   belongs_to :type, class_name: "WorkType", foreign_key: "work_type_id"
-  belongs_to :author_alias
+  belongs_to :author_alias, inverse_of: :works
+
+  has_one :author, through: :author_alias
 
   validates_uniqueness_of :book_id, scope: [:author_alias_id, :work_type_id]
 
-  delegate :author, to: :author_alias
-
   def self.for_list
-    preload(:type, author_alias: :author)
+    preload(:type, author_alias: {author: :main_alias})
   end
 end

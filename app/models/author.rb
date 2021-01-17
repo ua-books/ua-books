@@ -7,12 +7,15 @@ class Author < ApplicationRecord
   validates_inclusion_of :gender, in: %w[female male]
 
   has_many :aliases, class_name: "AuthorAlias", inverse_of: :author
+  has_one :main_alias, ->{ order(:id) }, class_name: "AuthorAlias", inverse_of: :author
+
+  has_many :works, through: :aliases, inverse_of: :author
 
   after_create do
     aliases.create!(first_name: first_name, last_name: last_name)
   end
 
-  def main_alias
-    aliases.first
+  def published_works
+    works.joins(:book).merge(Book.published)
   end
 end
