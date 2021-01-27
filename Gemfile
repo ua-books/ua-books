@@ -25,7 +25,7 @@ gem 'bootsnap', '~> 1.1', require: false
 gem 'omniauth-google-oauth2', '~> 0.5'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_girl_rails', '~> 4.8'
 end
