@@ -8,7 +8,7 @@ module RSpec
         :uid => provider.uid,
       })
 
-      visit "/auth/#{provider.name}/callback"
+      visit omniauth_sessions_path(provider: provider.name)
     ensure
       OmniAuth.config.mock_auth[provider.name.to_sym] = nil
     end

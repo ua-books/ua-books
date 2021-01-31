@@ -7,7 +7,7 @@ RSpec.describe "AuthorsController" do
     book = create(:book, :published, title: "Зубр шукає гніздо")
     create(:work, author_alias: oksana.main_alias, book: book, type: create(:text_author_type))
 
-    visit "/a/#{oksana.id}"
+    visit author_path(id: oksana)
     expect(page).to have_css :h1, text: /^Оксана Була$/
 
     expect(page).to have_text "Авторка тексту"
@@ -21,7 +21,7 @@ RSpec.describe "AuthorsController" do
     book = create(:book, title: "Зубр шукає гніздо")
     create(:work, author_alias: oksana.main_alias, book: book)
 
-    visit "/a/#{oksana.id}"
+    visit author_path(id: oksana)
     expect(page).to have_css :h1, text: /^Оксана Була$/
     expect(page).to_not have_content("Авторка тексту")
     expect(page).to_not have_content("Зубр шукає гніздо")
@@ -38,7 +38,7 @@ RSpec.describe "AuthorsController" do
     oksana_alias = AuthorAlias.create!(author: oksana, first_name: "Придумувачка", last_name: "Туконі")
     create(:work, author_alias: oksana_alias, book: book3, type: create(:illustrator_type))
 
-    visit "/a/#{oksana.id}"
+    visit author_path(id: oksana)
 
     expect(page).to have_text "Авторка тексту Оксана Була «Зубр шукає гніздо» Оксана Була «Ведмідь не хоче спати» Ілюстраторка Придумувачка Туконі «Туконі. Мешканець лісу»"
 

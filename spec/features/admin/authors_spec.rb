@@ -5,12 +5,12 @@ RSpec.describe "Admin::AuthorsController" do
   let(:publisher_user) { create(:publisher_user) }
 
   include_examples "features" do
-    let(:page_url) { "/admin/authors" }
+    let(:page_url) { admin_authors_path }
   end
 
   %i[admin publisher_user].each do |user|
     specify "#create #{user}" do
-      visit "/admin/authors/new"
+      visit new_admin_author_path
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: %r{^Автори / Додати$}
@@ -38,7 +38,7 @@ RSpec.describe "Admin::AuthorsController" do
   specify "#update" do
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
 
-    visit "/admin/authors/#{oksana.id}/edit"
+    visit edit_admin_author_path(oksana)
     sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Автори / Оксана Була / Правити$}

@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   get "(:slug)/:id" => "books#show", as: :book, constraints: {id: /\d+/}
   get "/" => "home#show", as: :root
   get "/:path", to: "static#show", as: :static, constraints: {path: /about|helping-us/}
-  get "/sitemap.xml", to: "sitemap#show"
+  get "/sitemap.xml", as: :sitemap, to: "sitemap#show"
 
   match "/auth/:provider/callback", to: "omniauth_sessions#create",
+    as: :omniauth_sessions,
     via: [:get, :post],
     constraints: {provider: Regexp.union(OauthProvider.names.values)}
 

@@ -4,11 +4,11 @@ RSpec.describe "Admin::WorkTypesController" do
   let(:admin) { create(:admin) }
 
   include_examples "features" do
-    let(:page_url) { "/admin/work_types" }
+    let(:page_url) { admin_work_types_path }
   end
 
   specify "#create" do
-    visit "/admin/work_types/new"
+    visit new_admin_work_type_path
     sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Типи робіт / Додати$}
@@ -31,7 +31,7 @@ RSpec.describe "Admin::WorkTypesController" do
   specify "#update" do
     illustrator_type = create(:illustrator_type, name_masculine: "Ілюстратор")
 
-    visit "/admin/work_types/#{illustrator_type.id}/edit"
+    visit edit_admin_work_type_path(illustrator_type)
     sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Типи робіт / Ілюстратор / Правити$}

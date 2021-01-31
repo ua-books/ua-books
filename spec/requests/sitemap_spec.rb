@@ -6,7 +6,7 @@ RSpec.describe "/sitemap.xml" do
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
     create(:work, author_alias: oksana.main_alias, book: book)
 
-    get "/sitemap.xml"
+    get sitemap_path
 
     xml = Capybara.string(response.body)
     xml.native.remove_namespaces!
@@ -24,7 +24,7 @@ RSpec.describe "/sitemap.xml" do
   specify "published book w/o cover" do
     book = create(:book, :published)
 
-    get "/sitemap.xml"
+    get sitemap_path
 
     xml = Capybara.string(response.body)
     xml.native.remove_namespaces!
@@ -37,7 +37,7 @@ RSpec.describe "/sitemap.xml" do
   specify "draft book" do
     create(:book)
 
-    get "/sitemap.xml"
+    get sitemap_path
 
     xml = Capybara.string(response.body)
     xml.native.remove_namespaces!
