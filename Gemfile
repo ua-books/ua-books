@@ -27,6 +27,7 @@ gem 'omniauth-google-oauth2', '~> 0.5'
 group :development, :test do
   gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', '~> 3.6'
+  gem 'rspec_junit_formatter'
   gem 'factory_girl_rails', '~> 4.8'
 end
 
