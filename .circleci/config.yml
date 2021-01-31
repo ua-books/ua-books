@@ -21,7 +21,7 @@ jobs:
       - checkout
       - ruby/install-deps
       - run:
-          command: 'sudo apt install -y postgresql-client || true'
+          command: 'sudo apt-get update && sudo apt install -y postgresql-client || true'
           name: Install psql
       - run:
           command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
