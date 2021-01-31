@@ -6,7 +6,7 @@ RSpec.describe "Admin::BooksController" do
   let(:publisher) { create(:publisher, name: "Старий Лев") }
 
   include_examples "features" do
-    let(:page_url) { "/admin/books" }
+    let(:page_url) { admin_books_path }
   end
 
   %i[admin publisher_user].each do |user|
@@ -18,7 +18,7 @@ RSpec.describe "Admin::BooksController" do
                     publisher_page_url: "https://starylev.com.ua/",
                     published_on: "2016-09-16")
 
-      visit "/admin/books"
+      visit admin_books_path
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: /^Книги$/
@@ -30,7 +30,7 @@ RSpec.describe "Admin::BooksController" do
       click_on "правити"
       expect(page).to have_content "Книги / Зубр шукає гніздо / Правити"
 
-      visit "/admin/books"
+      visit admin_books_path
       click_on "роботи"
       expect(page).to have_content "Роботи до книги «Зубр шукає гніздо»"
     end
@@ -38,7 +38,7 @@ RSpec.describe "Admin::BooksController" do
     specify "#index #{user} with a draft book" do
       book = create(:book, title: "Ця книга ще не опублікована на сайті", publisher: publisher)
 
-      visit "/admin/books"
+      visit admin_books_path
       sign_in_as public_send(user)
 
       expect(page).to have_content "Ця книга ще не опублікована на сайті"
@@ -47,7 +47,7 @@ RSpec.describe "Admin::BooksController" do
 
     specify "#create #{user}" do
       publisher
-      visit "/admin/books/new"
+      visit new_admin_book_path
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: %r{^Книги / Додати$}
@@ -65,7 +65,7 @@ RSpec.describe "Admin::BooksController" do
       expect(page).to have_content "Книгу було успішно додано. Будь ласка, вкажіть тих, хто над нею працював."
       expect(page).to have_content "Роботи до книги «Ведмідь не хоче спати»"
 
-      visit "/admin/books/#{Book.last.id}/edit"
+      visit edit_admin_book_path(Book.last)
 
       expect(page).to have_select "Стан", selected: "чорновик"
       expect(page).to have_select "Видавництво", selected: "Старий Лев"
@@ -77,7 +77,7 @@ RSpec.describe "Admin::BooksController" do
     end
 
     specify "#create with a prefilled form (#{user})" do
-      visit "/admin/books/new?book[title]=#{CGI.escape "Ведмідь"}"
+      visit new_admin_book_path(book: {title: "Ведмідь"})
       sign_in_as public_send(user)
       expect(page).to have_field "Назва", with: "Ведмідь"
     end
@@ -85,7 +85,7 @@ RSpec.describe "Admin::BooksController" do
     specify "#update #{user}" do
       book = create(:book, publisher: publisher, title: "Зубр шукає гніздо")
 
-      visit "/admin/books/#{book.id}/edit"
+      visit edit_admin_book_path(book)
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: %r{^Книги / Зубр шукає гніздо / Правити$}
@@ -96,7 +96,7 @@ RSpec.describe "Admin::BooksController" do
 
       expect(page).to have_content "Запис було успішно оновлено"
 
-      visit "/admin/books/#{book.id}/edit"
+      visit edit_admin_book_path(book)
       expect(page).to have_field "Назва", with: "Ведмідь не хоче спати"
     end
   end

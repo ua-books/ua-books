@@ -4,14 +4,14 @@ RSpec.describe "Admin::PublishersController" do
   let(:admin) { create(:admin) }
 
   include_examples "features" do
-    let(:page_url) { "/admin/publishers" }
+    let(:page_url) { admin_publishers_path }
   end
 
   specify "#index" do
     book = create(:publisher,
                   name: "Старий Лев")
 
-    visit "/admin/publishers"
+    visit admin_publishers_path
     sign_in_as admin
 
     expect(page).to have_css :h1, text: /^Видавництва$/
@@ -23,7 +23,7 @@ RSpec.describe "Admin::PublishersController" do
   end
 
   specify "#create" do
-    visit "/admin/publishers/new"
+    visit new_admin_publisher_path
     sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Видавництва / Додати$}
@@ -34,7 +34,7 @@ RSpec.describe "Admin::PublishersController" do
 
     expect(page).to have_content "Запис було успішно створено"
 
-    visit "/admin/publishers/#{Publisher.last.id}/edit"
+    visit edit_admin_publisher_path(Publisher.last)
 
     expect(page).to have_field "Назва", with: "Видавництво Старого Лева"
   end
@@ -42,7 +42,7 @@ RSpec.describe "Admin::PublishersController" do
   specify "#update" do
     publisher = create(:publisher, name: "Видавництво Старого Лева")
 
-    visit "/admin/publishers/#{publisher.id}/edit"
+    visit edit_admin_publisher_path(publisher)
     sign_in_as admin
 
     expect(page).to have_css :h1, text: %r{^Видавництва / Видавництво Старого Лева / Правити$}
@@ -53,7 +53,7 @@ RSpec.describe "Admin::PublishersController" do
 
     expect(page).to have_content "Запис було успішно оновлено"
 
-    visit "/admin/publishers/#{publisher.id}/edit"
+    visit edit_admin_publisher_path(publisher)
     expect(page).to have_field "Назва", with: "Старий Лев"
   end
 end

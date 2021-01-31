@@ -8,7 +8,7 @@ RSpec.describe "PublishersController" do
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
     create(:work, author_alias: oksana.main_alias, book: book)
 
-    visit "/p/#{leva_publishing.id}"
+    visit publisher_path(id: leva_publishing)
     expect(page).to have_css :h1, text: /^Видавництво «Старий Лев»$/
 
     expect(page).to have_link("Оксана Була «Зубр шукає гніздо»", href: "/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}")
@@ -20,14 +20,14 @@ RSpec.describe "PublishersController" do
   specify "draft book from the same publisher" do
     create(:book, title: "Зубр шукає гніздо", publisher: leva_publishing)
 
-    visit "/p/#{leva_publishing.id}"
+    visit publisher_path(id: leva_publishing)
     expect(page).to_not have_content("Зубр шукає гніздо")
   end
 
   specify "published book from another publisher" do
     create(:book, :published, title: "Зубр шукає гніздо")
 
-    visit "/p/#{leva_publishing.id}"
+    visit publisher_path(id: leva_publishing)
     expect(page).to_not have_content("Зубр шукає гніздо")
   end
 end

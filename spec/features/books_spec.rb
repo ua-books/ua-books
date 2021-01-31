@@ -20,7 +20,7 @@ RSpec.describe "BooksController" do
     create(:work, author_alias: oksana.main_alias, type: create(:illustrator_type), book: book, notes: "включно з обкладинкою")
     create(:work, author_alias: maryana.main_alias, type: create(:chief_editor_type), book: book, title: false)
 
-    visit "/#{book.id}"
+    visit book_path(id: book)
     expect(page).to have_css :h1, text: /^Оксана Була «Зубр шукає гніздо»$/
     expect(page).to have_content "Видавництво Старий Лев"
     expect(page).to have_link "Старий Лев", href: publisher_path(id: leva_publishing, slug: "видавництво-старий-лев")
@@ -50,7 +50,7 @@ RSpec.describe "BooksController" do
     let(:book) { create(:book, title: "Зубр шукає гніздо", publisher: leva_publishing) }
 
     specify "is not allowed when visited as anonymous" do
-      visit "/#{book.id}"
+      visit book_path(id: book)
       expect(page).to have_content "The page you were looking for doesn't exist."
     end
 
@@ -58,7 +58,7 @@ RSpec.describe "BooksController" do
       admin = create(:admin)
       sign_in_as admin
 
-      visit "/#{book.id}"
+      visit book_path(id: book)
       expect(page).to have_content "Зубр шукає гніздо"
       expect(page).to have_content "Старий Лев"
     end
@@ -67,7 +67,7 @@ RSpec.describe "BooksController" do
       leva_publishing_user = create(:publisher_user, publisher: leva_publishing)
       sign_in_as leva_publishing_user
 
-      visit "/#{book.id}"
+      visit book_path(id: book)
       expect(page).to have_content "Зубр шукає гніздо"
       expect(page).to have_content "Старий Лев"
     end
@@ -76,7 +76,7 @@ RSpec.describe "BooksController" do
       shady_publishing_user = create(:publisher_user)
       sign_in_as shady_publishing_user
 
-      visit "/#{book.id}"
+      visit book_path(id: book)
       expect(page).to have_content "The page you were looking for doesn't exist."
     end
   end

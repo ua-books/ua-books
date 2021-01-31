@@ -10,14 +10,14 @@ RSpec.describe "Admin::WorkController" do
   let(:publisher_user) { create(:publisher_user, publisher: publisher) }
 
   include_examples "features" do
-    let(:page_url) { "/admin/works" }
+    let(:page_url) { admin_works_path }
   end
 
   %i[admin publisher_user].each do |user|
     specify "#index #{user}" do
       create(:work, book: zubr_book, type: text_author_type, author_alias: oksana_bula.main_alias, notes: "2008")
 
-      visit "/admin/works"
+      visit admin_works_path
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: /^Роботи$/
@@ -33,7 +33,7 @@ RSpec.describe "Admin::WorkController" do
     end
 
     specify "#create #{user}" do
-      visit "/admin/works/new?work[book_id]=#{zubr_book.id}"
+      visit new_admin_work_path(work: {book_id: zubr_book})
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: %r{^Роботи / Додати$}
@@ -48,7 +48,7 @@ RSpec.describe "Admin::WorkController" do
       expect(page).to have_content "Запис було успішно створено"
       expect(page).to have_content "Роботи до книги «Зубр шукає гніздо»"
 
-      visit "/admin/works/#{Work.last.id}/edit"
+      visit edit_admin_work_path(Work.last)
 
       expect(page).to have_checked_field "У заголовку"
       expect(page).to have_select "Книга", selected: "Зубр шукає гніздо"
@@ -61,7 +61,7 @@ RSpec.describe "Admin::WorkController" do
       create(:illustrator_type)
       work = create(:work, book: zubr_book, type: text_author_type, author_alias: oksana_bula.main_alias)
 
-      visit "/admin/works/#{work.id}/edit"
+      visit edit_admin_work_path(work)
       sign_in_as public_send(user)
 
       expect(page).to have_css :h1, text: %r{^Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити$}
@@ -72,7 +72,7 @@ RSpec.describe "Admin::WorkController" do
 
       expect(page).to have_content "Запис було успішно оновлено"
 
-      visit "/admin/works/#{work.id}/edit"
+      visit edit_admin_work_path(work)
       expect(page).to have_select "Тип робіт", selected: "Ілюстратор"
     end
   end

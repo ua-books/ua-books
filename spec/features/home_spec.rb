@@ -6,7 +6,7 @@ RSpec.describe "Home page" do
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
     create(:work, author_alias: oksana.main_alias, book: book)
 
-    visit "/"
+    visit root_path
     expect(page).to have_content "Українські книжки"
     expect(page.title).to eq "Українські книжки"
     expect(page).to have_link("Оксана Була «Зубр шукає гніздо»", href: "/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}")
@@ -15,7 +15,7 @@ RSpec.describe "Home page" do
   specify "draft book" do
     create(:book, title: "Зубр шукає гніздо")
 
-    visit "/"
+    visit root_path
     expect(page).to_not have_content("Зубр шукає гніздо")
   end
 end
