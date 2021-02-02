@@ -16,8 +16,12 @@ html
       - if flash[:alert]
         .callout.alert = flash[:alert]
 
-      - if current_user
-          = current_user.email
-          =< button_to t(:sign_out), admin_sessions_path, form_class: "float-right", class: "button small hollow secondary", method: :delete
+      .clearfix
+        = link_to "Головна сторінка", admin_root_path
+
+        - if current_user
+          .float-right
+            = current_user.email
+            =< button_to t(:sign_out), admin_sessions_path, class: "button small hollow secondary", method: :delete
 
       = yield
