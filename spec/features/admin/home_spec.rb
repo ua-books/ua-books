@@ -21,7 +21,7 @@ RSpec.describe "Admin::HomeController" do
     expect(page).to have_link "Видавництва", href: admin_publishers_path
   end
 
-  specify "#index admin" do
+  specify "#index publisher" do
     publisher = create(:publisher, name: "Старий Лев")
     publisher_user = create(:publisher_user, publisher: publisher)
 
