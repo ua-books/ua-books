@@ -1,5 +1,5 @@
 = title "Адмін панель"
 
 ul
-  - %w[books authors work_types publishers].each do |controller_name|
+  - %w[books authors work_types publishers users].each do |controller_name|
       li = link_to t("admin.#{controller_name}.index.title"), polymorphic_path([:admin, controller_name])

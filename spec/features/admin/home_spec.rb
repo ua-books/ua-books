@@ -19,6 +19,7 @@ RSpec.describe "Admin::HomeController" do
     expect(page).to have_link "Автори", href: admin_authors_path
     expect(page).to have_link "Типи робіт", href: admin_work_types_path
     expect(page).to have_link "Видавництва", href: admin_publishers_path
+    expect(page).to have_link "Користувачі", href: admin_users_path
   end
 
   specify "#index publisher" do
@@ -35,5 +36,6 @@ RSpec.describe "Admin::HomeController" do
     expect(page).to have_link "Автори", href: admin_authors_path
     expect(page).to have_link "Типи робіт", href: admin_work_types_path
     expect(page).not_to have_link "Видавництва", href: admin_publishers_path
+    expect(page).not_to have_link "Користувачі", href: admin_publishers_path
   end
 end

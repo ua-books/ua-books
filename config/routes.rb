@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     resources :authors
     resources :works
     resources :publishers
+    resources :users, only: %i[index]
   end
 end
