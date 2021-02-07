@@ -23,10 +23,7 @@ RSpec.describe "Admin::WorkController" do
       expect(page).to have_css :h1, text: /^Роботи$/
       expect(page.title).to eq "Роботи | Admin"
 
-      expect(page).to have_content "Зубр шукає гніздо"
-      expect(page).to have_content "Авторка тексту"
-      expect(page).to have_content "Оксана Була"
-      expect(page).to have_content "2008"
+      expect(page).to have_content "Зубр шукає гніздо Авторка тексту Оксана Була 2008"
 
       click_on "правити"
       expect(page).to have_content "Роботи / Зубр шукає гніздо - Авторка тексту - Оксана Була / Правити"

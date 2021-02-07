@@ -5,7 +5,7 @@
 table.index
   thead
     - index_columns.each do |column|
-      th = column_name(column)
+      th => column_name(column)
     - index_action_columns.each do
       th
   tbody
@@ -14,8 +14,8 @@ table.index
         - index_columns.each do |column|
           td
             - if respond_to?("#{column}_column")
-              = public_send("#{column}_column", resource)
+              => public_send("#{column}_column", resource)
             - else
-              = resource.public_send(column)
+              => resource.public_send(column)
         - index_action_columns.each do |column|
-          td = public_send("#{column}_column", resource)
+          td => public_send("#{column}_column", resource)

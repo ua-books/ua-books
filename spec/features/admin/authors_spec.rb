@@ -23,8 +23,7 @@ RSpec.describe "Admin::AuthorsController" do
 
       expect(page).to have_content "Запис було успішно створено"
       expect(page).to have_css :h1, text: /^Автори$/
-      expect(page).to have_content "Дмитро"
-      expect(page).to have_content "Яворницький"
+      expect(page).to have_content "Дмитро Яворницький"
 
       if user == :admin
         click_on "правити"
