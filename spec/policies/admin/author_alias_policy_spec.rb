@@ -50,8 +50,8 @@ RSpec.describe Admin::AuthorAliasPolicy do
       Pundit.policy_scope!(user, [:admin, AuthorAlias])
     end
 
-    let(:author_alias_1) { build(:author_alias) }
-    let(:author_alias_2) { build(:author_alias) }
+    let(:author_alias_1) { build(:author_alias, first_name: "Перший", last_name: "Автор") }
+    let(:author_alias_2) { build(:author_alias, first_name: "Другий", last_name: "Автор") }
     let!(:author) { create(:author, aliases: [author_alias_1, author_alias_2]) }
 
     it "returns nothing for just registered user" do
