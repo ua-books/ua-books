@@ -10,7 +10,7 @@
       a href=new_admin_work_type_path target="_blank" Add new type
   .grid-x.grid-margin-x.align-middle
     .cell.medium-6
-      = f.association :author_alias, label_method: method(:author_alias)
+      = f.association :author_alias, label_method: method(:author_alias), collection: AuthorAlias.order(:last_name, :first_name)
     .cell.medium-6
       a href=new_admin_author_path target="_blank" Add new author
   .grid-x.grid-margin-x
