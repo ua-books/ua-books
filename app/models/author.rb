@@ -12,7 +12,7 @@ class Author < ApplicationRecord
   has_many :works, through: :aliases, inverse_of: :author
 
   after_create do
-    aliases.create!(first_name: first_name, last_name: last_name)
+    aliases.create!(first_name: first_name, last_name: last_name) if aliases.empty?
   end
 
   def published_works

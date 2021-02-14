@@ -1,0 +1,5 @@
+= simple_form_for [:admin, resource] do |f|
+  = f.association :author, label_method: method(:author_alias), include_blank: true
+  = f.input :first_name
+  = f.input :last_name
+  = f.submit class: "button"
