@@ -1,5 +1,5 @@
 = title publisher_title(current_user.publisher)
 
 ul
-  - %w[books authors work_types].each do |controller_name|
+  - %w[books authors author_aliases work_types].each do |controller_name|
       li = link_to t("admin.#{controller_name}.index.title"), polymorphic_path([:admin, controller_name])

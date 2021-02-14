@@ -6,6 +6,8 @@ uk:
         create: Додати книгу
       author:
         create: Додати автора
+      author_alias:
+        create: Додати псевдонім
       work_type:
         create: Додати тип робіт
       work:
@@ -36,6 +38,10 @@ uk:
         first_name: Ім'я
         last_name: Прізвище
         gender: Стать
+      author_alias:
+        author: Автор
+        first_name: Ім'я
+        last_name: Прізвище
       work_type:
         name_feminine: Назва (жіночий рід)
         name_masculine: Назва (чоловічий рід)

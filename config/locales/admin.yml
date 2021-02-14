@@ -25,6 +25,10 @@ uk:
     authors:
       index:
         title: Автори
+    author_aliases:
+      index:
+        title: Псевдоніми
+        title_for_author: Псевдоніми автора %{author}
     work_types:
       index:
         title: Типи робіт
