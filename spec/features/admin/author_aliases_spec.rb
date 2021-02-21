@@ -68,4 +68,19 @@ RSpec.describe "Admin::AuthorAliasesController" do
     visit edit_admin_author_alias_path(oksana_alias)
     expect(page).to have_field "Прізвище", with: "Лісу"
   end
+
+  specify "#set_as_main" do
+    create(:author_alias, first_name: "Оксана", last_name: "Була", author: oksana_bula, main: true)
+
+    visit admin_author_aliases_path
+    sign_in_as admin
+
+    expect(page).to have_content "Оксана Була Оксана Була правити головний"
+    expect(page).to have_content "Оксана Була Повелителька Туконів правити"
+
+    click_on "зробити головним"
+
+    expect(page).to have_content "Повелителька Туконів Оксана Була правити"
+    expect(page).to have_content "Повелителька Туконів Повелителька Туконів правити головний"
+  end
 end

@@ -59,7 +59,8 @@ CREATE TABLE author_aliases (
     last_name character varying NOT NULL,
     author_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    main boolean DEFAULT false
 );
 
 
@@ -470,6 +471,13 @@ CREATE INDEX index_author_aliases_on_author_id ON author_aliases USING btree (au
 
 
 --
+-- Name: index_author_aliases_on_author_id_and_main; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_author_aliases_on_author_id_and_main ON author_aliases USING btree (author_id, main) WHERE main;
+
+
+--
 -- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -603,6 +611,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210110144352'),
 ('20210110154703'),
 ('20210110161606'),
-('20210110163351');
+('20210110163351'),
+('20210221153907');
 
 
