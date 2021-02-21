@@ -31,7 +31,7 @@ RSpec.describe Admin::AuthorAliasPolicy do
     end
   end
 
-  permissions :edit?, :update? do
+  permissions :edit?, :update?, :set_as_main? do
     it "denies access to just registered user" do
       expect(policy).not_to permit(build(:user), AuthorAlias.new)
     end

@@ -10,4 +10,16 @@ class AuthorAlias < ApplicationRecord
   belongs_to :author, inverse_of: :aliases
 
   has_many :works, inverse_of: :aliases
+
+  scope :main, ->{ where(main: true) }
+
+  def set_as_main
+    return if main?
+
+    transaction do
+      author.main_alias.update!(main: false)
+      author.update!(first_name: first_name, last_name: last_name)
+      update!(main: true)
+    end
+  end
 end

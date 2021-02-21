@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     resources :books
     resources :work_types
     resources :authors
-    resources :author_aliases
+    resources :author_aliases do
+      member do
+        post :set_as_main
+      end
+    end
     resources :works
     resources :publishers
     resources :users, only: %i[index]

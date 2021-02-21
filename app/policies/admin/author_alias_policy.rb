@@ -17,5 +17,9 @@ module Admin
     def create?
       user.admin? || user.publisher?
     end
+
+    def set_as_main?
+      user.admin?
+    end
   end
 end
