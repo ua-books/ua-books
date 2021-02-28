@@ -101,7 +101,7 @@ RSpec.describe Admin::BookPolicy do
     end
 
     it "returns everything for admin" do
-      expect(policy_scope(build(:admin))).to match [book1, book2]
+      expect(policy_scope(build(:admin))).to match_array [book1, book2]
     end
 
     it "returns publisher's books for publisher" do
