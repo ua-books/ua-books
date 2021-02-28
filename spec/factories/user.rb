@@ -12,5 +12,9 @@ FactoryGirl.define do
     factory :publisher_user do
       publisher
     end
+
+    trait :dev_auth do
+      oauth_providers { [OauthProvider.new(name: "developer", uid: email)] }
+    end
   end
 end
