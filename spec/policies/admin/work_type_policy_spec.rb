@@ -34,7 +34,7 @@ RSpec.describe Admin::WorkTypePolicy do
     end
 
     it "returns everything for admin" do
-      expect(policy_scope(build(:admin))).to match [work_type1, work_type2]
+      expect(policy_scope(build(:admin))).to match_array [work_type1, work_type2]
     end
   end
 end

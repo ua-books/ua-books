@@ -59,11 +59,11 @@ RSpec.describe Admin::AuthorAliasPolicy do
     end
 
     it "returns everything for publisher" do
-      expect(policy_scope(build(:publisher_user))).to match [author_alias_1, author_alias_2]
+      expect(policy_scope(build(:publisher_user))).to match_array [author_alias_1, author_alias_2]
     end
 
     it "returns everything for admin" do
-      expect(policy_scope(build(:admin))).to match [author_alias_1, author_alias_2]
+      expect(policy_scope(build(:admin))).to match_array [author_alias_1, author_alias_2]
     end
   end
 end

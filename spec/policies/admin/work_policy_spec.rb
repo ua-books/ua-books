@@ -85,7 +85,7 @@ RSpec.describe Admin::WorkPolicy do
     end
 
     it "returns everything for admin" do
-      expect(policy_scope(build(:admin))).to match [work1, work2]
+      expect(policy_scope(build(:admin))).to match_array [work1, work2]
     end
 
     it "returns publisher's works for publisher" do
