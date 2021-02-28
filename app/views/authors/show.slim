@@ -4,7 +4,7 @@
 - content_for :head do
   link rel="canonical" href=author_url(id: author.id, slug: parameterize(author_name))
 
-article
+article.author-article
   h1.title = author_name
 
   - author.published_works.preload(:type, book: {title_works: :author_alias}).group_by(&:type).each do |_, works|

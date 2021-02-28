@@ -1,0 +1,9 @@
+.author-article {
+  > .title {
+    @include container;
+  }
+
+  > section {
+    @include container;
+  }
+}
