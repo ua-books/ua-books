@@ -11,7 +11,7 @@
 class Work < ApplicationRecord
   belongs_to :book, inverse_of: :works
   belongs_to :type, class_name: "WorkType", foreign_key: "work_type_id"
-  belongs_to :author_alias, inverse_of: :works
+  belongs_to :author_alias, inverse_of: :works, touch: true
 
   has_one :author, through: :author_alias
 

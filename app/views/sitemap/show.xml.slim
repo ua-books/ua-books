@@ -15,3 +15,9 @@ urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://w
       loc = publisher_url(id: publisher.id, slug: parameterize(publisher_title(publisher)))
       changefreq always
       lastmod = publisher.updated_at.to_formatted_s(:iso8601)
+
+  - Author.joins(:works => :book).merge(Book.published).distinct.each do |author|
+    url
+      loc = author_url(id: author.id, slug: parameterize(author_alias(author)))
+      changefreq always
+      lastmod = author.updated_at.to_formatted_s(:iso8601)
