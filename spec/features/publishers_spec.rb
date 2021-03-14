@@ -17,17 +17,28 @@ RSpec.describe "PublishersController" do
     expect(page).to have_css "link[rel='canonical'][href='http://www.example.com/#{CGI.escape "видавництво-старий-лев"}/p/#{leva_publishing.id}']", visible: false
   end
 
-  specify "draft book from the same publisher" do
+  specify "draft book from the same publisher is not visible" do
     create(:book, title: "Зубр шукає гніздо", publisher: leva_publishing)
+    create(:book, :published, title: "Ведмідь шукає гніздо", publisher: leva_publishing)
 
     visit publisher_path(id: leva_publishing)
     expect(page).to_not have_content("Зубр шукає гніздо")
+    expect(page).to have_content("Ведмідь шукає гніздо")
+  end
+
+  specify "page is not visible when there's no published books", realistic_error_responses: true do
+    create(:book, title: "Зубр шукає гніздо", publisher: leva_publishing)
+
+    visit publisher_path(id: leva_publishing)
+    expect(page).to have_content "The page you were looking for doesn't exist."
   end
 
   specify "published book from another publisher" do
+    create(:book, :published, title: "Ведмідь шукає гніздо", publisher: leva_publishing)
     create(:book, :published, title: "Зубр шукає гніздо")
 
     visit publisher_path(id: leva_publishing)
     expect(page).to_not have_content("Зубр шукає гніздо")
+    expect(page).to have_content("Ведмідь шукає гніздо")
   end
 end

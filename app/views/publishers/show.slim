@@ -8,6 +8,6 @@ article.publisher-article
   h1.title = publisher_title
 
   section
-    - books.each do |book|
+    - publisher_books.each do |book|
       - book_title = book_title(book, works: book.title_works)
       p: a href=book_path(id: book, slug: parameterize(book_title)) = book_title
