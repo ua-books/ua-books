@@ -17,7 +17,7 @@ class Book < ApplicationRecord
   validates_presence_of :title, :number_of_pages, :publisher
   validate :publisher_page_url_should_be_valid, if: ->{ publisher_page_url.present? }
 
-  belongs_to :publisher
+  belongs_to :publisher, touch: true
 
   has_many :works, inverse_of: :book
   has_many :title_works, ->{ where(title: true) }, class_name: "Work"
