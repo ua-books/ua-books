@@ -8,8 +8,6 @@ RSpec.describe "/sitemap.xml" do
 
     get sitemap_path
 
-    xml = Capybara.string(response.body)
-    xml.native.remove_namespaces!
     expect(xml).to have_selector(:xpath, "//urlset/url")
     url = xml.find(:xpath, "//urlset/url")
     expect(url).to have_selector("loc", text: "http://www.example.com/#{CGI.escape "оксана-була-зубр-шукає-гніздо"}/#{book.id}")
@@ -26,8 +24,6 @@ RSpec.describe "/sitemap.xml" do
 
     get sitemap_path
 
-    xml = Capybara.string(response.body)
-    xml.native.remove_namespaces!
     expect(xml).to have_selector(:xpath, "//urlset/url")
     url = xml.find(:xpath, "//urlset/url")
 
@@ -39,8 +35,14 @@ RSpec.describe "/sitemap.xml" do
 
     get sitemap_path
 
-    xml = Capybara.string(response.body)
-    xml.native.remove_namespaces!
     expect(xml).to_not have_selector(:xpath, "//urlset/url")
+  end
+
+  private
+
+  def xml
+    @xml ||= Capybara.string(response.body).tap do |xml|
+      xml.native.remove_namespaces!
+    end
   end
 end
