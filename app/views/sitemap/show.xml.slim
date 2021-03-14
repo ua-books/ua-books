@@ -9,3 +9,9 @@ urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://w
         image:image
           image:loc = imagekit_url(book.cover_uid, tr: {w: 640})
           image:title Обкладинка до книги «#{book.title}»
+
+  - Publisher.joins(:books).merge(Book.published).distinct.each do |publisher|
+    url
+      loc = publisher_url(id: publisher.id, slug: parameterize(publisher_title(publisher)))
+      changefreq always
+      lastmod = publisher.updated_at.to_formatted_s(:iso8601)
