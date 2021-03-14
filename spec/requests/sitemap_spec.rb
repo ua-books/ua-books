@@ -7,10 +7,11 @@ RSpec.describe "/sitemap.xml" do
     leva_publishing.update!(updated_at: "2017-10-11") # override `Book belongs_to :publisher, touch: true` behavior
     oksana = create(:author, first_name: "Оксана", last_name: "Була")
     create(:work, author_alias: oksana.main_alias, book: book)
+    oksana.update!(updated_at: "2017-09-11") # override `Work belongs_to :author_alias, touch: true` behavior
 
     get sitemap_path
 
-    expect(xml).to have_selector("//urlset/url", count: 2)
+    expect(xml).to have_selector("//urlset/url", count: 3)
     urls = xml.all(:xpath, "//urlset/url")
 
     book_url = urls[0]
@@ -26,6 +27,11 @@ RSpec.describe "/sitemap.xml" do
     expect(publisher_url).to have_selector("loc", text: "http://www.example.com/#{CGI.escape "видавництво-лева"}/p/#{leva_publishing.id}")
     expect(publisher_url).to have_selector("changefreq", text: "always")
     expect(publisher_url).to have_selector("lastmod", text: "2017-10-11T00:00:00")
+
+    author_url = urls[2]
+    expect(author_url).to have_selector("loc", text: "http://www.example.com/#{CGI.escape "оксана-була"}/a/#{oksana.id}")
+    expect(author_url).to have_selector("changefreq", text: "always")
+    expect(author_url).to have_selector("lastmod", text: "2017-09-11T00:00:00")
   end
 
   specify "published book w/o cover" do
@@ -56,6 +62,21 @@ RSpec.describe "/sitemap.xml" do
     get sitemap_path
 
     expect(xml).to have_selector("//url/loc", text: "http://www.example.com/#{CGI.escape "видавництво-лева"}/p/#{leva_publishing.id}", count: 1)
+  end
+
+  specify "multiple published books - one author" do
+    book1 = create(:book, :published)
+    book2 = create(:book, :published)
+
+    oksana = create(:author, first_name: "Оксана", last_name: "Була")
+
+    text_author_type = create(:text_author_type)
+    create(:work, author_alias: oksana.main_alias, book: book1, type: text_author_type)
+    create(:work, author_alias: oksana.main_alias, book: book2, type: text_author_type)
+
+    get sitemap_path
+
+    expect(xml).to have_selector("//url/loc", text: "http://www.example.com/#{CGI.escape "оксана-була"}/a/#{oksana.id}", count: 1)
   end
 
   private
