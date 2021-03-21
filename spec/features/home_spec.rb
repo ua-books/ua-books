@@ -18,4 +18,13 @@ RSpec.describe "Home page" do
     visit root_path
     expect(page).to_not have_content("Зубр шукає гніздо")
   end
+
+  specify "recent books are shown on top" do
+    create(:book, :published, title: "Book 1", published_on: Date.new(2021, 2, 10))
+    create(:book, :published, title: "Book 2", published_on: Date.new(2021, 5, 10))
+    create(:book, :published, title: "Book 3", published_on: Date.new(2021, 4, 10))
+
+    visit root_path
+    expect(page).to have_content "«Book 2» «Book 3» «Book 1»"
+  end
 end

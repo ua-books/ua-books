@@ -28,6 +28,10 @@ class Book < ApplicationRecord
     {title_works: :author_alias}
   end
 
+  def self.recent_on_top
+    order(published_on: :desc)
+  end
+
   private
 
   def publisher_page_url_should_be_valid

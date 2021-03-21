@@ -478,6 +478,13 @@ CREATE UNIQUE INDEX index_author_aliases_on_author_id_and_main ON author_aliases
 
 
 --
+-- Name: index_books_on_published_on; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_books_on_published_on ON books USING btree (published_on);
+
+
+--
 -- Name: index_books_on_publisher_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -612,6 +619,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210110154703'),
 ('20210110161606'),
 ('20210110163351'),
-('20210221153907');
+('20210221153907'),
+('20210321192243');
 
 
