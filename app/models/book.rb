@@ -24,6 +24,10 @@ class Book < ApplicationRecord
 
   dragonfly_accessor :cover
 
+  def self.associations_to_preload
+    {title_works: :author_alias}
+  end
+
   private
 
   def publisher_page_url_should_be_valid

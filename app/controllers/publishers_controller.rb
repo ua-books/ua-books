@@ -1,7 +1,7 @@
 class PublishersController < ApplicationController
   expose(:publisher)
   expose(:publisher_books) do
-    publisher.books.published.preload(title_works: :author_alias)
+    publisher.books.published.preload(Book.associations_to_preload)
   end
 
   def show

@@ -1,4 +1,4 @@
-- book_title = book_title(book, works: book.works.for_list)
+- book_title = book_title(book, works: book.works.preload(Work.associations_to_preload))
 - title book_title
 
 - content_for :head do
@@ -21,7 +21,7 @@ article.book-article
         dd = link_to book.publisher.name, publisher_path(id: book.publisher, slug: parameterize(publisher_title(book.publisher)))
 
       dl.inline.book-works
-        - book.works.for_list.each do |work|
+        - book.works.preload(Work.associations_to_preload).each do |work|
           dt => work_type_name(work)
           dd
             = link_to author_alias(work.author_alias), author_path(id: work.author, slug: parameterize(author_alias(work.author)))
