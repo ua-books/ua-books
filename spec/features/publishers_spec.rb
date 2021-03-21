@@ -41,4 +41,13 @@ RSpec.describe "PublishersController" do
     expect(page).to_not have_content("Зубр шукає гніздо")
     expect(page).to have_content("Ведмідь шукає гніздо")
   end
+
+  specify "recent books are shown on top" do
+    create(:book, :published, title: "Book 1", published_on: Date.new(2021, 2, 10), publisher: leva_publishing)
+    create(:book, :published, title: "Book 2", published_on: Date.new(2021, 5, 10), publisher: leva_publishing)
+    create(:book, :published, title: "Book 3", published_on: Date.new(2021, 4, 10), publisher: leva_publishing)
+
+    visit publisher_path(id: leva_publishing)
+    expect(page).to have_content "«Book 2» «Book 3» «Book 1»"
+  end
 end

@@ -58,4 +58,17 @@ RSpec.describe "AuthorsController" do
     expect(page).to have_link("Оксана Була «Ведмідь не хоче спати»")
     expect(page).to have_link("Придумувачка Туконі «Туконі. Мешканець лісу»")
   end
+
+  specify "recent books are shown on top" do
+    book1 = create(:book, :published, title: "Book 1", published_on: Date.new(2021, 2, 10))
+    book2 = create(:book, :published, title: "Book 2", published_on: Date.new(2021, 5, 10))
+    book3 = create(:book, :published, title: "Book 3", published_on: Date.new(2021, 4, 10))
+
+    create(:work, author_alias: oksana.main_alias, book: book1, type: text_author_type)
+    create(:work, author_alias: oksana.main_alias, book: book2, type: text_author_type)
+    create(:work, author_alias: oksana.main_alias, book: book3, type: text_author_type)
+
+    visit author_path(id: oksana)
+    expect(page).to have_content "Оксана Була «Book 2» Оксана Була «Book 3» Оксана Була «Book 1»"
+  end
 end

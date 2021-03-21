@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   expose(:books) do
-    Book.published.preload(Book.associations_to_preload)
+    Book.published.recent_on_top.preload(Book.associations_to_preload)
   end
 end

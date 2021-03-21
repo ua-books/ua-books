@@ -1,7 +1,7 @@
 class PublishersController < ApplicationController
   expose(:publisher)
   expose(:publisher_books) do
-    publisher.books.published.preload(Book.associations_to_preload)
+    publisher.books.published.recent_on_top.preload(Book.associations_to_preload)
   end
 
   def show
