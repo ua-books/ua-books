@@ -1,4 +1,5 @@
 = simple_form_for [:admin, resource] do |f|
   = f.input :name_feminine
   = f.input :name_masculine
+  = f.input :schema_org_role, collection: WorkType.schema_org_roles
   = f.submit class: "button"

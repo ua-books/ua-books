@@ -17,6 +17,8 @@ class Work < ApplicationRecord
 
   validates_uniqueness_of :book_id, scope: [:author_alias_id, :work_type_id]
 
+  delegate :author?, :editor?, :illustrator?, :contributor?, to: :type
+
   def self.associations_to_preload
     [:type, :author_alias, :author]
   end

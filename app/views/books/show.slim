@@ -46,3 +46,5 @@ article.book-article
   - if book.description_md.present?
     .description
       = markdown(book.description_md)
+
+script type="application/ld+json" == book_as_json_ld(book).to_json

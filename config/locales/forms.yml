@@ -46,6 +46,7 @@ uk:
       work_type:
         name_feminine: Назва (жіночий рід)
         name_masculine: Назва (чоловічий рід)
+        schema_org_role: Роль (за schema.org)
       work:
         title: У заголовку
         book: Книга
