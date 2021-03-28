@@ -34,6 +34,7 @@ uk:
         published_on: Дата подання до друку
         publisher_page_url: Посилання на книгу на сайті видавця
         cover_url: Обкладинка
+        isbn: ISBN
       author:
         first_name: Ім'я
         last_name: Прізвище

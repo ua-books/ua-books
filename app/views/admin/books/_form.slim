@@ -4,6 +4,7 @@
   = f.association :publisher, collection: policy_scope([:admin, Publisher])
   = f.input :title
   = f.input :number_of_pages
+  = f.input :isbn
   = f.input :description_md
   = f.input :published_on, html5: true
   = f.input :publisher_page_url
