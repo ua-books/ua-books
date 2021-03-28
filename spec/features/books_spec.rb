@@ -9,6 +9,7 @@ RSpec.describe "BooksController" do
                   title: "Зубр шукає гніздо",
                   description_md: "Це опис книжки про класного зубра",
                   number_of_pages: 32,
+                  isbn: "978-617-679-335-9",
                   publisher_page_url: "https://starylev.com.ua/",
                   published_on: "2016-09-16")
 
@@ -35,6 +36,7 @@ RSpec.describe "BooksController" do
 
     expect(page).to have_content "Рік видання 2016"
     expect(page).to have_content "Кількість сторінок 32"
+    expect(page).to have_content "ISBN 978-617-679-335-9"
 
     expect(page).to have_link "Перейти на сайт видавництва", href: "https://starylev.com.ua/"
 

@@ -36,6 +36,10 @@ article.book-article
         dt => t "number_of_pages"
         dd = book.number_of_pages
 
+        - if book.isbn.present?
+          dt => t "isbn"
+          dd = book_isbn(book)
+
       - if book.publisher_page_url.present?
         a.publisher-url.button.large.expanded href=book.publisher_page_url target="_blank" rel="nofollow noopener" Перейти на сайт видавництва
 

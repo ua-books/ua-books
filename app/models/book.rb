@@ -16,6 +16,7 @@ class Book < ApplicationRecord
 
   validates_presence_of :title, :number_of_pages, :publisher
   validate :publisher_page_url_should_be_valid, if: ->{ publisher_page_url.present? }
+  validate :isbn_should_be_valid, if: ->{ isbn.present? }
 
   belongs_to :publisher, touch: true
 
@@ -44,5 +45,15 @@ class Book < ApplicationRecord
     end
   rescue
     errors.add(:publisher_page_url, :invalid)
+  end
+
+  def isbn_should_be_valid
+    isbn = Lisbn.new(self.isbn)
+    if isbn.valid?
+      # use normalized (non-dash) version
+      self.isbn = isbn.isbn13
+    else
+      errors.add(:isbn, :invalid)
+    end
   end
 end

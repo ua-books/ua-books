@@ -25,6 +25,11 @@ module ApplicationHelper
     end
   end
 
+  def book_isbn(book)
+    isbn = Lisbn.new(book.isbn)
+    isbn.parts.join("-")
+  end
+
   # Gender-aware work type name
   def work_type_name(work)
     case work.author.gender
