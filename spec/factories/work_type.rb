@@ -21,6 +21,12 @@ FactoryGirl.define do
     factory :en_translator_type do
       name_feminine "Переклала з англійської"
       name_masculine "Переклав з англійської"
+      schema_org_role "translator"
+    end
+
+    factory :project_manager do
+      name_feminine "Керівниця проєкту"
+      name_masculine "Керівник проєкту"
       schema_org_role "contributor"
     end
   end

@@ -110,8 +110,24 @@ RSpec.describe JsonLdHelper do
         )
       end
 
-      specify "contributor" do
+      specify "translator" do
         work_type = create(:en_translator_type)
+        create(:work, author_alias: author.main_alias, type: work_type, book: book)
+
+        result = helper.book_as_json_ld(book)
+
+        expect(result).to include(
+          translator: [{
+            "@type": "Person",
+            "@id": "http://test.host/a/4",
+            "url": "http://test.host/a/4",
+            "name": "Оксана Була",
+          }]
+        )
+      end
+
+      specify "contributor" do
+        work_type = create(:project_manager)
         create(:work, author_alias: author.main_alias, type: work_type, book: book)
 
         result = helper.book_as_json_ld(book)

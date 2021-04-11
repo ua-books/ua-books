@@ -29,6 +29,11 @@ module JsonLdHelper
       json[:editor] = works_as_json_ld(editor_works)
     end
 
+    translator_works = book.works.find_all(&:translator?)
+    if translator_works.present?
+      json[:translator] = works_as_json_ld(translator_works)
+    end
+
     contributor_works = book.works.find_all(&:contributor?)
     if contributor_works.present?
       json[:contributor] = works_as_json_ld(contributor_works)

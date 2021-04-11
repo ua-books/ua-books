@@ -10,6 +10,7 @@ class WorkType < ApplicationRecord
   enum schema_org_role: {
     "author": "author",
     "illustrator": "illustrator",
+    "translator": "translator",
     "editor": "editor",
     "contributor": "contributor",
   }
