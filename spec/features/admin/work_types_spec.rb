@@ -16,6 +16,7 @@ RSpec.describe "Admin::WorkTypesController" do
 
     fill_in "Назва (жіночий рід)", with: "Авторка тексту"
     fill_in "Назва (чоловічий рід)", with: "Автор тексту"
+    select "author", from: "Роль (за schema.org)"
     click_on "Додати тип робіт"
 
     expect(page).to have_content "Запис було успішно створено"
@@ -25,6 +26,7 @@ RSpec.describe "Admin::WorkTypesController" do
     click_on "правити"
     expect(page).to have_field "Назва (жіночий рід)", with: "Авторка тексту"
     expect(page).to have_field "Назва (чоловічий рід)", with: "Автор тексту"
+    expect(page).to have_select "Роль (за schema.org)", selected: "author"
   end
 
   specify "#update" do

@@ -272,7 +272,8 @@ CREATE TABLE work_types (
     name_feminine character varying NOT NULL,
     name_masculine character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    schema_org_role character varying
 );
 
 
@@ -622,6 +623,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210110163351'),
 ('20210221153907'),
 ('20210321192243'),
-('20210328153338');
+('20210328153338'),
+('20210411153603');
 
 
