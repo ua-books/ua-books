@@ -13,7 +13,7 @@ gem 'decent_exposure', '~> 3.0'
 gem 'simple_form', '~> 5.0'
 gem 'redcarpet', '~> 3.5'
 gem 'pundit', '~> 2.0'
-gem 'dragonfly', '~> 1.2'
+gem 'dragonfly', '~> 1.4'
 gem 'dragonfly-s3_data_store', '~> 1.3'
 gem 'lisbn', '~> 0.3'
 
