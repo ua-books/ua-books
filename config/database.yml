@@ -5,14 +5,12 @@ default: &default
 
 development:
   <<: *default
-  database: ua-books
+  database: ua_books
 
 test:
   <<: *default
-  database: ua-books_test
+  database: ua_books_test
 
 production:
   <<: *default
-  database: ua-books
-  username: ua-books
-  password: <%= ENV['UA_BOOKS_DATABASE_PASSWORD'] %>
+  database: ua_books
